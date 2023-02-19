@@ -157,7 +157,7 @@ classDiagram
     <h2>Descargar los editores de código</h2>
     <ul>
       <li><a href="https://codeSandbox.io/dashboard" target="_blank">Codesandbox</a></li>
-      > En el caso de CodeSandbox no es necesario descargarlo ya que se utiliza como un simple espacio donde se almacena el proyecto que posteriormente se sube al  repostiorio de GitHub.
+      > En el caso de CodeSandbox no es necesario descargarlo ya que se utiliza como un simple espacio donde se almacena el proyecto que posteriormente se sube al  repostiorio de GitHub. Aunque igualmente existe un <a href="https://github.com/codesandbox/codesandbox-client" target="_blank">cliente de escritorio</a> para mayor comodidad.
       <li><a href="https://code.visualstudio.com/" target="_blank">VisualStudio</a></li>
     </ul>
     
@@ -222,7 +222,7 @@ En principio para este pequeño proyecto el Equipo debería trabajar sobre la mi
 
 ## **6. Patrocinadores** 
 
-<a href="https://www.youtube.com/watch?v=9IULfQH7E90">
+<a href="https://www.youtube.com/watch?v=xxIsmbVZuSI">
   <img src="https://api.products.aspose.app/slides/api/Common/DownloadFile/b0ecc963-11f6-4b46-a2ba-004b730c3861?file=result.gif" alt="Texto alternativo" width="500px">
 </a>
 
