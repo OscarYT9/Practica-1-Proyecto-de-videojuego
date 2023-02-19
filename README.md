@@ -1,5 +1,9 @@
 # **Practica-1-Proyecto-de-videojuego**
-## >1. Introducción
+# <p> <sub>`Tiempo restante`</sub> <img src="https://gen.sendtric.com/countdown/3rmim0lrpi" alt="Descripción de la imagen" align="center" width="300" /> <sub>`Click para abrir el programa`</sub> <a  href="https://codesandbox.io/p/github/OscarYT9/Practica-1-Proyecto-de-videojuego/draft/1?workspaceId=a923da0c-be0a-4c5f-a6e5-15ed3514b8c6&file=%2FREADME.md&workspace=%257B%2522activeFileId%2522%253A%2522cle8er4sd0000g4jvesqp9pcq%2522%252C%2522openFiles%2522%253A%255B%2522%252FREADME.md%2522%255D%252C%2522sidebarPanel%2522%253A%2522EXPLORER%2522%252C%2522gitSidebarPanel%2522%253A%2522COMMIT%2522%252C%2522spaces%2522%253A%257B%2522cleauevoq001d336jzl1lezqf%2522%253A%257B%2522key%2522%253A%2522cleauevoq001d336jzl1lezqf%2522%252C%2522name%2522%253A%2522Default%2522%252C%2522devtools%2522%253A%255B%255D%257D%257D%252C%2522currentSpace%2522%253A%2522cleauevoq001d336jzl1lezqf%2522%252C%2522spacesOrder%2522%253A%255B%2522cleauevoq001d336jzl1lezqf%2522%255D%252C%2522hideCodeEditor%2522%253Afalse%257D"><img src="https://codesandbox.io/favicon.ico" alt="CodeSandbox" height="40" style="vertical-align:top; margin:4px"></a> </p>
+
+
+
+## 1. Introducción
 ### 1.1 Programación orientada a objetos
 >Una compañía de videojuegos quiere comprobar el equilibrio entre los personajes de su próximo juego 
 de lucha. Nos envía documentación relativa al conjunto P de N personajes del juego (PJs) y a la lógica 
@@ -7,7 +11,7 @@ del combate para que programemos distintas simulaciones y evaluemos si siempre r
 un PJ de la misma clase. La documentación incluye varios ficheros de prueba con personajes ya 
 definidos (prueba1.txt, prueba2.txt, prueba3.txt) y un main.py con código para abrir y leer los ficheros. [p1.pdf](https://github.com/OscarYT9/Practica-1-Proyecto-de-videojuego/files/10770799/p1.pdf)
 
-### 1.2 Programación orientada a objetos
+### 1.2 Diagrama de clases
 
 ```mermaid
 %%{init: {'theme': 'dark',
@@ -19,35 +23,70 @@ classDiagram
   Caster <|-- Mage
 
   class Avatar{
-    +String name
-    +int level
-    +equip()
+    #name string
+    #life int
+    #strength int
+    #defense int
+    #weapon  None
+    #armor   None
+    `#level int`
+    
+    +get_life()
+    +set_life()
+    +get_name()
+    +set_name()
+    +get_strength()
+    +set_strength()
+    +get_defense()
+    `+get_weapon()`
+    +get_armor()
+    +set_armpt()
     +attack()
+    +defend()
+    +equip()
   }
   
   class Melee{
-    +int strength
-    +int defense
-    +useWeapon()
+	#shield None
+	
+	+get_shield()
+	+set_shield()
+    +set_weapon()
+    `+use_weapon()`
   }
   
   class Caster{
-    +int intelligence
-    +int mana
-    +castSpell()
+    +mana int
+    `+intelligence int`
+    
+	 get_mana()
+	 set_mana()
+	 set_weapon()
+    `+castSpell()`
   }
   
   class Warrior{
-    -String weaponType
-    -rage()
+    -fury int
+    `-weaponType string`
+    
+    -get_fury()
+    -set_fury()
+    -attack()
+    -defend()
   }
   
   class Mage{
-    -String element
-    -summon()
+    `-element string`
+    
+    -attack()
+    -defend()
+    `-summon()`
 }
 
+
 ```
+### 1.3 Diagrama de objetos
+
 ```mermaid
 %%{init: {'theme': 'dark',
 'lineColor': '#F8B229'}}%%
@@ -98,16 +137,16 @@ classDiagram
 ```
 
 
-## >**2. Programas usados**
+## **2. Programas utilizados**
 <div style="max-width: 600px; display: flex; flex-wrap: wrap; justify-content: center;">
   <div style="margin: 10px;">
     <a href="https://codesandbox.io/" target="_blank">
-      <img src="https://img.shields.io/badge/CodeSandbox-entorno_de_desarrollo_utlizado-grey?style=for-the-badge&logo=CodeSandbox&logoColor=white&labelColor=151515" alt="CodeSandbox Logo">
+      <img src="https://img.shields.io/badge/CodeSandbox-entorno_de_desarrollo_en_la_nube-grey?style=for-the-badge&logo=CodeSandbox&logoColor=white&labelColor=151515" alt="CodeSandbox Logo">
     </a>
   </div>
   <div style="margin: 10px;">
     <a href="https://code.visualstudio.com/" target="_blank">
-      <img src="https://img.shields.io/badge/Visual_Studio_Code-entorno_de_desarrollo_utlizado-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=blue&labelColor=151515" alt="Visual Studio Code Logo">
+      <img src="https://img.shields.io/badge/Visual_Studio_Code-editor_de_código_avanzado_(IDE)-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=blue&labelColor=151515" alt="Visual Studio Code Logo">
     </a>
   </div>
 </div>
@@ -130,7 +169,7 @@ classDiagram
      > El espacio de CodeSandbox se importa automaticamente a la extensión si formas parte del mismo.<br>
      > Todos los editores del repositorio tienen acceso al espacio de trabajo de CodeSandbox.<br>
      <li><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python" target="_blank">Python</a></li>
-     > Es necesario para ejecutar codigo python (.py) en VSCode, además proporciona métodos que ayudan a la escritura y también se puede instalar en una instancia de CodeSanbox (sería necesario installar Docker para que funcione, para más info consultar el vídeo de <a href="https://www.youtube.com/watch?v=5T848HAHGfs" target="_blank">Devcontainers y Programación en la Nube</a>
+     > Es necesario para ejecutar codigo python (.py) en VSCode, además proporciona métodos que ayudan a la escritura y también se puede instalar en una instancia de CodeSanbox (sería necesario installar Docker para que funcione, para más info consultar el vídeo de <a href="https://www.youtube.com/watch?v=5T848HAHGfs" target="_blank">Devcontainers y Programación en la Nube</a>)
   </ul>
 
 </details>
@@ -139,9 +178,9 @@ classDiagram
   <img src="https://cdn.dribbble.com/users/7040/screenshots/8214019/media/9d162bf2d3303da6f3e777bbae322b33.gif" alt="Texto alternativo" width="500px">
 </a>
 
-*Proceso de configuración finalizado* <img src="https://media.tenor.com/M5dR7qb1f1sAAAAC/loading-thinking.gif" alt="Texto alternativo" width="40px">
+*Proceso de configuración finalizado* <img src="https://user-images.githubusercontent.com/113378321/219910030-aac724a3-2159-4336-986c-d192fad7dbb1.gif" width="20px">
 
-## >**3. Flujo de trabajo**
+## **3. Flujo de trabajo**
 1. Ejecutar el VSCode y utilizar la extensión de CodeSandbox, o en cuyo caso utlizar la web de CodeSandbox para acceder a la copia del repositorio.
 
 <div style="display: flex;">
@@ -169,16 +208,35 @@ En principio para este pequeño proyecto el Equipo debería trabajar sobre la mi
 
 >Para más info sobre los  diferentes métodos que proporcionan los repositorios GitHub consultar el vídeo <a href="https://www.youtube.com/watch?v=tFr0Vg1q9Eg&t" target="_blank">GIT / GITHUB ♥ Ramas o Branch, Uniones o Merge ♥</a>
 
-## >**4. Tareas**
-
+## **4. Tareas**
 - [x] Crear el repositorio
 - [x] Configurar el editor de texto 
 - [x] Divertirse 😁
 
-## >**5. Patrocinadores** 
+
+## **5. Colaboradores**
+<table>
+<tr><td align="center"><a href="https://github.com/ggarciaengelmo"><img src="https://avatars.githubusercontent.com/u/125547323?v=4" width="100px;" alt="Nino"/><br /><sub><b>ggarciaengelmo</b></sub></a><br /> <a href="https://github.com/OscarYT9/Practica-1-Proyecto-de-videojuego/commits?author=ggarciaengelmo" title="Code">💻</a></td>
+<td align="center"><a href="https://github.com/OscarYT9"><img 	src="https://avatars.githubusercontent.com/u/113378321?s=96&v=4" width="100px;" alt="Nino"/><br /><sub><b>OscarYT9</b></sub></a><br /> <a href="https://github.com/OscarYT9/Practica-1-Proyecto-de-videojuego/commits?author=OscarYT9" title="Code">💻</a></td></tr>
+</table>
+
+## **6. Patrocinadores** 
 
 <a href="https://www.youtube.com/watch?v=9IULfQH7E90">
   <img src="https://api.products.aspose.app/slides/api/Common/DownloadFile/b0ecc963-11f6-4b46-a2ba-004b730c3861?file=result.gif" alt="Texto alternativo" width="500px">
 </a>
 
 [![IMAGE ALT TEXT HERE](https://w.wallha.com/ws/3/UIhkCsjd.jpg)](https://www.youtube.com/watch?v=gXzMD065HEk)
+
+<a href="https://code.visualstudio.com/">
+  <img align="right" alt="Juego | VSCode" width="21px" src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/file_type_vscode.svg" />
+</a>
+
+<a href="https://codesandbox.io/p/github/OscarYT9/Practica-1-Proyecto-de-videojuego/draft/1?workspaceId=a923da0c-be0a-4c5f-a6e5-15ed3514b8c6&file=%2FREADME.md&workspace=%257B%2522activeFileId%2522%253A%2522cle8er4sd0000g4jvesqp9pcq%2522%252C%2522openFiles%2522%253A%255B%2522%252FREADME.md%2522%255D%252C%2522sidebarPanel%2522%253A%2522EXPLORER%2522%252C%2522gitSidebarPanel%2522%253A%2522COMMIT%2522%252C%2522spaces%2522%253A%257B%2522cleauevoq001d336jzl1lezqf%2522%253A%257B%2522key%2522%253A%2522cleauevoq001d336jzl1lezqf%2522%252C%2522name%2522%253A%2522Default%2522%252C%2522devtools%2522%253A%255B%255D%257D%257D%252C%2522currentSpace%2522%253A%2522cleauevoq001d336jzl1lezqf%2522%252C%2522spacesOrder%2522%253A%255B%2522cleauevoq001d336jzl1lezqf%2522%255D%252C%2522hideCodeEditor%2522%253Afalse%257D">
+  <img align="right" alt="Juego | CodeSandbox" width="20px" src="https://raw.githubusercontent.com/anuraghazra/anuraghazra/master/assets/codesandbox.svg" />
+</a>
+
+
+<p align="center">
+        <img src="https://raw.githubusercontent.com/mayhemantt/mayhemantt/Update/svg/Bottom.svg" alt="Github Stats" />
+</p>
