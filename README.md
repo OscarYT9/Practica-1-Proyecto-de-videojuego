@@ -157,7 +157,7 @@ classDiagram
     <h2>Descargar los editores de código</h2>
     <ul>
       <li><a href="https://codeSandbox.io/dashboard" target="_blank">Codesandbox</a></li>
-      > En el caso de CodeSandbox no es necesario descargarlo ya que se utiliza como un simple espacio donde se almacena el proyecto que posteriormente se sube al  repostiorio de GitHub.
+      > En el caso de CodeSandbox no es necesario descargarlo ya que se utiliza como un simple espacio donde se almacena el proyecto que posteriormente se sube al  repostiorio de GitHub. Aunque igualmente existe un <a href="https://github.com/codesandbox/codesandbox-client" target="_blank">cliente de escritorio</a> para mayor comodidad.
       <li><a href="https://code.visualstudio.com/" target="_blank">VisualStudio</a></li>
     </ul>
     
