@@ -168,16 +168,16 @@ classDiagram
      > Es necesario inciar sesión (GitHub).<br>
      > El espacio de CodeSandbox se importa automaticamente a la extensión si formas parte del mismo.<br>
      > Todos los editores del repositorio tienen acceso al espacio de trabajo de CodeSandbox.<br>
-     <li><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python" target="_blank">Python</a></li>
+     <li><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python" target="_blank">Python</a></li><sub>(Ya está instalado en el entorno de trabajo de CodeSandbox)</sub><br>
      > Es necesario para ejecutar codigo python (.py) en VSCode, además proporciona métodos que ayudan a la escritura y también se puede instalar en una instancia de CodeSanbox (sería necesario installar Docker para que funcione, para más info consultar el vídeo de <a href="https://www.youtube.com/watch?v=5T848HAHGfs" target="_blank">Devcontainers y Programación en la Nube</a>)
 	   <ul>
 
->**Opcional:**
+>**Opcional** *<sub>(Estos cambios ya están aplicados al entorno de trabajo de CodeSandbox):</sub>*
 De normal VSCode no actualiza el código en tiempo real, sino que solo lo actualiza cuando sales de la vista del código, para modificar su comportamiento debes ir a Configuración> Remoto> Files:Auto Save y cambiar el `onFocusChange` por el `afterDealy`
 	![Captura13](https://user-images.githubusercontent.com/113378321/219981179-6f3af867-703f-4df3-bacf-3b7c3ae793d3.PNG)
 	Tambien se puede cambiar el tiempo (ms) que tarda en actualizarlo con `files.autoSaveDelay`
 	   ![Captura14](https://user-images.githubusercontent.com/113378321/219981364-fb8dbb6c-a28d-43a6-84b7-8393457b5a0a.PNG)
-	P.D: los cambios en el VSCode solo aparecen una vez que minimizas la aplicación o el que está en el CodeSanbox sale de la vista del código
+	<!--P.D: los cambios en el VSCode solo aparecen una vez que minimizas la aplicación o el que está en el CodeSanbox sale de la vista del código.(Esto no está muy claro tengo que seguir provando)-->
 		   
   </ul>
 
