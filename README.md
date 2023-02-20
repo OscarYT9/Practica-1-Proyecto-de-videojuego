@@ -236,7 +236,7 @@ En principio para este pequeño proyecto el Equipo debería trabajar sobre la mi
 </a>
 
 [![IMAGE ALT TEXT HERE](https://w.wallha.com/ws/3/UIhkCsjd.jpg)](https://www.youtube.com/watch?v=gXzMD065HEk)
-
+	 
 <a href="https://code.visualstudio.com/">
   <img align="right" alt="Juego | VSCode" width="21px" src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/file_type_vscode.svg" />
 </a>
@@ -245,7 +245,35 @@ En principio para este pequeño proyecto el Equipo debería trabajar sobre la mi
   <img align="right" alt="Juego | CodeSandbox" width="20px" src="https://raw.githubusercontent.com/anuraghazra/anuraghazra/master/assets/codesandbox.svg" />
 </a>
 
+<img src="https://img.shields.io/badge/markdown-000000?style=for-the-badge&logo=markdown&logoColor=white" alt="markdown" style="vertical-align:top; margin:4px">
 
 <p align="center">
         <img src="https://raw.githubusercontent.com/mayhemantt/mayhemantt/Update/svg/Bottom.svg" alt="Github Stats" />
 </p>
+	 
+##  **7. Referencias** 
+<a href="https://www.youtube.com/@Dimasmas/videos" target="_blank">@Dimasmas</a>[^1]
+
+<a href="https://www.youtube.com/@FaztCode/videos" target="_blank">@FaztCode</a>[^2]
+
+<a href="https://www.youtube.com/@EDteam/videos" target="_blank">@EDteam</a>[^3]
+
+<a href="https://www.youtube.com/@AntonioSarosi/videos" target="_blank">@AntonioSarosi</a>[^4]
+
+<a href="https://www.youtube.com/@AntonioSarosi/videos" target="_blank">@CodeSandbox</a>[^5]
+
+<a href="https://www.youtube.com/@MrPSolver
+/videos" target="_blank">@MrPSolver</a>[^6]
+
+
+[^1]: <a href="https://www.youtube.com/watch?v=Ji8uoRvi17s" target="_blank"> # ❗PRINCIPIO de la Programación Orientada a Objetos: ABSTRACCIÓN - [EN PYTHON] - Curso PYTHON de cero</a>
+
+[^2]: <a href="https://www.youtube.com/watch?v=pmVx7Ic3ITE" target="_blank"> # Github CodeSpaces, Visual Studio Code en la nube</a>
+
+[^3]: <a href="https://www.youtube.com/watch?v=G2LphORsbLw" target="_blank"> # ¿Cómo programar desde la nube sin instalar editores de código?</a>
+
+[^4]: <a href="https://www.youtube.com/watch?v=5T848HAHGfs" target="_blank"> # Devcontainers y Programación en la Nube. ¿Es el Futuro?</a>
+
+[^5]: <a href="https://www.youtube.com/watch?v=HfPIhxWacfs" target="_blank"># How to import a GitHub repository on CodeSandbox | CodeSandbox 101</a>
+
+[^6]: <a href="https://www.youtube.com/watch?v=0MhVkKHYUAY" target="_blank"># New Python Coders Be Like...</a>
