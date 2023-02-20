@@ -252,28 +252,28 @@ En principio para este pequeño proyecto el Equipo debería trabajar sobre la mi
 </p>
 	 
 ##  **7. Referencias** 
-<a href="https://www.youtube.com/@Dimasmas/videos" target="_blank">@Dimasmas</a>[^1]
+<a href="https://www.youtube.com/@Dimasmas/videos" target="_blank">@Dimasmas</a> [^1]
 
-<a href="https://www.youtube.com/@FaztCode/videos" target="_blank">@FaztCode</a>[^2]
+<a href="https://www.youtube.com/@FaztCode/videos" target="_blank">@FaztCode</a> [^2]
 
-<a href="https://www.youtube.com/@EDteam/videos" target="_blank">@EDteam</a>[^3]
+<a href="https://www.youtube.com/@EDteam/videos" target="_blank">@EDteam</a> [^3]
 
-<a href="https://www.youtube.com/@AntonioSarosi/videos" target="_blank">@AntonioSarosi</a>[^4]
+<a href="https://www.youtube.com/@AntonioSarosi/videos" target="_blank">@AntonioSarosi</a> [^4]
 
-<a href="https://www.youtube.com/@AntonioSarosi/videos" target="_blank">@CodeSandbox</a>[^5]
+<a href="https://www.youtube.com/@CodeSandbox/videos" target="_blank">@CodeSandbox</a> [^5]
 
 <a href="https://www.youtube.com/@MrPSolver
-/videos" target="_blank">@MrPSolver</a>[^6]
+/videos" target="_blank">@MrPSolver</a> [^6]
 
 
-[^1]: <a href="https://www.youtube.com/watch?v=Ji8uoRvi17s" target="_blank"> # ❗PRINCIPIO de la Programación Orientada a Objetos: ABSTRACCIÓN - [EN PYTHON] - Curso PYTHON de cero</a>
+[^1]: **<a href="https://www.youtube.com/watch?v=Ji8uoRvi17s" target="_blank"> # ❗PRINCIPIO de la Programación Orientada a Objetos: ABSTRACCIÓN - [EN PYTHON] - Curso PYTHON de cero</a>**
 
-[^2]: <a href="https://www.youtube.com/watch?v=pmVx7Ic3ITE" target="_blank"> # Github CodeSpaces, Visual Studio Code en la nube</a>
+[^2]: **<a href="https://www.youtube.com/watch?v=pmVx7Ic3ITE" target="_blank"> # Github CodeSpaces, Visual Studio Code en la nube</a>**
 
-[^3]: <a href="https://www.youtube.com/watch?v=G2LphORsbLw" target="_blank"> # ¿Cómo programar desde la nube sin instalar editores de código?</a>
+[^3]: **<a href="https://www.youtube.com/watch?v=G2LphORsbLw" target="_blank"> # ¿Cómo programar desde la nube sin instalar editores de código?</a>**
 
-[^4]: <a href="https://www.youtube.com/watch?v=5T848HAHGfs" target="_blank"> # Devcontainers y Programación en la Nube. ¿Es el Futuro?</a>
+[^4]: **<a href="https://www.youtube.com/watch?v=5T848HAHGfs" target="_blank"> # Devcontainers y Programación en la Nube. ¿Es el Futuro?</a>**
 
-[^5]: <a href="https://www.youtube.com/watch?v=HfPIhxWacfs" target="_blank"># How to import a GitHub repository on CodeSandbox | CodeSandbox 101</a>
+[^5]: **<a href="https://www.youtube.com/watch?v=HfPIhxWacfs" target="_blank"># How to import a GitHub repository on CodeSandbox | CodeSandbox 101</a>**
 
-[^6]: <a href="https://www.youtube.com/watch?v=0MhVkKHYUAY" target="_blank"># New Python Coders Be Like...</a>
+[^6]: **<a href="https://www.youtube.com/watch?v=0MhVkKHYUAY" target="_blank"># New Python Coders Be Like...</a>**
