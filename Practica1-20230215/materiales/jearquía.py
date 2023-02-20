@@ -135,7 +135,7 @@ espada.mostrar_poder()
 
 iron= armadura
 
-morthecaiser = Warrior("Morthecaiser", 100, 50, 25,espada,iron)
+Morthecaiser = Warrior("Morthecaiser", 100, 50, 25,espada,iron)
 
 # Llamar al método get_name usando el operador punto
-print(morthecaiser.get_name())
+print(Morthecaiser.get_name())
