@@ -260,10 +260,12 @@ En principio para este pequeño proyecto el Equipo debería trabajar sobre la mi
 
 <a href="https://www.youtube.com/@AntonioSarosi/videos" target="_blank">@AntonioSarosi</a> [^4]
 
-<a href="https://www.youtube.com/@CodeSandbox/videos" target="_blank">@CodeSandbox</a> [^5]
+<a href="https://www.youtube.com/@bluuweb/videos" target="_blank">@bluuweb</a> [^5]
+
+<a href="https://www.youtube.com/@CodeSandbox/videos" target="_blank">@CodeSandbox</a> [^6]
 
 <a href="https://www.youtube.com/@MrPSolver
-/videos" target="_blank">@MrPSolver</a> [^6]
+/videos" target="_blank">@MrPSolver</a> [^7]
 
 
 [^1]: **<a href="https://www.youtube.com/watch?v=Ji8uoRvi17s" target="_blank"> # ❗PRINCIPIO de la Programación Orientada a Objetos: ABSTRACCIÓN - [EN PYTHON] - Curso PYTHON de cero</a>**
@@ -274,6 +276,8 @@ En principio para este pequeño proyecto el Equipo debería trabajar sobre la mi
 
 [^4]: **<a href="https://www.youtube.com/watch?v=5T848HAHGfs" target="_blank"> # Devcontainers y Programación en la Nube. ¿Es el Futuro?</a>**
 
-[^5]: **<a href="https://www.youtube.com/watch?v=HfPIhxWacfs" target="_blank"># How to import a GitHub repository on CodeSandbox | CodeSandbox 101</a>**
+[^5]: **<a href="https://www.youtube.com/watch?v=tFr0Vg1q9Eg" target="_blank"> # GIT / GITHUB ♥ Ramas o Branch, Uniones o Merge ♥ [ Tutorial en Español - Parte 3]</a>**
 
-[^6]: **<a href="https://www.youtube.com/watch?v=0MhVkKHYUAY" target="_blank"># New Python Coders Be Like...</a>**
+[^6]: **<a href="https://www.youtube.com/watch?v=HfPIhxWacfs" target="_blank"># How to import a GitHub repository on CodeSandbox | CodeSandbox 101</a>**
+
+[^7]: **<a href="https://www.youtube.com/watch?v=0MhVkKHYUAY" target="_blank"># New Python Coders Be Like...</a>**
