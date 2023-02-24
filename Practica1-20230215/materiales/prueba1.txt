@@ -1,4 +1,4 @@
-Warrior	Warrior0	141	44	6	0
+Warrior	Warrior0	141	44	6	0 #fury
 Warrior	Warrior1	113	38	2	0
 Warrior	Warrior2	110	40	12	9
 Warrior	Warrior3	144	39	11	0

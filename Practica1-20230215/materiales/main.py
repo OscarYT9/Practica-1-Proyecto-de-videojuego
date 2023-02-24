@@ -5,9 +5,10 @@ def run(path):
     with open(path) as f:
         pjs = f.readlines()
         for pj in pjs:
-            parse_params(pj.split())
+            parse_params(pj.split()) #Separar por espacios
 
     #TODO: Implement simulation here
+    import jearquía
 
 def parse_params(params):
 
@@ -29,4 +30,5 @@ def parse_params(params):
 if __name__ == "__main__":
 
     run(sys.argv[1])
+    
 
