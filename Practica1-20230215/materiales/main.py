@@ -1,14 +1,20 @@
 import sys
 
+
+personajes = []
+
+
+
 def run(path):
- 
+
+
     with open(path) as f:
         pjs = f.readlines()
         for pj in pjs:
             parse_params(pj.split()) #Separar por espacios
 
     #TODO: Implement simulation here
-    import jearquía
+    
 
 def parse_params(params):
 
@@ -26,9 +32,9 @@ def parse_params(params):
         raise ValueError("Avatar '{}' is not valid".format(params[0]))
 
 
-
 if __name__ == "__main__":
 
     run(sys.argv[1])
+    
     
 

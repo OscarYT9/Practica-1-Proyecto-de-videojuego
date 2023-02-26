@@ -15,8 +15,9 @@ class Weapon(Item):
         self.power = power
 
     def mostrar(self):
-        print(f"Nombre: {self.name}")
-        print(f"Poder: {self.power}")
+        #print(f"Nombre: {self.name}")
+        #print(f"Poder: {self.power}")
+        return f"Nombre: {self.name}\nPoder: {self.power}"
 
     def get_name(self):
         return self.name
@@ -54,20 +55,21 @@ def generate_wand():
 #_______________________________________________________________________________________
 
 class Covering(Item):
-    def __init__(self, name, proteccion):
+    def __init__(self, name, protection):
         self.name = name
-        self.proteccion = proteccion
+        self.protection = protection
 
     def get_proteccion(self):
-        return self.proteccion
+        return self.protection
 
-    def set_proteccion(self, proteccion):
-        self.proteccion = proteccion
+    def set_proteccion(self, protection):
+        self.protection = protection
     
 
     def mostrar(self):
-        print(f"Nombre: {self.name}")
-        print(f"Protección: {self.proteccion}")
+        #print(f"Nombre: {self.name}")
+        #print(f"Protección: {self.protection}")
+        return f"Nombre: {self.name}\nProtección: {self.protection}"
 
     def get_name(self):
         return self.name
@@ -77,30 +79,30 @@ class Armor(Covering):
 
     armors = []
 
-    def __init__(self, name,  proteccion):
-        super().__init__(name, proteccion)
+    def __init__(self, name,  protection):
+        super().__init__(name, protection)
 
-        self.proteccion = proteccion
+        self.protection = protection
 
 
 def generate_armor():
     import random
     name = f"Armor {len(Armor.armors)+1}"
-    proteccion = random.randint(1, 5)
-    return Armor(name, proteccion)
+    protection = random.randint(1, 5)
+    return Armor(name, protection)
 
 class Shield(Covering): #Solo los Warriors pueden tener escudo
 
     shields = []
 
-    def __init__(self, nombre, proteccion):
-        super().__init__(nombre, proteccion)
+    def __init__(self, nombre, protection):
+        super().__init__(nombre, protection)
 
-        self.proteccion = proteccion
+        self.protection = protection
 
 def generate_shield():
     import random
     name = f"Shield {len(Shield.shields)+1}"
-    proteccion = random.randint(1, 5)
-    return Shield(name, proteccion)
+    protection = random.randint(1, 5)
+    return Shield(name, protection)
 

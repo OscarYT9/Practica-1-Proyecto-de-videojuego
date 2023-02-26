@@ -76,6 +76,9 @@ class Warrior(Melee):
 
     def get_fury(self):
         return self.fury
+    
+    def set_fury(self, fury):
+        self.fury = fury
 
     def set_shield(self, shield):
         self.shield = shield
@@ -88,16 +91,20 @@ class Warrior(Melee):
             return self.strength + self.weapon.power + random.randint(0, self.fury)
 
     def defend(self):
-        if (self.weapon is None) or (self.shield is None):
+        if (self.armor is None) and (self.shield is None):
             return self.defense
+        elif self.armor is None:
+            return self.defense + self.shield.protection
+        elif self.shield is None:
+            return self.defense + self.armor.protection
         else:
             return self.defense + self.armor.protection + self.shield.protection
 #_______________________________________________________________________________________
 
 class Caster(Avatar):
     @abstractmethod
-    def __init__(self, name, life, strength, defense, weapon, armor, mana):
-        super().__init__(name, life, strength, defense)
+    def __init__(self, name, life, strength, defense, mana, weapon, armor):
+        super().__init__(name, life, strength, defense, weapon, armor)
         
         self.mana = mana
 
@@ -111,31 +118,83 @@ class Caster(Avatar):
         self.weapon = Item
         
 
-class Mage(Caster): 
+class Mage(Caster):
+    def __init__(self, name, life, strength, defense, mana, weapon, armor):
+        super().__init__(name, life, strength, defense, mana, weapon, armor)
 
     def attack(self):
         import random
         aleatorio = random.randint(0,1)
-        return aleatorio
+        if aleatorio == 1:
+            return aleatorio
         if aleatorio == 0:
             self.mana += 2
+            print(f"{self.get_name()} ha recuperado 2 puntos de mana.")
         if self.mana > 1:
-            return self.strength + self.weapon.power
+            if self.weapon is None:
+                damage = self.strength
+            else:
+                damage = self.strength + self.weapon.power
+            self.mana -= 1
+            print(f"{self.get_name()} ha utilizado 1 punto de mana.")
+            return damage
         else:
-            self.attack = 1
+            print(f"{self.get_name()} no tiene suficiente mana para atacar.")
+            return 1
+        
             
-            
-    def defense(self):
-        return self.defense + self.weapon.value
+    def defend(self):
+        if self.armor is None:
+            return self.defense
+        else:
+            return self.defense + self.armor.protection
             
 #_______________________________________________________________________________________
 
 
-class priest(Caster):
-    def __init__(self, name, life, strength, defense, mana):
-        super().__init__(name, life, strength, defense, mana)
+class Priest(Caster):
+    def __init__(self, name, life, strength, defense, mana, weapon, armor):
+        super().__init__(name, life, strength, defense, mana, weapon, armor)
 
     def attack(self):
-        return super().attack()
-    
+        import random
+        aleatorio = random.randint(0,1)
+        if aleatorio == 1:
+            return aleatorio
+        if aleatorio == 0:
+            self.mana += 2
+            print(f"{self.get_name()} ha recuperado 2 puntos de mana.")
+        if self.mana > 1:
+            if self.weapon is None:
+                damage = self.strength
+            else:
+                damage = self.strength + self.weapon.power
+            self.mana -= 1
+            print(f"{self.get_name()} ha utilizado 1 punto de mana.")
+            return damage
+        else:
+            print(f"{self.get_name()} no tiene suficiente mana para atacar.")
+            return 1
 
+    def defend(self):
+        if self.armor is None:
+            return self.defense
+        else:
+            return self.defense + self.armor.protection
+        
+    def heal(self):
+        import random
+        aleatorio = random.randint(0, 1)
+        if aleatorio == 1:
+            self.mana += 2
+        
+        if self.mana > 2:
+            if self.weapon is None:
+                curacion = (self.strength + self.attack()) // 2
+            else:
+                curacion = (self.strength + self.attack() + self.weapon.power) // 2
+            self.mana -= 2
+        else:
+            curacion = 0
+        
+        return curacion
