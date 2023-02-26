@@ -3,18 +3,13 @@ from items import *
 import random
 
 
-def combat(warrior1, warrior2, personajes):
-    # Comprobar si ambos personajes tienen vida
-    if warrior1.life <= 0:
-        print(f"{warrior1.get_name()} está muerto y no puede luchar.")
-        return
-    elif warrior2.life <= 0:
-        print(f"{warrior2.get_name()} está muerto y no puede luchar.")
-        return
-    
+def combat(personajes):
+
     # Decidir aleatoriamente quién es el atacante y quién el defensor
-    attacker, defender = random.sample([warrior1, warrior2], 2)
-    print(f"{attacker.get_name()} es el atacante y {defender.get_name()} es el defensor.")
+    attacker = random.choice(personajes)
+    defender = random.choice(personajes)
+    while attacker == defender:
+        defender = random.choice(personajes)
 
     # Atacar al defensor
     damage = attacker.attack()
