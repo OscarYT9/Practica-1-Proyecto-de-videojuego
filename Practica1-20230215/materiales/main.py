@@ -18,9 +18,11 @@ def run(path):
             personaje = parse_params(pj.split()) #Separar por espacios
             personajes.append(personaje)
 
-
     #TODO: Implement simulation here
-    
+
+    for i in range(0,31):
+        while len(personajes)>1:
+            combat(personajes)
 
 def parse_params(params):
 

@@ -62,11 +62,11 @@ def combat(personajes):
             else:
                 print(f"{winner.get_name()} no ha obtenido una nueva armadura.")
                 
-        print_remaining_characters(personajes) #Imprime la lista de personajes restantes
+        #print_remaining_characters(personajes) #Imprime la lista de personajes restantes
 
             
-    else:
-        print("Fin de la batalla me voy corriendo a buscar a otros dos tipos")
+    #else:
+        #print("Fin de la batalla me voy corriendo a buscar a otros dos tipos")
         #En esta parte habría que volver a coger otros dos de la lista para que peleen
 
     
