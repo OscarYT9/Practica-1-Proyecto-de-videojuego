@@ -236,7 +236,10 @@ En principio para este pequeño proyecto el Equipo debería trabajar sobre la mi
 </a>
 
 [![IMAGE ALT TEXT HERE](https://w.wallha.com/ws/3/UIhkCsjd.jpg)](https://www.youtube.com/watch?v=gXzMD065HEk)
-	 
+[![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/221442306-891c2632-81d9-4ca1-9ffc-6aa329b13b95.png)](https://www.youtube.com/watch?v=oATfORhqelk)
+[![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/221443350-b860c641-6df2-449a-8b36-07c78e0505e4.jpg)](https://www.youtube.com/watch?v=2SVzBVsoY_Q)
+
+
 <a href="https://code.visualstudio.com/">
   <img align="right" alt="Juego | VSCode" width="21px" src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/file_type_vscode.svg" />
 </a>
