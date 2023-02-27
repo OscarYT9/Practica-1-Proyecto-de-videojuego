@@ -3,28 +3,28 @@ from classes import *
 from items import *
 from combat import *
 
-
-
 personajes = []
 
-
-
 def run(path):
-
 
     with open(path) as f:
         pjs = f.readlines()
         for pj in pjs:
             personaje = parse_params(pj.split()) #Separar por espacios
             personajes.append(personaje)
-
     #TODO: Implement simulation here
-    for personaje in personajes:
-        nombres = []
-        nombres.append(personaje.name)
+    print("Lista de personajes: ",personajes)
 
-    #while len(pjs)>1:
-    combat(nombres)
+    nombres = []
+    for personaje in personajes:
+        nombres.append(personaje.name)
+    print("Lista con los nombres de los personajes: ",nombres)
+    
+    i=0
+    for i in range(0,31): 
+        while len(personajes)>1:
+            combat(personajes)
+    print("El ganador es",personajes[0].get_name())
 
 
 def create_character(name, life, strength, protection, fury):
@@ -54,11 +54,13 @@ def parse_params(params):
         weapon, armor = None, None
         #print ("Create Mage [todo]")
         return create_character1(name, life, strength, protection, mana)
+    
     elif params[0].lower() == "priest":
         mana = int(params[5])
         weapon, armor = None, None
         #print ("Create Priest [todo]")
         return create_character2(name, life, strength, protection, mana)
+    
     else:
         raise ValueError("Avatar '{}' is not valid".format(params[0]))
     
@@ -66,3 +68,4 @@ def parse_params(params):
 if __name__ == "__main__":
 
     run(sys.argv[1])
+#El nombre de las armas indica el número de armas que ha tenido el personaje incluido la que tiene
