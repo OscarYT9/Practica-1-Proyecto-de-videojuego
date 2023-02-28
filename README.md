@@ -238,7 +238,7 @@ En principio para este pequeño proyecto el Equipo debería trabajar sobre la mi
 [![IMAGE ALT TEXT HERE](https://w.wallha.com/ws/3/UIhkCsjd.jpg)](https://www.youtube.com/watch?v=gXzMD065HEk)
 [![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/221442306-891c2632-81d9-4ca1-9ffc-6aa329b13b95.png)](https://www.youtube.com/watch?v=oATfORhqelk)
 [![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/221443350-b860c641-6df2-449a-8b36-07c78e0505e4.jpg)](https://www.youtube.com/watch?v=2SVzBVsoY_Q)
-
+[![IMAGE ALT TEXT HERE](https://is4-ssl.mzstatic.com/image/thumb/Music113/v4/2c/c7/d1/2cc7d1ae-21ad-8f52-6744-4f3503210702/cover.jpg/3000x3000bb.jpg)](https://www.youtube.com/watch?v=5_tjeX0B8UU&list=OLAK5uy_kFPsnC6pAdlxg1ahchvANmJHzVv2BmXik)
 
 <a href="https://code.visualstudio.com/">
   <img align="right" alt="Juego | VSCode" width="21px" src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/file_type_vscode.svg" />
