@@ -240,6 +240,7 @@ En principio para este pequeño proyecto el Equipo debería trabajar sobre la mi
 [![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/221443350-b860c641-6df2-449a-8b36-07c78e0505e4.jpg)](https://www.youtube.com/watch?v=2SVzBVsoY_Q)
 [![IMAGE ALT TEXT HERE](https://is4-ssl.mzstatic.com/image/thumb/Music113/v4/2c/c7/d1/2cc7d1ae-21ad-8f52-6744-4f3503210702/cover.jpg/3000x3000bb.jpg)](https://www.youtube.com/watch?v=5_tjeX0B8UU&list=OLAK5uy_kFPsnC6pAdlxg1ahchvANmJHzVv2BmXik)
 [![IMAGE ALT TEXT HERE](https://besthqwallpapers.com/Uploads/3-4-2018/47026/mordekaiser-4k-moba-art-warrior.jpg)](https://www.youtube.com/watch?v=QzjZcMsGm3M&t=18s)
+[![IMAGE ALT TEXT HERE](https://images.squarespace-cdn.com/content/v1/52c9d908e4b0e87887310693/1555177699048-3WV3CHFJDSRPUPHPKN4F/SonniesEdge_LDR_09.jpg)](https://www.youtube.com/watch?v=hl_BEyYrguE)
 
 <a href="https://code.visualstudio.com/">
   <img align="right" alt="Juego | VSCode" width="21px" src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/file_type_vscode.svg" />
