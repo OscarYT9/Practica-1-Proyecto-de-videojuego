@@ -242,6 +242,7 @@ En principio para este pequeño proyecto el Equipo debería trabajar sobre la mi
 [![IMAGE ALT TEXT HERE](https://images.squarespace-cdn.com/content/v1/52c9d908e4b0e87887310693/1555177699048-3WV3CHFJDSRPUPHPKN4F/SonniesEdge_LDR_09.jpg)](https://www.youtube.com/watch?v=hl_BEyYrguE)
 [![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/222863458-f4585721-1bf2-4c0b-96b8-897f8ec36236.jpg)](https://www.youtube.com/watch?v=QzjZcMsGm3M&t=18s)
 [![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/222863677-61c380cd-f2a6-4dd8-95dd-a3a9d06c8608.jpg)](https://www.youtube.com/watch?v=-dXRClwk-h0)
+[![IMAGE ALT TEXT HERE](https://rare-gallery.com/uploads/posts/774261-2-Gabriel-Belmont-Prince-of-Darkness-Dracula-Castlevania.jpg)](https://www.youtube.com/watch?v=qnACJZm_BYw)
 
 <a href="https://code.visualstudio.com/">
   <img align="right" alt="Juego | VSCode" width="21px" src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/file_type_vscode.svg" />
@@ -270,8 +271,9 @@ En principio para este pequeño proyecto el Equipo debería trabajar sobre la mi
 
 <a href="https://www.youtube.com/@CodeSandbox/videos" target="_blank">@CodeSandbox</a> [^6]
 
-<a href="https://www.youtube.com/@MrPSolver
-/videos" target="_blank">@MrPSolver</a> [^7]
+<a href="https://www.youtube.com/@BitBoss/videos" target="_blank">@BitBoss</a> [^7][^8]
+
+<a href="https://www.youtube.com/@MrPSolver/videos" target="_blank">@MrPSolver</a> [^9]
 
 
 [^1]: **<a href="https://www.youtube.com/watch?v=Ji8uoRvi17s" target="_blank"> # ❗PRINCIPIO de la Programación Orientada a Objetos: ABSTRACCIÓN - [EN PYTHON] - Curso PYTHON de cero</a>**
@@ -286,4 +288,8 @@ En principio para este pequeño proyecto el Equipo debería trabajar sobre la mi
 
 [^6]: **<a href="https://www.youtube.com/watch?v=HfPIhxWacfs" target="_blank"># How to import a GitHub repository on CodeSandbox | CodeSandbox 101</a>**
 
-[^7]: **<a href="https://www.youtube.com/watch?v=0MhVkKHYUAY" target="_blank"># New Python Coders Be Like...</a>**
+[^7]: **<a href="https://www.youtube.com/watch?v=SI7O81GMG2A" target="_blank"># Programación Orientada a Objetos (POO): Abstracción, Encapsulamiento, Herencia, Polimorfismo</a>**
+
+[^8]: **<a href="https://www.youtube.com/watch?v=JVNirg9qs4M" target="_blank"># CLASES en PYTHON, TODOS los pilares de POO aplicados a un EJEMPLO COMPLETO desde CERO</a>**
+
+[^9]: **<a href="https://www.youtube.com/watch?v=0MhVkKHYUAY" target="_blank"># New Python Coders Be Like...</a>**
