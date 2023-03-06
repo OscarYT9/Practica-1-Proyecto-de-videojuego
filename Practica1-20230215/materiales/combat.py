@@ -23,12 +23,18 @@ def combat(personajes):
     if isinstance(attacker, Priest):
         if random.random() < 0.25:
             attacker.life = attacker.heal() + attacker.life
+
+            if attacker.get_name() not in resultados:
+                resultados[attacker.get_name()] = {"clase": type(attacker).__name__,"victorias": 0,"daño_total": 0, "total_peleas_atacante":0,"curación": attacker.heal()}
+            else:
+                resultados[attacker.get_name()]["curación"] += attacker.heal()
+
             return
             #print("El",attacker.name,"se ha curado",attacker.heal(),"y ahora tiene",attacker.life)
         else:
             damage = attacker.attack()
-
-    damage = attacker.attack()
+    else:
+        damage = attacker.attack()
 
     reduced_damage = defender.defend() # Calcular cuánto daño se reduce por la defensa del defensor
     damage_received = max(damage - reduced_damage, 0) # El daño reducido nunca puede ser mayor que el daño causado
@@ -36,13 +42,13 @@ def combat(personajes):
 
     # Actualizar los resultados
     if attacker.get_name() not in resultados:
-        resultados[attacker.get_name()] = {"clase": type(attacker).__name__,"victorias": 0,"daño_total": 0, "total_peleas_atacante":0}
+        resultados[attacker.get_name()] = {"clase": type(attacker).__name__,"victorias": 0,"daño_total": 0, "total_peleas_atacante":0,"curación":0}
     else:
         resultados[attacker.get_name()]["daño_total"] += damage_received
         resultados[attacker.get_name()]["total_peleas_atacante"] += 1
 
     if defender.get_name() not in resultados:
-        resultados[defender.get_name()] = {"clase": type(attacker).__name__,"victorias": 0,"daño_total": damage_received, "total_peleas_atacante":0}
+        resultados[defender.get_name()] = {"clase": type(attacker).__name__,"victorias": 0,"daño_total": 0, "total_peleas_atacante":0,"curación":0}
 
     # Comprobar si el defensor ha muerto
     if defender.life <= 0:

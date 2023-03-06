@@ -43,9 +43,13 @@ def run(path):
     df["daño_medio"] = df["daño_total"] / df["total_peleas_atacante"]
     df["desviacion_tipica"] = df["daño_total"].apply(lambda x: np.sqrt(((df["daño_total"] - x)**2).sum() / df["daño_total"].count()))
 
+    df_sorted = df.sort_values(by="victorias", ascending=False)
     df.groupby("nombre")[["daño_medio", "desviacion_tipica"]].mean().reset_index()
-    print(df.to_string(max_rows=None))
+    print(df_sorted.to_string(max_rows=None))
 
+    
+    class_stats = df.groupby('clase')['daño_medio'].agg(['mean', 'std'])
+    print(class_stats)
 
     import matplotlib.pyplot as plt
 
