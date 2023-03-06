@@ -1,8 +1,9 @@
+import pandas as pd
+import math
 import sys
 from classes import *
 from items import *
 from combat import *
-
 personajes = []
 
 def run(path):
@@ -24,6 +25,45 @@ def run(path):
         peleas_participadas = resultados[personaje.get_name()]["total_peleas"]
         daño_medio = resultados[personaje.get_name()]["daño_total"] / peleas_participadas if peleas_participadas > 0 else 0
         print(f"{personaje.get_name()} causó un daño medio de {daño_medio} en {peleas_participadas} peleas.")
+
+    # Calcular la media de los daños totales
+    total_danos = [resultados[p]["daño_total"] for p in resultados]
+    media_danos = sum(total_danos) / len(total_danos)
+
+    # Calcular la desviación típica
+    desviacion_tipica = math.sqrt(sum((x - media_danos)**2 for x in total_danos) / len(total_danos))
+
+    print(f"La desviación típica de los daños totales es: {desviacion_tipica:.2f}")
+
+
+    # Creamos un diccionario con los datos
+    data = {'Nombre': ['Juan', 'María', 'Pedro', 'Lucía'],
+        'Edad': [25, 34, 29, 31],
+        'País': ['España', 'México', 'Argentina', 'Colombia']}
+
+    # Creamos el DataFrame a partir del diccionario
+    df = pd.DataFrame(data)
+
+    # Mostramos el DataFrame
+    print(df)
+
+
+
+    import matplotlib.pyplot as plt
+
+    # Crear el gráfico
+    plt.scatter(df['Edad'], df['País'])
+
+    # Agregar etiquetas de los ejes
+    plt.xlabel('Eje X')
+    plt.ylabel('Eje Y')
+
+    # Agregar título al gráfico
+    plt.title('Gráfico de dispersión')
+
+    # Mostrar el gráfico
+    plt.show()
+
 
 #def create_warrior(name, life, strength, protection, fury):
     #weapon, armor, shield = None, None, None
@@ -66,4 +106,3 @@ def parse_params(params):
 if __name__ == "__main__":
 
     run(sys.argv[1])
-#El nombre de las armas indica el número de armas que ha tenido el personaje incluido la que tiene

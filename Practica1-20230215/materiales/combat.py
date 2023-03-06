@@ -101,7 +101,7 @@ def combat(personajes):
                 
         #print_remaining_characters(personajes) #Imprime la lista de personajes restantes
         #print("")
-        print(resultados)
+        #print(resultados)
             
     #else:
         #print("Fin de la batalla me voy corriendo a buscar a otros dos tipos")
