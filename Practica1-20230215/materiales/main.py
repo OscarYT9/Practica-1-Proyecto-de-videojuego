@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import math
 import sys
@@ -22,7 +23,7 @@ def run(path):
             combat(personajes)
     
     for personaje in x:
-        peleas_participadas = resultados[personaje.get_name()]["total_peleas"]
+        peleas_participadas = resultados[personaje.get_name()]["total_peleas_atacante"]
         daño_medio = resultados[personaje.get_name()]["daño_total"] / peleas_participadas if peleas_participadas > 0 else 0
         print(f"{personaje.get_name()} causó un daño medio de {daño_medio} en {peleas_participadas} peleas.")
 
@@ -36,33 +37,31 @@ def run(path):
     print(f"La desviación típica de los daños totales es: {desviacion_tipica:.2f}")
 
 
-    # Creamos un diccionario con los datos
-    data = {'Nombre': ['Juan', 'María', 'Pedro', 'Lucía'],
-        'Edad': [25, 34, 29, 31],
-        'País': ['España', 'México', 'Argentina', 'Colombia']}
 
-    # Creamos el DataFrame a partir del diccionario
-    df = pd.DataFrame(data)
+    df = pd.DataFrame.from_dict(resultados, orient='index')
+    df.rename_axis("nombre", inplace=True)
+    df["daño_medio"] = df["daño_total"] / df["total_peleas_atacante"]
+    df["desviacion_tipica"] = df["daño_total"].apply(lambda x: np.sqrt(((df["daño_total"] - x)**2).sum() / df["daño_total"].count()))
 
-    # Mostramos el DataFrame
-    print(df)
-
+    df.groupby("nombre")[["daño_medio", "desviacion_tipica"]].mean().reset_index()
+    print(df.to_string(max_rows=None))
 
 
     import matplotlib.pyplot as plt
 
     # Crear el gráfico
-    plt.scatter(df['Edad'], df['País'])
+    plt.scatter(df['clase'], df['victorias'])
 
     # Agregar etiquetas de los ejes
     plt.xlabel('Eje X')
-    plt.ylabel('Eje Y')
+    plt.ylabel('Victorias')
 
     # Agregar título al gráfico
     plt.title('Gráfico de dispersión')
 
     # Mostrar el gráfico
     plt.show()
+    plt.savefig('nombre_del_archivo.png')
 
 
 #def create_warrior(name, life, strength, protection, fury):

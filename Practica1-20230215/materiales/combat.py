@@ -2,7 +2,6 @@ from classes import *
 from items import *
 import random
 
-total_peleas = []
 resultados = {} # diccionario vacío para almacenar los resultados de cada personaje
 #personajes_info = []
 #victorias=0
@@ -37,15 +36,13 @@ def combat(personajes):
 
     # Actualizar los resultados
     if attacker.get_name() not in resultados:
-        resultados[attacker.get_name()] = {"clase": type(attacker).__name__,"victorias": 0,"daño_total": 0, "total_peleas":0}
+        resultados[attacker.get_name()] = {"clase": type(attacker).__name__,"victorias": 0,"daño_total": 0, "total_peleas_atacante":0}
     else:
         resultados[attacker.get_name()]["daño_total"] += damage_received
-        resultados[attacker.get_name()]["total_peleas"] += 1
+        resultados[attacker.get_name()]["total_peleas_atacante"] += 1
 
     if defender.get_name() not in resultados:
-        resultados[defender.get_name()] = {"clase": type(attacker).__name__,"victorias": 0,"daño_total": damage_received, "total_peleas":0}
-    else:
-        resultados[attacker.get_name()]["total_peleas"] += 1
+        resultados[defender.get_name()] = {"clase": type(attacker).__name__,"victorias": 0,"daño_total": damage_received, "total_peleas_atacante":0}
 
     # Comprobar si el defensor ha muerto
     if defender.life <= 0:
