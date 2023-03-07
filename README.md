@@ -243,6 +243,7 @@ En principio para este pequeño proyecto el Equipo debería trabajar sobre la mi
 [![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/222863458-f4585721-1bf2-4c0b-96b8-897f8ec36236.jpg)](https://www.youtube.com/watch?v=QzjZcMsGm3M&t=18s)
 [![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/222863677-61c380cd-f2a6-4dd8-95dd-a3a9d06c8608.jpg)](https://www.youtube.com/watch?v=-dXRClwk-h0)
 [![IMAGE ALT TEXT HERE](https://rare-gallery.com/uploads/posts/774261-2-Gabriel-Belmont-Prince-of-Darkness-Dracula-Castlevania.jpg)](https://www.youtube.com/watch?v=qnACJZm_BYw)
+[![IMAGE ALT TEXT HERE](https://cdna.artstation.com/p/assets/images/images/016/502/820/large/lee-j-p-.jpg?1552406319)](https://www.youtube.com/watch?v=fWTRBsNHzco)
 
 <a href="https://code.visualstudio.com/">
   <img align="right" alt="Juego | VSCode" width="21px" src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/file_type_vscode.svg" />
