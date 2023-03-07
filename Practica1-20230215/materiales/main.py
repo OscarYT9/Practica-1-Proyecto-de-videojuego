@@ -5,6 +5,7 @@ import sys
 from classes import *
 from items import *
 from combat import *
+
 personajes = []
 
 def run(path):
@@ -16,38 +17,24 @@ def run(path):
             personajes.append(personaje)
     #TODO: Implement simulation here
 
-    x = personajes.copy()
+    x = personajes.copy() #Creamos una copia de la lista de personajes antes de ejecutar el bucle (la necesitaremos para obtener los nombres de los personajes y así acceder al diccionario de resultados)
     i=0
     for i in range(0,31): 
         while len(personajes)>1:
             combat(personajes)
     
-    for personaje in x:
-        peleas_participadas = resultados[personaje.get_name()]["total_peleas_atacante"]
-        daño_medio = resultados[personaje.get_name()]["daño_total"] / peleas_participadas if peleas_participadas > 0 else 0
-        print(f"{personaje.get_name()} causó un daño medio de {daño_medio} en {peleas_participadas} peleas.")
-
-    # Calcular la media de los daños totales
-    total_danos = [resultados[p]["daño_total"] for p in resultados]
-    media_danos = sum(total_danos) / len(total_danos)
-
-    # Calcular la desviación típica
-    desviacion_tipica = math.sqrt(sum((x - media_danos)**2 for x in total_danos) / len(total_danos))
-
-    print(f"La desviación típica de los daños totales es: {desviacion_tipica:.2f}")
-
-
-
+    #Creamos el DataFrame
     df = pd.DataFrame.from_dict(resultados, orient='index')
     df.rename_axis("nombre", inplace=True)
     df["daño_medio"] = df["daño_total"] / df["total_peleas_atacante"]
     df["desviacion_tipica"] = df["daño_total"].apply(lambda x: np.sqrt(((df["daño_total"] - x)**2).sum() / df["daño_total"].count()))
 
+    #Ordenamos el DataFrame por numero de victorias (en orden descendente)
     df_sorted = df.sort_values(by="victorias", ascending=False)
     df.groupby("nombre")[["daño_medio", "desviacion_tipica"]].mean().reset_index()
     print(df_sorted.to_string(max_rows=None))
 
-    
+    #Calculamos la media de daño y desviación atípica por clases e imprimimos el DataFrame
     class_stats = df.groupby('clase')['daño_medio'].agg(['mean', 'std'])
     print(class_stats)
 
@@ -66,21 +53,34 @@ def run(path):
     # Mostrar el gráfico
     plt.show()
     plt.savefig('nombre_del_archivo.png')
+    
+    #Gráfico con todas las columnas del DataFrame
+    import seaborn as sns
+    import matplotlib.pyplot as plt
 
+    sns.pairplot(df, hue='clase', markers=['o', 's', 'D'],
+                plot_kws={'alpha': 0.5}) # Set marker opacity here
+    plt.show()
+    plt.savefig('mi_grafico.png')
+        
+    #Gráfico interactivo con todas las columnas del DataFrame
+    import plotly.express as px
 
-#def create_warrior(name, life, strength, protection, fury):
-    #weapon, armor, shield = None, None, None
-    #return Warrior(name, life, strength, protection, fury, weapon, armor, shield)
+    # Create a dictionary that maps class names to marker symbols
+    symbol_map = {'Mage': 'square', 'Warrior': 'diamond'}
 
-#def create_mage(name, life, strength, protection, mana):
-    #weapon, armor = None, None
-    #return Mage(name, life, strength, protection, mana, weapon, armor)
+    fig = px.scatter_matrix(df,
+        dimensions=['victorias', 'daño_total', 'total_peleas_atacante', 'curación', 'daño_medio', 'desviacion_tipica'],
+        color='clase',
+        opacity=0.5,
+        symbol='clase',
+        symbol_map=symbol_map)
 
-#def create_priest(name, life, strength, protection, mana):
-    #weapon, armor = None, None
-    #return Priest(name, life, strength, protection, mana, weapon, armor)
+    fig.show()
 
-
+    print(Avatar.get_life.__doc__)
+    print(combat.__doc__)
+    
 def parse_params(params):
 
     name, life, strength, protection = params[1], int(params[2]), int(params[3]), int(params[4])
@@ -105,7 +105,6 @@ def parse_params(params):
     else:
         raise ValueError("Avatar '{}' is not valid".format(params[0]))
     
-
 if __name__ == "__main__":
 
     run(sys.argv[1])
