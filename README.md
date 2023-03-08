@@ -239,10 +239,11 @@ En principio para este pequeño proyecto el Equipo debería trabajar sobre la mi
 [![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/221442306-891c2632-81d9-4ca1-9ffc-6aa329b13b95.png)](https://www.youtube.com/watch?v=oATfORhqelk)
 [![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/221443350-b860c641-6df2-449a-8b36-07c78e0505e4.jpg)](https://www.youtube.com/watch?v=2SVzBVsoY_Q)
 [![IMAGE ALT TEXT HERE](https://is4-ssl.mzstatic.com/image/thumb/Music113/v4/2c/c7/d1/2cc7d1ae-21ad-8f52-6744-4f3503210702/cover.jpg/3000x3000bb.jpg)](https://www.youtube.com/watch?v=5_tjeX0B8UU&list=OLAK5uy_kFPsnC6pAdlxg1ahchvANmJHzVv2BmXik)
+[![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/223850696-5bd205e5-bb2b-41ba-a44b-bdd92c75e0b1.jpg)](https://www.youtube.com/watch?v=F_-TPa8iS70)
 [![IMAGE ALT TEXT HERE](https://images.squarespace-cdn.com/content/v1/52c9d908e4b0e87887310693/1555177699048-3WV3CHFJDSRPUPHPKN4F/SonniesEdge_LDR_09.jpg)](https://www.youtube.com/watch?v=hl_BEyYrguE)
 [![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/222863458-f4585721-1bf2-4c0b-96b8-897f8ec36236.jpg)](https://www.youtube.com/watch?v=QzjZcMsGm3M&t=18s)
 [![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/222863677-61c380cd-f2a6-4dd8-95dd-a3a9d06c8608.jpg)](https://www.youtube.com/watch?v=-dXRClwk-h0)
-[![IMAGE ALT TEXT HERE](https://rare-gallery.com/uploads/posts/774261-2-Gabriel-Belmont-Prince-of-Darkness-Dracula-Castlevania.jpg)](https://www.youtube.com/watch?v=qnACJZm_BYw)
+[![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/223845009-11c90628-7d08-42fa-9365-55ebcbf01039.png)](https://www.youtube.com/watch?v=qnACJZm_BYw)
 [![IMAGE ALT TEXT HERE](https://cdna.artstation.com/p/assets/images/images/016/502/820/large/lee-j-p-.jpg?1552406319)](https://www.youtube.com/watch?v=fWTRBsNHzco)
 
 <a href="https://code.visualstudio.com/">
