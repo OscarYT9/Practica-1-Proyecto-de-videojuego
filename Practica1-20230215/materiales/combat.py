@@ -173,4 +173,26 @@ def equip(self, item):
     #else:
         #print(f"{item.name} is not a weapon or armor!")
 
+def generate_sword():
+    import random
+    name = f"Sword {len(Sword.swords)+1}"
+    power = random.randint(1, 5)
+    return Sword(name, power)
 
+def generate_wand():
+    import random
+    name = f"Wand {len(Wand.wands)+1}"
+    power = random.randint(1, 5)
+    return Wand(name, power)
+
+def generate_armor():
+    import random
+    name = f"Armor {len(Armor.armors)+1}"
+    protection = random.randint(1, 5)
+    return Armor(name, protection)
+
+def generate_shield():
+    import random
+    name = f"Shield {len(Shield.shields)+1}"
+    protection = random.randint(1, 5)
+    return Shield(name, protection)

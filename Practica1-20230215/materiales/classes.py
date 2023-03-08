@@ -368,14 +368,9 @@ class Warrior(Melee):
     set_shield(shield: Item)
         Equipa un escudo al guerrero.
     attack() -> int
-        Devuelve el ataque del guerrero con su arma equipada, si tiene una, y devuelve el valor del ataque realizado.
-        Si no tiene arma, realiza un ataque con su fuerza base más un número aleatorio entre 0 y la rabia del guerrero.
+        Devuelve el ataque del guerrero con su arma equipada, si tiene una. Si no tiene arma, realiza un ataque con su fuerza base más un número aleatorio entre 0 y la rabia del guerrero.
     defend() -> int
         Devuelve el valor de la defensa del guerrero.
-        Si no tiene armadura ni escudo, devuelve la defensa base del guerrero.
-        Si tiene un escudo equipado, devuelve la defensa base del guerrero más la protección del escudo.
-        Si tiene una armadura equipada, devuelve la defensa base del guerrero más la protección de la armadura.
-        Si tiene ambos equipados, devuelve la defensa base del guerrero más la protección de la armadura y del escudo.
     """
     def __init__(self, name, life, strength, defense, fury, weapon, armor, shield):
         super().__init__(name, life, strength, defense, weapon, armor, shield)
@@ -409,8 +404,7 @@ class Warrior(Melee):
 
     def attack(self):
         """
-        Realiza el ataque del guerrero con su arma equipada, si tiene una, y devuelve el valor del ataque realizado.
-        Si no tiene arma, realiza un ataque con su fuerza base más un número aleatorio entre 0 y la rabia del guerrero.
+        Devuelve el ataque del guerrero con su arma equipada, si tiene una. Si no tiene arma, realiza un ataque con su fuerza base más un número aleatorio entre 0 y la rabia del guerrero.
 
         Returns
         -------
@@ -426,10 +420,6 @@ class Warrior(Melee):
     def defend(self):
         """
         Devuelve el valor de la defensa del guerrero.
-        Si no tiene armadura ni escudo, devuelve la defensa base del guerrero.
-        Si tiene un escudo equipado, devuelve la defensa base del guerrero más la protección del escudo.
-        Si tiene una armadura equipada, devuelve la defensa base del guerrero más la protección de la armadura.
-        Si tiene ambos equipados, devuelve la defensa base del guerrero más la protección de la armadura y del escudo.
 
         Returns
         -------
@@ -590,8 +580,6 @@ class Mage(Caster):
         """
         import random
         aleatorio = random.randint(0,1)
-        if aleatorio == 1:
-            return aleatorio
         if aleatorio == 0:
             self.mana += 2
             # print(f"{self.get_name()} ha recuperado 2 puntos de mana.")
@@ -604,6 +592,7 @@ class Mage(Caster):
             # print(f"{self.get_name()} ha utilizado 1 punto de mana.")
             return damage
         else:
+            self.mana -= 1
             # print(f"{self.get_name()} no tiene suficiente mana para atacar.")
             return 1
         
@@ -625,7 +614,7 @@ class Mage(Caster):
 #_______________________________________________________________________________________
 
 
-class Priest(Caster):
+class Priest(Mage):
     """Clase que representa a un sacerdote.
 
     Attributes
@@ -659,45 +648,26 @@ class Priest(Caster):
 
     def attack(self):
         """
-        Devuelve el valor del ataque realizado por el sacerdote
+        Devuelve el valor del ataque realizado por el mago
 
         Returns
         -------
         int
-            Valor del ataque realizado por el sacerdote.
+            Valor del ataque realizado por el mago.
         """
-        import random
-        aleatorio = random.randint(0,1)
-        if aleatorio == 1:
-            return aleatorio
-        if aleatorio == 0:
-            self.mana += 2
-            # print(f"{self.get_name()} ha recuperado 2 puntos de mana.")
-        if self.mana > 1:
-            if self.weapon is None:
-                damage = self.strength
-            else:
-                damage = self.strength + self.weapon.power
-            self.mana -= 1
-            # print(f"{self.get_name()} ha utilizado 1 punto de mana.")
-            return damage
-        else:
-            # print(f"{self.get_name()} no tiene suficiente mana para atacar.")
-            return 1
+        return super().attack()
 
     def defend(self):
         """
-        Devuelve el valor de la defensa del sacerdote.
+        Devuelve el valor de la defensa del mago.
 
         Returns
         -------
         int
-            La cantidad de daño bloqueado por la defensa del sacerdote.
+            La cantidad de daño bloqueado por la defensa del mago.
         """
-        if self.armor is None:
-            return self.defense
-        else:
-            return self.defense + self.armor.protection
+        return super().defend()
+
         
     def heal(self):
         """

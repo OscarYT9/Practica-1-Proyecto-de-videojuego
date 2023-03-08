@@ -50,7 +50,7 @@ def print_remaining_characters(personajes):
 
 
 
-
+ x = personajes.copy() #Creamos una copia de la lista de personajes antes de ejecutar el bucle (la necesitaremos para obtener los nombres de los personajes y así acceder al diccionario de resultados)
 for personaje in x:
         peleas_participadas = resultados[personaje.get_name()]["total_peleas_atacante"]
         daño_medio = resultados[personaje.get_name()]["daño_total"] / peleas_participadas if peleas_participadas > 0 else 0

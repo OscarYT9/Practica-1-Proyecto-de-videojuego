@@ -9,6 +9,18 @@ from combat import *
 personajes = []
 
 def run(path):
+    """
+    Ejecuta la simulación de combate entre los personajes leídos desde el archivo especificado.
+    
+    Parameters
+    ----------
+    path : str
+        ruta del archivo que contiene los parámetros de los personajes
+    
+    Returns
+    -------    
+    None
+    """
 
     with open(path) as f:
         pjs = f.readlines()
@@ -17,11 +29,13 @@ def run(path):
             personajes.append(personaje)
     #TODO: Implement simulation here
 
-    x = personajes.copy() #Creamos una copia de la lista de personajes antes de ejecutar el bucle (la necesitaremos para obtener los nombres de los personajes y así acceder al diccionario de resultados)
+    import copy
     i=0
-    for i in range(0,31): 
-        while len(personajes)>1:
-            combat(personajes)
+    for i in range(0,31):
+        personajes_copy = copy.deepcopy(personajes)
+        print(personajes_copy)
+        while len(personajes_copy)>1:
+            combat(personajes_copy)
     
     #Creamos el DataFrame
     df = pd.DataFrame.from_dict(resultados, orient='index')
@@ -32,7 +46,7 @@ def run(path):
     #Ordenamos el DataFrame por numero de victorias (en orden descendente)
     df_sorted = df.sort_values(by="victorias", ascending=False)
     df.groupby("nombre")[["daño_medio", "desviacion_tipica"]].mean().reset_index()
-    print(df_sorted.to_string(max_rows=None))
+    print(df_sorted[["victorias", "daño_medio", "desviacion_tipica"]].to_string(max_rows=None))
 
     #Calculamos la media de daño y desviación atípica por clases e imprimimos el DataFrame
     class_stats = df.groupby('clase')['daño_medio'].agg(['mean', 'std'])
@@ -82,8 +96,25 @@ def run(path):
 
     print(Avatar.get_life.__doc__)
     print(combat.__doc__)
+    print(Priest.attack.__doc__)
     
 def parse_params(params):
+    """
+    Crea un objeto de tipo Warrior, Mage o Priest con los parámetros especificados.
+    
+    Parameters
+    ----------
+    params : list
+        lista con los parámetros del personaje (clase, nombre, vida, fuerza, protección, otros parámetros dependiendo de la clase)
+    
+    Returns
+    -------
+    Un objeto de la clase correspondiente (Warrior, Mage o Priest)
+    
+    Raises
+    -------
+    ValueError: si el primer parámetro de la lista no corresponde a ninguna de las tres clases válidas (Warrior, Mage o Priest)
+    """
 
     name, life, strength, protection = params[1], int(params[2]), int(params[3]), int(params[4])
     if params[0].lower() == "warrior":
