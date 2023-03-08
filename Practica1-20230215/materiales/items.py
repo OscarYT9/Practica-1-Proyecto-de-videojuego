@@ -1,9 +1,29 @@
 class Item:
-    
+    """Clase base para todos los objetos del juego."""
     pass
 #_______________________________________________________________________________________
 
 class Weapon(Item):
+    """Clase base para las armas del juego.
+
+    Attributes
+    ----------
+    name : str
+        El nombre del arma.
+    power : int
+        El poder del arma.
+
+    Methods
+    -------
+    get_power()
+        Devuelve el poder del arma.
+    set_shield(power)
+        Establece el poder del arma a un nuevo valor.
+    mostrar()
+        Muestra la información del arma.
+    get_name()
+        Devuelve el nombre del arma.
+    """
     def __init__(self, name, power):
 
         self.name = name

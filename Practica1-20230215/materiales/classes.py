@@ -235,38 +235,188 @@ class Avatar:
     
     
 class Melee(Avatar):
+    """
+    Clase abstracta que representa a un avatar de tipo Melee.
+
+    Attributes
+    ----------
+    name : str
+        Nombre del avatar.
+    life : int
+        Vida actual del avatar.
+    strength : int
+        Fuerza del avatar.
+    defense : int
+        Defensa del avatar.
+    weapon : Item
+        Arma equipada del avatar.
+    armor : Item
+        Armadura equipada del avatar.
+    shield : Item
+        Escudo equipado del avatar.
+
+    Methods
+    -------
+    get_shield()
+        Devuelve el escudo equipado del avatar.
+    set_shield(shield: Item)
+        Equipa un escudo al avatar.
+    set_weapon(item: Item)
+        Equipa un arma al avatar.
+    """
     @abstractmethod
     def __init__(self, name, life, strength, defense, weapon, armor, shield):
+        """
+        Inicializa los atributos de la clase abstracta Melee.
+
+        Parameters
+        ----------
+        name : str
+            Nombre del avatar.
+        life : int
+            Vida actual del avatar.
+        strength : int
+            Fuerza del avatar.
+        defense : int
+            Defensa del avatar.
+        weapon : Item
+            Arma equipada del avatar.
+        armor : Item
+            Armadura equipada del avatar.
+        shield : Item
+            Escudo equipado del avatar.
+
+        Returns
+        -------
+        None
+        """
         super().__init__(name, life, strength, defense, weapon, armor)
 
         self.shield = None
         
     def get_shield(self):
+        """
+        Devuelve el escudo equipado del melee.
+
+        Returns
+        -------
+        Item
+            El escudo equipado del melee.
+        """
         return self.shield
 
     def set_shield(self, shield):
+        """
+        Equipa un escudo al melee.
+
+        Parameters
+        ----------
+        shield : Item
+            El escudo a equipar.
+
+        Returns
+        -------
+        None
+        """
         self.shield = shield
 
     def set_weapon(self,Item):
+        """
+        Equipa un arma al melee.
+
+        Parameters
+        ----------
+        item : Item
+            El arma a equipar.
+
+        Returns
+        -------
+        None
+        """
         self.weapon = Item
 
 
-class Warrior(Melee): 
+class Warrior(Melee):
+    """
+    Clase que representa a un guerrero.
+
+    Attributes
+    ----------
+    name : str
+        Nombre del guerrero.
+    life : int
+        Vida actual del guerrero.
+    strength : int
+        Fuerza del guerrero.
+    defense : int
+        Defensa del guerrero.
+    fury : int
+        Rabia del guerrero.
+    weapon : Item
+        Arma equipada del guerrero.
+    armor : Item
+        Armadura equipada del guerrero.
+    shield : Item
+        Escudo equipado del guerrero.
+
+    Methods
+    -------
+    get_fury()
+        Devuelve la rabia del guerrero.
+    set_fury(fury: int)
+        Establece la rabia del guerrero.
+    set_shield(shield: Item)
+        Equipa un escudo al guerrero.
+    attack() -> int
+        Devuelve el ataque del guerrero con su arma equipada, si tiene una, y devuelve el valor del ataque realizado.
+        Si no tiene arma, realiza un ataque con su fuerza base más un número aleatorio entre 0 y la rabia del guerrero.
+    defend() -> int
+        Devuelve el valor de la defensa del guerrero.
+        Si no tiene armadura ni escudo, devuelve la defensa base del guerrero.
+        Si tiene un escudo equipado, devuelve la defensa base del guerrero más la protección del escudo.
+        Si tiene una armadura equipada, devuelve la defensa base del guerrero más la protección de la armadura.
+        Si tiene ambos equipados, devuelve la defensa base del guerrero más la protección de la armadura y del escudo.
+    """
     def __init__(self, name, life, strength, defense, fury, weapon, armor, shield):
         super().__init__(name, life, strength, defense, weapon, armor, shield)
         
         self.fury = fury
 
     def get_fury(self):
+        """
+        Devuelve la rabia del guerrero.
+
+        Returns
+        -------
+        int
+            La rabia del guerrero.
+        """
         return self.fury
     
     def set_fury(self, fury):
+        """
+        Establece la rabia del guerrero.
+
+        Parameters
+        ----------
+        fury : int
+            La nueva rabia del guerrero.
+        """
         self.fury = fury
 
     def set_shield(self, shield):
         self.shield = shield
 
     def attack(self):
+        """
+        Realiza el ataque del guerrero con su arma equipada, si tiene una, y devuelve el valor del ataque realizado.
+        Si no tiene arma, realiza un ataque con su fuerza base más un número aleatorio entre 0 y la rabia del guerrero.
+
+        Returns
+        -------
+        int
+            Valor del ataque realizado por el guerrero.
+        """
         import random
         if self.weapon is None:
             return self.strength + random.randint(0, self.fury)
@@ -274,6 +424,18 @@ class Warrior(Melee):
             return self.strength + self.weapon.power + random.randint(0, self.fury)
 
     def defend(self):
+        """
+        Devuelve el valor de la defensa del guerrero.
+        Si no tiene armadura ni escudo, devuelve la defensa base del guerrero.
+        Si tiene un escudo equipado, devuelve la defensa base del guerrero más la protección del escudo.
+        Si tiene una armadura equipada, devuelve la defensa base del guerrero más la protección de la armadura.
+        Si tiene ambos equipados, devuelve la defensa base del guerrero más la protección de la armadura y del escudo.
+
+        Returns
+        -------
+        int
+            La cantidad de daño bloqueado por la defensa del guerrero.
+        """
         if (self.armor is None) and (self.shield is None):
             return self.defense
         elif self.armor is None:
@@ -285,48 +447,176 @@ class Warrior(Melee):
 #_______________________________________________________________________________________
 
 class Caster(Avatar):
+    """
+    Clase abstracta que representa a un avatar tipo Caster.
+
+    Attributes
+    ----------
+    name : str
+        Nombre del avatar.
+    life : int
+        Vida actual del avatar.
+    strength : int
+        Fuerza del avatar.
+    defense : int
+        Defensa del avatar.
+    mana : int
+        Maná actual del avatar.
+    weapon : Item
+        Arma equipada del avatar.
+    armor : Item
+        Armadura equipada del avatar.
+
+    Methods
+    -------
+    get_mana()
+        Devuelve el maná del avatar.
+    set_mana(mana: int)
+        Actualiza el maná del avatar.
+    set_weapon(Item)
+        Equipa un arma al avatar.
+    """
+
     @abstractmethod
     def __init__(self, name, life, strength, defense, mana, weapon, armor):
+        """
+        Inicializa los atributos de clase abstracta Caster.
+
+        Parameters
+        ----------
+        name : str
+            Nombre del caster.
+        life : int
+            Vida actual del caster.
+        strength : int
+            Fuerza del caster.
+        defense : int
+            Defensa del caster.
+        mana : int
+            Cantidad de mana del caster.
+        weapon : Item
+            Arma equipada del caster.
+        armor : Item
+            Armadura equipada del caster.
+
+        Returns
+        -------
+        None
+        """
         super().__init__(name, life, strength, defense, weapon, armor)
         
         self.mana = mana
 
     def get_mana(self):
+        """
+        Devuelve el maná actual del caster.
+
+        Returns
+        -------
+        int
+            El maná actual del Caster.
+        """
         return self.mana
     
     def set_mana(self,mana):
+        """
+        Establece el maná actual del caster.
+
+        Parameters
+        ----------
+        mana : int
+            El nuevo valor del maná.
+
+        Returns
+        -------
+        None
+        """
         self.mana = mana
         
     def set_weapon(self,Item):
+        """
+        Equipa un arma al caster.
+
+        Parameters
+        ----------
+        Item : Item
+            El arma a equipar.
+
+        Returns
+        -------
+        None
+        """
         self.weapon = Item
         
 
 class Mage(Caster):
+    """Clase que representa a un mago.
+
+    Attributes
+    ----------
+   name : str
+        Nombre del avatar.
+    life : int
+        Vida actual del avatar.
+    strength : int
+        Fuerza del avatar.
+    defense : int
+        Defensa del avatar.
+    mana : int
+        Maná actual del avatar.
+    weapon : Item
+        Arma equipada del avatar.
+    armor : Item
+        Armadura equipada del avatar.
+
+    Methods
+    -------
+    attack() -> int
+        Devuelve el ataque del mago
+    defend() ->
+        Devuelve el valor de la defensa del mago.
+    """
     def __init__(self, name, life, strength, defense, mana, weapon, armor):
         super().__init__(name, life, strength, defense, mana, weapon, armor)
 
     def attack(self):
+        """
+        Devuelve el valor del ataque realizado por el mago
+
+        Returns
+        -------
+        int
+            Valor del ataque realizado por el mago.
+        """
         import random
         aleatorio = random.randint(0,1)
         if aleatorio == 1:
             return aleatorio
         if aleatorio == 0:
             self.mana += 2
-            #print(f"{self.get_name()} ha recuperado 2 puntos de mana.")
+            # print(f"{self.get_name()} ha recuperado 2 puntos de mana.")
         if self.mana > 1:
             if self.weapon is None:
                 damage = self.strength
             else:
                 damage = self.strength + self.weapon.power
             self.mana -= 1
-            #print(f"{self.get_name()} ha utilizado 1 punto de mana.")
+            # print(f"{self.get_name()} ha utilizado 1 punto de mana.")
             return damage
         else:
-            #print(f"{self.get_name()} no tiene suficiente mana para atacar.")
+            # print(f"{self.get_name()} no tiene suficiente mana para atacar.")
             return 1
         
             
     def defend(self):
+        """
+        Devuelve el valor de la defensa del mago.
+
+        Returns
+        -------
+        int
+            La cantidad de daño bloqueado por la defensa del mago.
+        """
         if self.armor is None:
             return self.defense
         else:
@@ -336,36 +626,88 @@ class Mage(Caster):
 
 
 class Priest(Caster):
+    """Clase que representa a un sacerdote.
+
+    Attributes
+    ----------
+   name : str
+        Nombre del avatar.
+    life : int
+        Vida actual del avatar.
+    strength : int
+        Fuerza del avatar.
+    defense : int
+        Defensa del avatar.
+    mana : int
+        Maná actual del avatar.
+    weapon : Item
+        Arma equipada del avatar.
+    armor : Item
+        Armadura equipada del avatar.
+
+    Methods
+    -------
+    attack() -> int
+        Devuelve el ataque del sacerdote
+    defend() -> int
+        Devuelve el valor de la defensa del sacerdote.
+    heal() -> int
+        Devuelve el valor de la curación realizada por el sacerdote.
+    """
     def __init__(self, name, life, strength, defense, mana, weapon, armor):
         super().__init__(name, life, strength, defense, mana, weapon, armor)
 
     def attack(self):
+        """
+        Devuelve el valor del ataque realizado por el sacerdote
+
+        Returns
+        -------
+        int
+            Valor del ataque realizado por el sacerdote.
+        """
         import random
         aleatorio = random.randint(0,1)
         if aleatorio == 1:
             return aleatorio
         if aleatorio == 0:
             self.mana += 2
-            #print(f"{self.get_name()} ha recuperado 2 puntos de mana.")
+            # print(f"{self.get_name()} ha recuperado 2 puntos de mana.")
         if self.mana > 1:
             if self.weapon is None:
                 damage = self.strength
             else:
                 damage = self.strength + self.weapon.power
             self.mana -= 1
-            #print(f"{self.get_name()} ha utilizado 1 punto de mana.")
+            # print(f"{self.get_name()} ha utilizado 1 punto de mana.")
             return damage
         else:
-            #print(f"{self.get_name()} no tiene suficiente mana para atacar.")
+            # print(f"{self.get_name()} no tiene suficiente mana para atacar.")
             return 1
 
     def defend(self):
+        """
+        Devuelve el valor de la defensa del sacerdote.
+
+        Returns
+        -------
+        int
+            La cantidad de daño bloqueado por la defensa del sacerdote.
+        """
         if self.armor is None:
             return self.defense
         else:
             return self.defense + self.armor.protection
         
     def heal(self):
+        """
+        Devuelve el valor de la curación realizada por el sacerdote.
+
+        Returns
+        -------
+        int
+            La cantidad de puntos de vida curados por el sacerdote.
+        """
         import random
         aleatorio = random.randint(0, 1)
         if aleatorio == 1:

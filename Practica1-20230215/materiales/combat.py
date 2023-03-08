@@ -9,11 +9,14 @@ def combat(personajes):
     """
     Realiza un combate entre dos personajes aleatorios del conjunto de personajes proporcionado. Un personaje es elegido como el atacante y el otro como el defensor. Se realiza un ataque y se calcula la defensa del defensor. El daño causado al defensor es reducido por la defensa del defensor. Se actualizan los resultados del combate en el diccionario "resultados".
 
-    Args:
-        personajes (list): Una lista de objetos Personaje que se utilizarán en el combate.
+    Parameters
+    ----------
+    personajes : list
+        Una lista de objetos Personaje que se utilizarán en el combate.
 
-    Returns:
-        None
+    Returns
+    -------
+    None.
     """
 
     # Decide aleatoriamente dos personajes de la lista personajes y les asigna la variable atacante y defensor.
@@ -54,12 +57,12 @@ def combat(personajes):
         resultados[attacker.get_name()]["total_peleas_atacante"] += 1
 
     if defender.get_name() not in resultados:
-        resultados[defender.get_name()] = {"clase": type(attacker).__name__,"victorias": 0,"daño_total": 0, "total_peleas_atacante":0,"curación":0}
+        resultados[defender.get_name()] = {"clase": type(defender).__name__,"victorias": 0,"daño_total": 0, "total_peleas_atacante":0,"curación":0}
 
     # Comprobar si el defensor ha muerto
     if defender.life <= 0:
         defender.life = 0 #Esta muerto
-        personajes.remove(defender) #Elmina al personaje de la lista en caso de morir
+        personajes.remove(defender) # Elmina al personaje de la lista en caso de morir
         print("El ganador es",attacker.get_name())
 
         # Actualizar los resultados
@@ -106,7 +109,6 @@ def combat(personajes):
                 equip(winner, new_armor)
             #else:
                 #print(f"{winner.get_name()} no ha obtenido una nueva armadura.")
-                
         
             
    
@@ -115,12 +117,14 @@ def reduce_life(self, damage):
     """
     Reduce la vida del personaje por la cantidad de daño recibido. Si la vida del personaje llega a 0 o menos, se establece la vida en 0.
 
-    Args:
-        self (Personaje): El objeto Personaje en el que se reducirá la vida.
-        damage (int): La cantidad de daño que se reducirá de la vida del personaje.
+    Parameters
+    ----------
+    damage : int
+        La cantidad de daño que se reducirá de la vida del personaje.
 
-    Returns:
-        None
+    Returns
+    -------
+    None
     """
     self.life -= damage
     if self.life <= 0:
@@ -136,12 +140,14 @@ def equip(self, item):
     """
     Equipa al personaje con el objeto proporcionado. Si el objeto es una espada o una varita, se equipa como arma. Si el objeto es una armadura o un escudo, se equipa como armadura. Si el objeto es un objeto desconocido, se ignora.
 
-    Args:
-        self (Personaje): El objeto Personaje que se equipará con el objeto.
-        item (Sword, Wand, Armor o Shield): El objeto que se equipará.
+    Parameters
+    ----------
+    item : Sword, Wand, Armor, Shield
+        El objeto que se equipará.
 
-    Returns:
-        None
+    Returns
+    -------
+    None
     """
     if isinstance(item, Sword) or isinstance(item, Wand):
         if self.weapon is None or item.power > self.weapon.power:

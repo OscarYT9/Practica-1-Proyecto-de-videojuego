@@ -67,7 +67,9 @@ def run(path):
     import plotly.express as px
 
     # Create a dictionary that maps class names to marker symbols
-    symbol_map = {'Mage': 'square', 'Warrior': 'diamond'}
+    symbol_map = {'Mage': 'square', 'Warrior': 'diamond', 'Priest': 'circle'}
+
+    # Create a list of colors for the classes
 
     fig = px.scatter_matrix(df,
         dimensions=['victorias', 'daño_total', 'total_peleas_atacante', 'curación', 'daño_medio', 'desviacion_tipica'],
