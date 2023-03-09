@@ -48,13 +48,13 @@ def run(path):
     #Ordenamos el DataFrame por numero de victorias (en orden descendente)
     df_sorted = df.sort_values(by="victorias", ascending=False)
     df.groupby("nombre")[["daño_medio", "desviacion_tipica_daño"]].mean().reset_index()
-    print(df_sorted[["victorias", "daño_medio", "desviacion_tipica_daño", "curacion_media","desviacion_tipica_curacion","total_peleas_atacante"]].to_string(max_rows=None))
+    print(df_sorted[["victorias", "daño_medio", "desviacion_tipica_daño", "curacion_media","desviacion_tipica_curacion"]].to_string(max_rows=None))
 
     #Calculamos la media de daño y desviación atípica por clases e imprimimos el DataFrame
     class_stats = df.groupby('clase').agg({'daño_medio': ['mean', 'std'], 'victorias': 'sum'})
     print(class_stats)
 
-    graficos=1
+    graficos=0
     if graficos == 1:
         import matplotlib.pyplot as plt
 
