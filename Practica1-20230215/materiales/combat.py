@@ -70,10 +70,6 @@ def combat(personajes):
         elif len(personajes)==1:
             resultados[attacker.get_name()]["victorias"] += 1
 
-        if len(personajes)==1:
-            print(personajes[0].get_name())
-            print("El ganador es",attacker.get_name())
-
         winner = attacker
         
         if isinstance(winner, Warrior):

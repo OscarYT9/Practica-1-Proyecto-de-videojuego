@@ -42,7 +42,7 @@ def run(path):
     df["curacion_media"] = df["curación"] / df["total_peleas_atacante"]
 
     df["desviacion_tipica_daño"] = df["daño_medio"].apply(lambda x: np.sqrt(((df["daño_medio"] - x)**2).sum() / df["daño_medio"].count()))
-    df["desviacion_tipica_curacion"] = df["curacion_media"].apply(lambda x: np.sqrt(((df["curacion_media"] - x)**2).sum() / df["curacion_media"].count()))
+    df["desviacion_tipica_curacion"] = np.where(df['clase'] == 'Priest', df["curacion_media"].apply(lambda x: np.sqrt(((df["curacion_media"] - x)**2).sum() / df["curacion_media"].count())), np.nan)
 
 
     #Ordenamos el DataFrame por numero de victorias (en orden descendente)
