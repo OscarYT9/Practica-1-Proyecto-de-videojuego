@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-import math
 import sys
 from classes import *
 from items import *
@@ -31,72 +30,78 @@ def run(path):
 
     import copy
     i=0
-    for i in range(0,31):
+    for i in range(0,30):
         personajes_copy = copy.deepcopy(personajes)
-        print(personajes_copy)
         while len(personajes_copy)>1:
             combat(personajes_copy)
-    
+        
     #Creamos el DataFrame
     df = pd.DataFrame.from_dict(resultados, orient='index')
     df.rename_axis("nombre", inplace=True)
     df["daño_medio"] = df["daño_total"] / df["total_peleas_atacante"]
-    df["desviacion_tipica"] = df["daño_total"].apply(lambda x: np.sqrt(((df["daño_total"] - x)**2).sum() / df["daño_total"].count()))
+    df["curacion_media"] = df["curación"] / df["total_peleas_atacante"]
+
+    df["desviacion_tipica_daño"] = df["daño_medio"].apply(lambda x: np.sqrt(((df["daño_medio"] - x)**2).sum() / df["daño_medio"].count()))
+    df["desviacion_tipica_curacion"] = df["curacion_media"].apply(lambda x: np.sqrt(((df["curacion_media"] - x)**2).sum() / df["curacion_media"].count()))
+
 
     #Ordenamos el DataFrame por numero de victorias (en orden descendente)
     df_sorted = df.sort_values(by="victorias", ascending=False)
-    df.groupby("nombre")[["daño_medio", "desviacion_tipica"]].mean().reset_index()
-    print(df_sorted[["victorias", "daño_medio", "desviacion_tipica"]].to_string(max_rows=None))
+    df.groupby("nombre")[["daño_medio", "desviacion_tipica_daño"]].mean().reset_index()
+    print(df_sorted[["victorias", "daño_medio", "desviacion_tipica_daño", "curacion_media","desviacion_tipica_curacion","total_peleas_atacante"]].to_string(max_rows=None))
 
     #Calculamos la media de daño y desviación atípica por clases e imprimimos el DataFrame
-    class_stats = df.groupby('clase')['daño_medio'].agg(['mean', 'std'])
+    class_stats = df.groupby('clase').agg({'daño_medio': ['mean', 'std'], 'victorias': 'sum'})
     print(class_stats)
 
-    import matplotlib.pyplot as plt
+    graficos=1
+    if graficos == 1:
+        import matplotlib.pyplot as plt
 
-    # Crear el gráfico
-    plt.scatter(df['clase'], df['victorias'])
+        # Crear el gráfico
+        plt.scatter(df['clase'], df['victorias'])
 
-    # Agregar etiquetas de los ejes
-    plt.xlabel('Eje X')
-    plt.ylabel('Victorias')
+        # Agregar etiquetas de los ejes
+        plt.xlabel('Eje X')
+        plt.ylabel('Victorias')
 
-    # Agregar título al gráfico
-    plt.title('Gráfico de dispersión')
+        # Agregar título al gráfico
+        plt.title('Gráfico de dispersión')
 
-    # Mostrar el gráfico
-    plt.show()
-    plt.savefig('nombre_del_archivo.png')
-    
-    #Gráfico con todas las columnas del DataFrame
-    import seaborn as sns
-    import matplotlib.pyplot as plt
-
-    sns.pairplot(df, hue='clase', markers=['o', 's', 'D'],
-                plot_kws={'alpha': 0.5}) # Set marker opacity here
-    plt.show()
-    plt.savefig('mi_grafico.png')
+        # Mostrar el gráfico
+        plt.show()
+        plt.savefig('nombre_del_archivo.png')
         
-    #Gráfico interactivo con todas las columnas del DataFrame
-    import plotly.express as px
+        #Gráfico con todas las columnas del DataFrame
+        import seaborn as sns
+        import matplotlib.pyplot as plt
+        
+        unique_classes = df['clase'].unique()
+        if len(unique_classes) == 2:
+            sns.pairplot(df, hue='clase', markers=['o', 's'],
+                        plot_kws={'alpha': 0.5}) # Set marker opacity here
+        else:
+            sns.pairplot(df, hue='clase', markers=['o', 's', 'D'],
+                        plot_kws={'alpha': 0.5}) # Set marker opacity here
+        plt.show()
+        plt.savefig('mi_grafico.png')
+            
+        #Gráfico interactivo con todas las columnas del DataFrame
+        import plotly.express as px
 
-    # Create a dictionary that maps class names to marker symbols
-    symbol_map = {'Mage': 'square', 'Warrior': 'diamond', 'Priest': 'circle'}
+        # Create a dictionary that maps class names to marker symbols
+        symbol_map = {'Mage': 'square', 'Warrior': 'diamond', 'Priest': 'circle'}
 
-    # Create a list of colors for the classes
+        # Create a list of colors for the classes
 
-    fig = px.scatter_matrix(df,
-        dimensions=['victorias', 'daño_total', 'total_peleas_atacante', 'curación', 'daño_medio', 'desviacion_tipica'],
-        color='clase',
-        opacity=0.5,
-        symbol='clase',
-        symbol_map=symbol_map)
+        fig = px.scatter_matrix(df,
+            dimensions=['victorias', 'daño_total', 'total_peleas_atacante', 'curación', 'daño_medio', 'desviacion_tipica_daño',"desviacion_tipica_curacion"],
+            color='clase',
+            opacity=0.5,
+            symbol='clase',
+            symbol_map=symbol_map)
 
-    fig.show()
-
-    print(Avatar.get_life.__doc__)
-    print(combat.__doc__)
-    print(Priest.attack.__doc__)
+        fig.show()
     
 def parse_params(params):
     """

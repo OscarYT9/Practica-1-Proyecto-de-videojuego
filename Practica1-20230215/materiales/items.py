@@ -253,7 +253,7 @@ class Armor(Covering):
 
 
 
-class Shield(Covering): #Solo los Warriors pueden tener escudo
+class Shield(Covering):
     """Clase para los escudos del juego.
 
     Attributes

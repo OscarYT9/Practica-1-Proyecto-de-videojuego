@@ -63,13 +63,16 @@ def combat(personajes):
     if defender.life <= 0:
         defender.life = 0 #Esta muerto
         personajes.remove(defender) # Elmina al personaje de la lista en caso de morir
-        print("El ganador es",attacker.get_name())
 
         # Actualizar los resultados
-        if attacker.get_name() not in resultados:
+        if attacker.get_name() not in resultados and len(personajes)==1:
             resultados[attacker.get_name()] = {"clase": type(attacker).__name__, "victorias": 1,"daño_total": damage_received}
-        else:
+        elif len(personajes)==1:
             resultados[attacker.get_name()]["victorias"] += 1
+
+        if len(personajes)==1:
+            print(personajes[0].get_name())
+            print("El ganador es",attacker.get_name())
 
         winner = attacker
         
@@ -174,24 +177,76 @@ def equip(self, item):
         #print(f"{item.name} is not a weapon or armor!")
 
 def generate_sword():
+    """Genera una espada aleatoria.
+
+    Genera una espada aleatoria con un nombre único y un poder aleatorio entre 1 y 5.
+
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    Sword
+        Un objeto Sword con un nombre único y un poder aleatorio entre 1 y 5.
+    """
     import random
     name = f"Sword {len(Sword.swords)+1}"
     power = random.randint(1, 5)
     return Sword(name, power)
 
 def generate_wand():
+    """Genera una varita aleatoria.
+
+    Genera una varita aleatoria con un nombre único y un poder aleatorio entre 1 y 5.
+
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    Wand
+        Un objeto Wand con un nombre único y un poder aleatorio entre 1 y 5.
+    """
     import random
     name = f"Wand {len(Wand.wands)+1}"
     power = random.randint(1, 5)
     return Wand(name, power)
 
 def generate_armor():
+    """Genera una armadura aleatoria.
+
+    Genera una armadura aleatoria con un nombre único y una protección aleatoria entre 1 y 5.
+
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    Armor
+        Un objeto Armor con un nombre único y una protección aleatoria entre 1 y 5.
+    """
     import random
     name = f"Armor {len(Armor.armors)+1}"
     protection = random.randint(1, 5)
     return Armor(name, protection)
 
 def generate_shield():
+    """Genera un escudo aleatorio.
+
+    Genera un escudo aleatorio con un nombre único y una protección aleatoria entre 1 y 5.
+
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    Shield
+        Un objeto Shield con un nombre único y una protección aleatoria entre 1 y 5.
+    """
     import random
     name = f"Shield {len(Shield.shields)+1}"
     protection = random.randint(1, 5)
