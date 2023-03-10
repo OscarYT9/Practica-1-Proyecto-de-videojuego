@@ -582,18 +582,15 @@ class Mage(Caster):
         aleatorio = random.randint(0,1)
         if aleatorio == 0:
             self.mana += 2
-            # print(f"{self.get_name()} ha recuperado 2 puntos de mana.")
         if self.mana > 1:
             if self.weapon is None:
                 damage = self.strength
             else:
                 damage = self.strength + self.weapon.power
             self.mana -= 1
-            # print(f"{self.get_name()} ha utilizado 1 punto de mana.")
             return damage
         else:
             self.mana -= 1
-            # print(f"{self.get_name()} no tiene suficiente mana para atacar.")
             return 1
         
             

@@ -3,7 +3,7 @@ import pandas as pd
 import sys
 from classes import *
 from items import *
-from combat import *
+from simulation import *
 
 personajes = []
 
@@ -24,7 +24,7 @@ def run(path):
     with open(path) as f:
         pjs = f.readlines()
         for pj in pjs:
-            personaje = parse_params(pj.split()) #Separar por espacios
+            personaje = parse_params(pj.split())
             personajes.append(personaje)
     #TODO: Implement simulation here
 
@@ -48,44 +48,88 @@ def run(path):
     #Ordenamos el DataFrame por numero de victorias (en orden descendente)
     df_sorted = df.sort_values(by="victorias", ascending=False)
     df.groupby("nombre")[["daño_medio", "desviacion_tipica_daño"]].mean().reset_index()
+
+    print("####################################################################################################")
+    print("                                         Datos personajes                                           ")
+    print("####################################################################################################")
+
     print(df_sorted[["victorias", "daño_medio", "desviacion_tipica_daño", "curacion_media","desviacion_tipica_curacion"]].to_string(max_rows=None))
+
 
     #Calculamos la media de daño y desviación atípica por clases e imprimimos el DataFrame
     class_stats = df.groupby('clase').agg({'daño_medio': ['mean', 'std'], 'victorias': 'sum'})
+
+    print("#######################################")
+    print("             Datos clases              ")
+    print("#######################################")
+    
     print(class_stats)
 
-    graficos=0
-    if graficos == 1:
+    dataframe=0
+    if dataframe ==1:
         import matplotlib.pyplot as plt
 
-        # Crear el gráfico
-        plt.scatter(df['clase'], df['victorias'])
+        # Asumiendo que ya tienes el DataFrame en la variable df_sorted
+        # Creamos una figura y un eje
+        fig, ax = plt.subplots(1, 1, figsize=(12, 20))
 
-        # Agregar etiquetas de los ejes
-        plt.xlabel('Eje X')
-        plt.ylabel('Victorias')
+        # Ocultamos los ejes
+        ax.axis('tight')
+        ax.axis('off')
 
-        # Agregar título al gráfico
-        plt.title('Gráfico de dispersión')
+        # Agregamos la tabla al eje
+        ax.table(cellText=df_sorted.values, colLabels=df_sorted.columns, loc='center')
 
-        # Mostrar el gráfico
-        plt.show()
-        plt.savefig('nombre_del_archivo.png')
-        
-        #Gráfico con todas las columnas del DataFrame
+        # Guardamos la figura como una imagen
+        plt.savefig('df.png',dpi=300)
+
+    graficos=1
+    if graficos == 1:
         import seaborn as sns
         import matplotlib.pyplot as plt
-        
+
+        # Creamos el DataFrame con los datos de interés
+        class_stats = df.groupby('clase').agg({'victorias': 'sum'}).reset_index()
+
+        # Creamos el gráfico de barras
+        fig, axs = plt.subplots(1, 2, figsize=(12, 4))
+        sns.barplot(data=class_stats, x='clase', y='victorias', hue='clase', ax=axs[0])
+
+        # Agregamos etiquetas de los ejes y título
+        axs[0].set_xlabel('Clase')
+        axs[0].set_ylabel('Victorias totales')
+        axs[0].set_title('Histograma de victorias totales por clase'+" "+"("+str(i+1)+" "+"simulaciones)")
+
+        # Crear el gráfico de dispersión
+        sns.scatterplot(data=df, x='clase', y='victorias', hue='clase', ax=axs[1])
+
+        # Agregar etiquetas de los ejes y título
+        axs[1].set_xlabel('Clase')
+        axs[1].set_ylabel('Victorias')
+        axs[1].set_title('Gráfico de dispersión'+" "+"("+str(i+1)+" "+"simulaciones)")
+
+        # Mostrar los gráficos
+        plt.tight_layout()
+        plt.show()
+        plt.savefig('mis_graficos.png')
+        #_________________________________________________________________________
+
+        # Seleccionamos las columnas deseadas
+        columns_to_plot = ['clase','victorias', 'daño_medio', 'desviacion_tipica_daño', 'curacion_media', 'desviacion_tipica_curacion']
+        df_selected = df[columns_to_plot]
+
+        # Creamos el gráfico con las columnas seleccionadas
+        import seaborn as sns
+        import matplotlib.pyplot as plt
+
         unique_classes = df['clase'].unique()
         if len(unique_classes) == 2:
-            sns.pairplot(df, hue='clase', markers=['o', 's'],
-                        plot_kws={'alpha': 0.5}) # Set marker opacity here
+            sns.pairplot(df_selected, markers=['o', 's'], plot_kws={'alpha': 0.5})
         else:
-            sns.pairplot(df, hue='clase', markers=['o', 's', 'D'],
-                        plot_kws={'alpha': 0.5}) # Set marker opacity here
-        plt.show()
+            sns.pairplot(df_selected, hue='clase', markers=['o', 's', 'D'], plot_kws={'alpha': 0.5})
         plt.savefig('mi_grafico.png')
-            
+        #_________________________________________________________________________
+
         #Gráfico interactivo con todas las columnas del DataFrame
         import plotly.express as px
 
@@ -95,7 +139,7 @@ def run(path):
         # Create a list of colors for the classes
 
         fig = px.scatter_matrix(df,
-            dimensions=['victorias', 'daño_total', 'total_peleas_atacante', 'curación', 'daño_medio', 'desviacion_tipica_daño',"desviacion_tipica_curacion"],
+            dimensions=['victorias', 'daño_medio','desviacion_tipica_daño', 'curacion_media' ,'desviacion_tipica_curacion','total_peleas_atacante'],
             color='clase',
             opacity=0.5,
             symbol='clase',
