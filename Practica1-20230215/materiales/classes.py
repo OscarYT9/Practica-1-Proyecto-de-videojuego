@@ -1,3 +1,5 @@
+# Nombre del archivo: classes.py
+# Autores: Óscar Vilela Rodríguez (oscar.vilela.rodriguez@udc.es), Guillermo García Engelmo (g.garcia2@udc.es)
 from items import *
 from abc import ABC, abstractmethod
 class Avatar:

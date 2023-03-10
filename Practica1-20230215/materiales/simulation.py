@@ -1,3 +1,5 @@
+# Nombre del archivo: simulation.py
+# Autores: Óscar Vilela Rodríguez (oscar.vilela.rodriguez@udc.es), Guillermo García Engelmo (g.garcia2@udc.es)
 from classes import *
 from items import *
 import random

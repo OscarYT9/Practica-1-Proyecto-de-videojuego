@@ -1,3 +1,5 @@
+# Nombre del archivo: items.py
+# Autores: Óscar Vilela Rodríguez (oscar.vilela.rodriguez@udc.es), Guillermo García Engelmo (g.garcia2@udc.es)
 class Item:
     """Clase base para todos los objetos del juego."""
     pass
@@ -137,10 +139,8 @@ class Wand(Weapon):
         -------
         None
         """
-        super().__init__(name,power)
-        self.name = name
-        self.power = power
-        Wand.wands.append({'name': self.name, 'power': self.power})
+        super().__init__(name, power)
+        Wand.wands.append(self)
         
 
 
@@ -247,9 +247,7 @@ class Armor(Covering):
         None
         """
         super().__init__(name, protection)
-
-        self.protection = protection
-
+        Armor.armors.append(self)
 
 
 
@@ -292,8 +290,7 @@ class Shield(Covering):
         None
         """
         super().__init__(nombre, protection)
-
-        self.protection = protection
+        Shield.shields.append(self)
 
 
 

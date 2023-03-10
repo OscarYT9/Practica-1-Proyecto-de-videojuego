@@ -1,3 +1,5 @@
+# Nombre del archivo: main.py
+# Autores: Óscar Vilela Rodríguez (oscar.vilela.rodriguez@udc.es), Guillermo García Engelmo (g.garcia2@udc.es)
 import numpy as np
 import pandas as pd
 import sys
@@ -69,7 +71,7 @@ def run(path):
     if dataframe ==1:
         import matplotlib.pyplot as plt
 
-        # Asumiendo que ya tienes el DataFrame en la variable df_sorted
+        # Asumimos que ya tenemos el DataFrame en la variable df_sorted
         # Creamos una figura y un eje
         fig, ax = plt.subplots(1, 1, figsize=(12, 20))
 
@@ -130,14 +132,13 @@ def run(path):
         plt.savefig('mi_grafico.png')
         #_________________________________________________________________________
 
-        #Gráfico interactivo con todas las columnas del DataFrame
+        # Gráfico interactivo con todas las columnas del DataFrame
         import plotly.express as px
 
-        # Create a dictionary that maps class names to marker symbols
+        # Crear un diccionario que mapee los nombres de las clases a los símbolos de marcador
         symbol_map = {'Mage': 'square', 'Warrior': 'diamond', 'Priest': 'circle'}
 
-        # Create a list of colors for the classes
-
+        # Creamos una lista de los colores de las clases
         fig = px.scatter_matrix(df,
             dimensions=['victorias', 'daño_medio','desviacion_tipica_daño', 'curacion_media' ,'desviacion_tipica_curacion','total_peleas_atacante'],
             color='clase',
@@ -145,6 +146,7 @@ def run(path):
             symbol='clase',
             symbol_map=symbol_map)
 
+        fig.update_layout(width=1500,height=1500)
         fig.show()
     
 def parse_params(params):
