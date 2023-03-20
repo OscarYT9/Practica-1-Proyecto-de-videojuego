@@ -129,7 +129,7 @@ def run(path):
             sns.pairplot(df_selected, markers=['o', 's'], plot_kws={'alpha': 0.5})
         else:
             sns.pairplot(df_selected, hue='clase', markers=['o', 's', 'D'], plot_kws={'alpha': 0.5})
-        plt.savefig('mi_grafico.png')
+        plt.savefig('Gráfico_de_Pares.png')
         #_________________________________________________________________________
 
         # Gráfico interactivo con todas las columnas del DataFrame
