@@ -1,8 +1,11 @@
 from abc import ABC, abstractmethod
+import heapq
+
 class Avion:
-    def __init__(self, id, clase):
+    def __init__(self, id, clase, time):
         self.id = id
         self.clase = clase
+        self.time = time
 
 #_____________________________________________________________________________________________________________________________________________
 class Empty(Exception):
@@ -65,3 +68,28 @@ class ArrayQueue:
       self._data[k] = old[walk]            # intentionally shift indices
       walk = (1 + walk) % len(old)         # use old size as modulus
     self._front = 0                        # front has been realigned
+  
+
+class PriorityQueue:
+  def __init__(self):
+      self._cola = []
+      self._indice = 0
+  
+  def __len__(self):
+    """Return the number of elements in the queue."""
+    return len(self._cola)
+    
+  def push(self, elemento, prioridad):
+      heapq.heappush(self._cola, (-prioridad, self._indice, elemento))
+      self._indice += 1
+    
+  def pop(self):
+      return heapq.heappop(self._cola)[-1]
+
+  def remove(self, elemento):
+      for i, (_, _, e) in enumerate(self._cola):
+          if e == elemento:
+              self._cola.pop(i)
+              heapq.heapify(self._cola)
+              return e
+      raise ValueError(f"{elemento} is not in the queue")
