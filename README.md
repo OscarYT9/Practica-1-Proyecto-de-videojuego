@@ -2,8 +2,12 @@
 # <p> <sub>`Tiempo restante`</sub> <img src="https://gen.sendtric.com/countdown/0b60je0yta" alt="Descripción de la imagen" align="center" width="300" /> <sub>`Click para abrir`</sub> <a  href="https://codesandbox.io/p/github/OscarYT9/Practica-1-Proyecto-de-videojuego/draft/1?workspaceId=a923da0c-be0a-4c5f-a6e5-15ed3514b8c6&file=%2FREADME.md&workspace=%257B%2522activeFileId%2522%253A%2522cle8er4sd0000g4jvesqp9pcq%2522%252C%2522openFiles%2522%253A%255B%2522%252FREADME.md%2522%255D%252C%2522sidebarPanel%2522%253A%2522EXPLORER%2522%252C%2522gitSidebarPanel%2522%253A%2522COMMIT%2522%252C%2522spaces%2522%253A%257B%2522cleauevoq001d336jzl1lezqf%2522%253A%257B%2522key%2522%253A%2522cleauevoq001d336jzl1lezqf%2522%252C%2522name%2522%253A%2522Default%2522%252C%2522devtools%2522%253A%255B%255D%257D%257D%252C%2522currentSpace%2522%253A%2522cleauevoq001d336jzl1lezqf%2522%252C%2522spacesOrder%2522%253A%255B%2522cleauevoq001d336jzl1lezqf%2522%255D%252C%2522hideCodeEditor%2522%253Afalse%257D"><img src="https://codesandbox.io/favicon.ico" alt="CodeSandbox" height="40" style="vertical-align:top; margin:4px"></a> </p>
 
 
-
 ## 1. Introducción
+<details open>
+  <summary>📝Prácticas</summary>
+  	<details open>
+	<summary style="text-align:center;" pointer-events: none;"><img src="https://user-images.githubusercontent.com/113378321/227663867-0a1c397d-c997-43f5-9459-91057135a331.gif" width="40px">Práctica 1</summary>
+	
 ### 1.1 Programación orientada a objetos
 >Una compañía de videojuegos quiere comprobar el equilibrio entre los personajes de su próximo juego 
 de lucha. Nos envía documentación relativa al conjunto P de N personajes del juego (PJs) y a la lógica 
@@ -135,7 +139,25 @@ classDiagram
     -punch()
 }
 ```
+</details>
+<details open>
+	<summary style="text-align:center;"><img src="https://user-images.githubusercontent.com/113378321/227663814-05674c31-2426-4d3c-9021-4baf6c1831f3.gif" width="40px">Práctica 2</summary>
+	
+### 1.4 Colas
+>El control de vuelo de un aeropuerto necesita un nuevo programa informático que gestione el 
+despegue de aviones. Este proceso se realizará siguiendo el orden establecido por una prioridad 
+que viene determinada por la clase de vuelo. [Practica_2.pdf](https://github.com/OscarYT9/Practica-1-Proyecto-de-videojuego/files/11066198/Practica_2.pdf)
 
+| Clase de vuelo | Prioridad |
+| --- | --- |
+| Doméstico | 1 (MAX) |
+| Privado | 2 |
+| Regular | 3 |
+| Charter | 4 |
+| Transoceánico | 5 (MIN) |
+
+</details>
+</details>
 
 ## **2. Programas utilizados**
 <div style="max-width: 600px; display: flex; flex-wrap: wrap; justify-content: center;">
@@ -245,6 +267,8 @@ En principio para este pequeño proyecto el Equipo debería trabajar sobre la mi
 [![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/222863677-61c380cd-f2a6-4dd8-95dd-a3a9d06c8608.jpg)](https://www.youtube.com/watch?v=-dXRClwk-h0)
 [![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/223845009-11c90628-7d08-42fa-9365-55ebcbf01039.png)](https://www.youtube.com/watch?v=qnACJZm_BYw)
 [![IMAGE ALT TEXT HERE](https://cdna.artstation.com/p/assets/images/images/016/502/820/large/lee-j-p-.jpg?1552406319)](https://www.youtube.com/watch?v=fWTRBsNHzco)
+[![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/227637813-e43af441-6f7d-4a01-8e6e-9f489560237e.jpg)](https://www.youtube.com/watch?v=crgpxKsal18)
+
 
 <a href="https://code.visualstudio.com/">
   <img align="right" alt="Juego | VSCode" width="21px" src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/file_type_vscode.svg" />
