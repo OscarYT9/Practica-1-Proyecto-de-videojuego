@@ -69,6 +69,11 @@ class ArrayQueue:
       walk = (1 + walk) % len(old)         # use old size as modulus
     self._front = 0                        # front has been realigned
   
+  def __getitem__(self, index):
+    """Return the element at the specified index."""
+    if index < 0 or index >= self._size:
+      raise IndexError('Index out of range')
+    return self._data[(self._front + index) % len(self._data)]
 
 class PriorityQueue:
   def __init__(self):
@@ -93,3 +98,9 @@ class PriorityQueue:
               heapq.heapify(self._cola)
               return e
       raise ValueError(f"{elemento} is not in the queue")
+  
+  def __getitem__(self, index):
+    """Return the element at the specified index."""
+    if index < 0 or index >= self._size:
+      raise IndexError('Index out of range')
+    return self._data[(self._front + index) % len(self._data)]

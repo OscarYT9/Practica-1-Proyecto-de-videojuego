@@ -28,12 +28,12 @@ def run(path):
 
     print(Cola_despegues.__len__())
     tiempo = 0
-    while Cola_despegues.__len__()>0 and Lista_de_colas_prioridad.__len__()>=0:
+    while not Lista_de_colas_prioridad.is_empty() or not Cola_despegues.is_empty():
         tiempo += 1
         avion = Cola_despegues.dequeue() # para obtener el elemento del frente de la cola
         avion.time = tiempo
-
-        print("Entrando en pista vuelo...","<",avion.id,">","<",avion.clase,">","<",avion.time,"min",">") #En términos de eficiencia computacional, utilizar una cadena formateada con f es ligeramente más costoso que simplemente concatenar cadenas con comas.
+        
+        print(f"Entrando en pista vuelo... < {avion.id} > < {avion.clase} > < {avion.time} min >") #En términos de eficiencia computacional, utilizar una cadena formateada con f es ligeramente más costoso que simplemente concatenar cadenas con comas.
         if avion.clase == "domestico":
             Lista_de_colas_prioridad.push(avion,5)
         elif avion.clase == "privado":
@@ -45,15 +45,18 @@ def run(path):
         elif avion.clase == "transoceanico":
             Lista_de_colas_prioridad.push(avion,1)
         
+        # Verificar si hay aviones en la cola con tiempo mayor a 20
+        for i in range(Lista_de_colas_prioridad.__len__()):
+            avion_en_cola = Lista_de_colas_prioridad.__getitem__(i)
+            if avion_en_cola.time > 20:
+                Lista_de_colas_prioridad.remove(avion_en_cola)
+                Lista_de_colas_prioridad.push(avion_en_cola,5)
         # Verificar si han transcurrido 5 unidades de tiempo
-        if avion.time > 20:
-            Lista_de_colas_prioridad.remove(avion)
-            avion.time = tiempo
-            Lista_de_colas_prioridad.push(avion,5)
         if tiempo % 5 == 0:
-            print(Lista_de_colas_prioridad.pop().id)
-            print(f"Se ha ordenado el despegue del vuelo de maxima prioridad")
-  
+            x = Lista_de_colas_prioridad.pop()
+            print(x.id)
+            print(f"Se ha ordenado el despegue del vuelo de maxima prioridad {x.id}, {x.clase}, {x.time}")
+    print(Lista_de_colas_prioridad.__len__())
 def parse_params(params):
     
     id, clase, time = params[0], params[1],0
