@@ -75,6 +75,18 @@ class ArrayQueue:
       raise IndexError('Index out of range')
     return self._data[(self._front + index) % len(self._data)]
 
+  def remove_element(self, element):
+        """Remove the specified element from the queue.
+        If element is not in the queue, raises ValueError."""
+        if element not in self._data:
+            raise ValueError("Element not found in queue")
+        index = self._data.index(element)
+        self._data[index] = None
+        for i in range(index, self._size-1):
+            self._data[i] = self._data[i+1]
+        self._data[self._size-1] = None
+        self._size -= 1
+
 class PriorityQueue:
   def __init__(self):
       self._cola = []
