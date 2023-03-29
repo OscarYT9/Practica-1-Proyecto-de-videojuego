@@ -39,12 +39,9 @@ def run(path):
     print(Cola_despegues.__len__())
 
     tiempo = 0
-    while not Cola_despegues.is_empty() or not len(Lista_de_colas_prioridad) == 0:
-        tiempo += 1
-        print("Tiempo Actual:", tiempo)
-        
-        if not Cola_despegues.is_empty():
-            
+    while not Cola_despegues.is_empty():
+            tiempo += 1
+            print("Tiempo Actual:", tiempo)
 
             avion = Cola_despegues.dequeue() # para obtener el elemento del frente de la cola
             avion.time = tiempo
@@ -61,16 +58,68 @@ def run(path):
             elif avion.clase == "transoceanico":
                 Lista_de_colas_prioridad[4].enqueue(avion)
     
+            # Verificar si han transcurrido 5 unidades de tiempo
+            if tiempo % 5 == 0:
+                # Ordenar el despegue del vuelo de máxima prioridad
+                    if not Lista_de_colas_prioridad[0].is_empty():
+                        avion = Lista_de_colas_prioridad[0].dequeue() #Desencola el primer elemento
+                        print(f"Despegando vuelo... < {avion.id} > < {avion.clase} > < {avion.time} min >")
+
+                    elif not Lista_de_colas_prioridad[1].is_empty():
+                        avion = Lista_de_colas_prioridad[1].dequeue() #Desencola el primer elemento
+                        print(f"Despegando vuelo... < {avion.id} > < {avion.clase} > < {avion.time} min >")
+
+                    elif not Lista_de_colas_prioridad[2].is_empty():
+                        avion = Lista_de_colas_prioridad[2].dequeue() #Desencola el primer elemento
+                        print(f"Despegando vuelo... < {avion.id} > < {avion.clase} > < {avion.time} min >")
+
+                    elif not Lista_de_colas_prioridad[3].is_empty():
+                        avion = Lista_de_colas_prioridad[3].dequeue() #Desencola el primer elemento
+                        print(f"Despegando vuelo... < {avion.id} > < {avion.clase} > < {avion.time} min >")
+
+                    elif not Lista_de_colas_prioridad[4].is_empty():
+                        avion = Lista_de_colas_prioridad[4].dequeue() #Desencola el primer elemento
+                        print(f"Despegando vuelo... < {avion.id} > < {avion.clase} > < {avion.time} min >")
+
+            # Verificar si hay aviones en la cola con tiempo mayor a 20
+            for cola_prioridad in Lista_de_colas_prioridad:
+                for avion in cola_prioridad:
+                    if avion.time - tiempo >20:
+                        cola_prioridad.remove_element(avion)
+                        Lista_de_colas_prioridad[0].enqueue(avion)
+
+
+            print(Cola_despegues.__len__())
+            print(Lista_de_colas_prioridad.__len__())
+            print("")
+            for i in Lista_de_colas_prioridad:
+                print(i.__len__())
+
+    while any(len(cola) > 0 for cola in Lista_de_colas_prioridad):
+        tiempo += 1
+        print("Tiempo Actual:", tiempo)
         # Verificar si han transcurrido 5 unidades de tiempo
         if tiempo % 5 == 0:
             # Ordenar el despegue del vuelo de máxima prioridad
-            for cola_prioridad in Lista_de_colas_prioridad:
-                if not cola_prioridad.is_empty():
-                    avion = cola_prioridad.dequeue() #Desencola el primer elemento
+                if not Lista_de_colas_prioridad[0].is_empty():
+                    avion = Lista_de_colas_prioridad[0].dequeue() #Desencola el primer elemento
                     print(f"Despegando vuelo... < {avion.id} > < {avion.clase} > < {avion.time} min >")
-                    break
-                else:
-                    Lista_de_colas_prioridad.remove(cola_prioridad)
+
+                elif not Lista_de_colas_prioridad[1].is_empty():
+                    avion = Lista_de_colas_prioridad[1].dequeue() #Desencola el primer elemento
+                    print(f"Despegando vuelo... < {avion.id} > < {avion.clase} > < {avion.time} min >")
+
+                elif not Lista_de_colas_prioridad[2].is_empty():
+                    avion = Lista_de_colas_prioridad[2].dequeue() #Desencola el primer elemento
+                    print(f"Despegando vuelo... < {avion.id} > < {avion.clase} > < {avion.time} min >")
+
+                elif not Lista_de_colas_prioridad[3].is_empty():
+                    avion = Lista_de_colas_prioridad[3].dequeue() #Desencola el primer elemento
+                    print(f"Despegando vuelo... < {avion.id} > < {avion.clase} > < {avion.time} min >")
+
+                elif not Lista_de_colas_prioridad[4].is_empty():
+                    avion = Lista_de_colas_prioridad[4].dequeue() #Desencola el primer elemento
+                    print(f"Despegando vuelo... < {avion.id} > < {avion.clase} > < {avion.time} min >")
 
         # Verificar si hay aviones en la cola con tiempo mayor a 20
         for cola_prioridad in Lista_de_colas_prioridad:
@@ -80,12 +129,11 @@ def run(path):
                     Lista_de_colas_prioridad[0].enqueue(avion)
 
 
-        #print(Cola_despegues.__len__())
-        #print(Lista_de_colas_prioridad.__len__())
-        #print("")
-        #for i in Lista_de_colas_prioridad:
-            #print(i.__len__())
-
+        print(Cola_despegues.__len__())
+        print(Lista_de_colas_prioridad.__len__())
+        print("")
+        for i in Lista_de_colas_prioridad:
+            print(i.__len__())
 
 
 
