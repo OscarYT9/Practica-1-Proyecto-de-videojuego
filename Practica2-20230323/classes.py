@@ -2,10 +2,11 @@ from abc import ABC, abstractmethod
 import heapq
 
 class Avion:
-    def __init__(self, id, clase, time):
+    def __init__(self, id, clase, time, departure):
         self.id = id
         self.clase = clase
         self.time = time
+        self.departure = departure
 
 #_____________________________________________________________________________________________________________________________________________
 class Empty(Exception):
@@ -75,17 +76,19 @@ class ArrayQueue:
       raise IndexError('Index out of range')
     return self._data[(self._front + index) % len(self._data)]
 
-  def remove_element(self, element):
-        """Remove the specified element from the queue.
-        If element is not in the queue, raises ValueError."""
-        if element not in self._data:
-            raise ValueError("Element not found in queue")
-        index = self._data.index(element)
-        self._data[index] = None
-        for i in range(index, self._size-1):
-            self._data[i] = self._data[i+1]
-        self._data[self._size-1] = None
-        self._size -= 1
+  def remove_element(self, e):
+      """Elimina la primera ocurrencia del elemento e de la cola."""
+      for i in range(self._size):
+        if self._data[(self._front + i) % len(self._data)] == e:
+          # Se encontró el elemento
+          for j in range(i, self._size - 1):
+            # Desplazar los elementos restantes hacia la izquierda
+            self._data[(self._front + j) % len(self._data)] = self._data[(self._front + j + 1) % len(self._data)]
+          self._data[(self._front + self._size - 1) % len(self._data)] = None
+          self._size -= 1
+          return
+      # El elemento no se encontró
+      raise ValueError('Elemento no encontrado')
 
 class PriorityQueue:
   def __init__(self):
