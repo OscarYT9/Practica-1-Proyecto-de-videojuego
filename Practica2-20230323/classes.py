@@ -90,6 +90,14 @@ class ArrayQueue:
       # El elemento no se encontró
       raise ValueError('Elemento no encontrado')
 
+  def enqueue_front(self, e):
+      """Add an element to the front of queue."""
+      if self._size == len(self._data):
+          self._resize(2 * len(self._data))     # double the array size
+      self._front = (self._front - 1) % len(self._data)
+      self._data[self._front] = e
+      self._size += 1
+
 class PriorityQueue:
   def __init__(self):
       self._cola = []

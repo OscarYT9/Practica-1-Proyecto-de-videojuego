@@ -9,6 +9,7 @@ cola_prioridad_2 = ArrayQueue()
 cola_prioridad_3 = ArrayQueue()
 cola_prioridad_4 = ArrayQueue()
 cola_prioridad_5 = ArrayQueue()
+cola_mas20 = ArrayQueue()
 
 Lista_de_colas_prioridad = [cola_prioridad_1, cola_prioridad_2, cola_prioridad_3, cola_prioridad_4, cola_prioridad_5]
 
@@ -87,18 +88,14 @@ def run(path):
                         avion.departure = tiempo
 
             # Verificar si hay aviones en la cola con tiempo mayor a 20
-            for i, cola_prioridad in enumerate(Lista_de_colas_prioridad):
+            for cola_prioridad in Lista_de_colas_prioridad:
                 for avion in cola_prioridad:
                     if tiempo - avion.time > 20:
                         cola_prioridad.remove_element(avion)
-                        if i == 0:
-                            Lista_de_colas_prioridad[0].enqueue(avion)
-                            avion.time = tiempo
-                            print("se ha cambiado el tiempo",avion.id, avion.clase, avion.time)
-                        else:
-                            Lista_de_colas_prioridad[i-1].enqueue(avion)  # mover el avión a la cola de prioridad más alta
-                            avion.time = tiempo
-                            print("se ha cambiado el tiempo", avion.id)
+                        Lista_de_colas_prioridad[0].enqueue_front(avion)
+                        avion.time = tiempo
+                        print("se ha cambiado el tiempo",avion.id, avion.clase, avion.time)
+
 
             print(Cola_despegues.__len__())
             print(Lista_de_colas_prioridad.__len__())
