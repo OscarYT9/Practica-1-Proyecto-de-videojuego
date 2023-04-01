@@ -93,18 +93,18 @@ def run(path):
                         cola_prioridad.remove_element(avion)
                         if i == 0:
                             Lista_de_colas_prioridad[0].enqueue(avion)
-                            avion.departure = tiempo
-                            print("se ha cambiado el tiempo",avion.id)
+                            avion.time = tiempo
+                            print("se ha cambiado el tiempo",avion.id, avion.clase, avion.time)
                         else:
                             Lista_de_colas_prioridad[i-1].enqueue(avion)  # mover el avión a la cola de prioridad más alta
-                            avion.departure = tiempo
+                            avion.time = tiempo
                             print("se ha cambiado el tiempo", avion.id)
 
             print(Cola_despegues.__len__())
             print(Lista_de_colas_prioridad.__len__())
             print("")
             for i in Lista_de_colas_prioridad:
-                print(i.__len__(), end="")
+                print(i.__len__())
 
  
 
