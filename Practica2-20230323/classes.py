@@ -8,6 +8,28 @@ class Avion:
         self.time = time
         self.departure = departure
 
+    def get_id(self):
+        return self.id
+
+    def get_clase(self):
+        return self.clase
+
+    def set_clase(self, clase):
+        self.clase = clase
+
+    def get_time(self):
+        return self.time
+
+    def set_time(self, time):
+        self.time = time
+
+    def get_departure(self):
+        return self.departure
+
+    def set_departure(self, departure):
+        self.departure = departure
+
+
 #_____________________________________________________________________________________________________________________________________________
 class Empty(Exception):
   """Error attempting to access an element from an empty container."""
