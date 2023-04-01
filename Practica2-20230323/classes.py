@@ -98,6 +98,25 @@ class ArrayQueue:
       self._data[self._front] = e
       self._size += 1
 
+  def insert(self, index, e):
+    """Inserta un elemento en la posición index de la cola."""
+    if index < 0 or index > self._size:
+        raise IndexError('Index out of range')
+
+    if self._size == len(self._data):
+        self._resize(2 * len(self._data))
+
+    i = (self._front + index) % len(self._data)
+    for j in range(self._size, index, -1):
+        self._data[(self._front + j) % len(self._data)] = self._data[(self._front + j - 1) % len(self._data)]
+
+    self._data[i] = e
+    self._size += 1
+
+
+
+
+
 class PriorityQueue:
   def __init__(self):
       self._cola = []
