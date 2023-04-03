@@ -102,11 +102,6 @@ def run(path):
                             avion.time = tiempo
                             print("se ha cambiado el tiempo", avion.id)
 
-            print(Cola_despegues.__len__())
-            print(Lista_de_colas_prioridad.__len__())
-            print("")
-            for i in Lista_de_colas_prioridad:
-                print(i.__len__())
 
 
     import pandas as pd
@@ -118,14 +113,122 @@ def run(path):
 
     # una vez que se hayan agregado todos los aviones, se transforma la lista en un DataFrame
     df = pd.DataFrame(data, columns=['id', 'clase', 'time', 'departure'])
-    print(df)
 
     df['duracion'] = df['departure'] - df['time']
-    duracion_media_por_clase = df.groupby('clase')['duracion'].mean()
+    
+    #Creamos un nuevo dataframe que contiene los valores de la columna "clase" y los valores de las duraciones medias por grupo.
+    duracion_media_por_clase = df.groupby('clase')['duracion'].mean().reset_index()
+
+    # Ordenar las duraciones promedio de menor a mayor
+    duracion_media_por_clase = duracion_media_por_clase.sort_values('duracion', ascending=True).reset_index(drop=True)
+
+    # Reordenar las categorías de 'clase' en el DataFrame original
+    df['clase'] = pd.Categorical(df['clase'], categories=duracion_media_por_clase['clase'], ordered=True)
+
     print("=====================================================")
+    print("                   Datos aviones                     ")
+    print("=====================================================")
+
+    print(df)
+    
+    print("===============================================================================================================================")
+    print("Media entre el momento en el que el avión entra en pista y el momento en que despega, agrupado por la clase de vuelo (Duración)")
+    print("===============================================================================================================================")
+
     print(duracion_media_por_clase)
 
- 
+    import seaborn as sns
+    import matplotlib.pyplot as plt
+
+# Crear los subplots con los dos ejes y compartir el eje x
+    x = input("¿Quieres imprimir los gráficos? [y/n] ")
+    if x == "y":
+        y = 1
+        if y == 1:
+            fig, (ax1, ax2) = plt.subplots(ncols=2, sharey=True, figsize=(10,5), gridspec_kw={'width_ratios': [3, 1]})
+
+            sns.boxplot(x='clase', y='duracion', data=df, ax=ax1)
+            ax1.set(xlabel='Clase', ylabel='Duración')
+
+            sns.barplot(x='clase', y='duracion', data=df.groupby('clase')['duracion'].mean().reset_index(), ax=ax2).set(xlabel=None)
+            ax2.set(xlabel='', ylabel='Duración promedio')
+            ax2.set_xticklabels(ax2.get_xticklabels(), rotation=90)
+
+            plt.show()
+            plt.savefig('Gráficos1.png')
+        if y == 1:
+
+            fig, (ax1, ax2) = plt.subplots(nrows=2, sharey=True, figsize=(10,5))
+
+            sns.boxplot(x='duracion', y='clase', data=df, ax=ax1)
+            ax1.set(xlabel='Duración', ylabel='Clase')
+
+            sns.barplot(x='duracion', y='clase', data=df.groupby('clase')['duracion'].mean().reset_index(), ax=ax2)
+            ax2.set(xlabel='Duración promedio', ylabel='')
+
+            plt.show()
+            plt.savefig('Gráficos2.png')
+        
+        if y ==1:
+            fig, (ax1, ax2) = plt.subplots(ncols=2, sharey=True, figsize=(10,5), gridspec_kw={'width_ratios': [3, 1]})
+
+            sns.boxplot(y='clase', x='duracion', data=df, ax=ax1)
+            ax1.set(xlabel='Duración', ylabel='Clase')
+
+            sns.barplot(y='clase', x='duracion', data=df.groupby('clase')['duracion'].mean().reset_index(), ax=ax2)
+            ax2.set(xlabel='Duración promedio', ylabel='')
+
+            plt.show()
+            plt.savefig('Gráficos3.png')
+
+        import plotly.express as px
+        import plotly.graph_objs as go
+        from plotly.subplots import make_subplots
+        
+
+        #Gráfico interactivo
+        colores = {'domestico': 'cornflowerblue', 'privado': 'gold', 'regular': 'mediumseagreen', 'charter': 'tomato', 'transoceanico': 'plum'}
+
+        fig = make_subplots(rows=3, cols=1, shared_yaxes=True,
+                            subplot_titles=("Duración por Clase", "Duración Promedio por Clase", "Dispersión de Tiempo por Avión"))
+
+        for tipo, group in df.groupby('clase'):
+            fig.add_trace(go.Box(x=group['clase'], y=group['duracion'], name=tipo, marker_color=colores[tipo]), row=1, col=1)
+
+        fig.add_trace(go.Bar(x=duracion_media_por_clase['clase'], y=duracion_media_por_clase['duracion'], name="Duración Promedio", marker_color=[colores[tipo] for tipo in duracion_media_por_clase['clase']]), row=2, col=1)
+
+        tiempo_total_por_avion = df.groupby('id')['duracion'].sum().reset_index().sort_values(by='duracion')
+        fig.add_trace(go.Scatter(x=tiempo_total_por_avion['id'], y=tiempo_total_por_avion['duracion'], mode='markers', 
+                        marker=dict(color=[colores[tipo] for tipo in df['clase']], size=10, line_width=1), 
+                        text=tiempo_total_por_avion['duracion'], name='Tiempo Total de Vuelo'), row=3, col=1)
+
+        fig.update_xaxes(title_text="Clase", row=1, col=1)
+        fig.update_yaxes(title_text="Duración", row=1, col=1)
+        fig.update_xaxes(title_text="Clase", row=2, col=1)
+        fig.update_yaxes(title_text="Duración Promedio", row=2, col=1)
+        fig.update_xaxes(title_text="Avión", row=3, col=1)
+        fig.update_yaxes(title_text="Tiempo Total", row=3, col=1)
+
+        fig.update_layout(height=4000, showlegend=True, coloraxis_showscale=False)
+
+        fig.update_layout(
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                xanchor="right",
+                x=1
+            )
+        )
+
+        tiempo_total_por_avion['duracion_texto'] = tiempo_total_por_avion['duracion'].apply(lambda x: f"{x:.2g} min")
+        fig.update_traces(text=tiempo_total_por_avion['duracion_texto'], row=3, col=1)
+
+        fig.show()
+
+
+
+
 
 
 

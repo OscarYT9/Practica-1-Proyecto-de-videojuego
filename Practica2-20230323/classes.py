@@ -2,31 +2,127 @@ from abc import ABC, abstractmethod
 import heapq
 
 class Avion:
+    """
+    Clase abstracta que representa a un avión.
+
+    Attributes
+    ----------
+    id : str
+        Identificación del avión.
+    clase : str
+        Clase del avion.
+    time : int
+        Tiempo de entrada en pista del avión.
+    departure : int
+        Tiempo de despegue del avión.
+
+    Methods
+    -------
+    get_id()
+        Devuelve la identificación del avión.
+    set_id(id: str)
+        Establece la identificación del avión.
+    get_clase()
+        Devuelve la clase de vuelo del avion.
+    set_clase(clase: int)
+        Establece la la clase de vuelo del avión.
+    get_time()
+        Devuelve el tiempo de entrada en pista del avión.
+    set_time(time: int)
+        Establece el tiempo de entrada en pista del avión.
+    get_departure()
+        Devuelve el timepo de despegue del avión.
+    set_departure(departure: int)
+        Establece el tiempo de despegue del avión.
+    """
     def __init__(self, id, clase, time, departure):
+        """
+        Inicializa los atributos del avatar.
+
+        Parameters
+        ----------
+        id : str
+            identificación del avión.
+        clase : int
+            clase del avión.
+        time : int
+            tiempo de entrada en pista del avión.
+        departure : int
+            tiempo de despegue del avión.
+
+        Returns
+        -------
+        None
+        """
         self.id = id
         self.clase = clase
         self.time = time
         self.departure = departure
 
     def get_id(self):
+        """
+        Devuelve la identificación del avión.
+
+        Returns
+        -------
+        str
+            La identificación del avión.
+        """
         return self.id
 
     def get_clase(self):
+        """
+        Devuelve la clase del avión.
+
+        Returns
+        -------
+        str
+            La clase del avión.
+        """
         return self.clase
 
-    def set_clase(self, clase):
-        self.clase = clase
-
     def get_time(self):
+        """
+        Devuelve el tiempo de entrada en pista del avión.
+
+        Returns
+        -------
+        int
+            El tiempo de entrada en pista del avión.
+        """
         return self.time
 
     def set_time(self, time):
+        """
+        Establece el tiempo de entrada en pista del avión.
+
+        Returns
+        -------
+        int
+            Nuevo tiempo de entrada en pista del avión.
+        """
         self.time = time
 
     def get_departure(self):
+        """
+        Devuelve el tiempo de despegue del avión.
+
+        Returns
+        -------
+        int
+            El tiempo de despegue del avión.
+        """
         return self.departure
 
     def set_departure(self, departure):
+        """
+        Establece el tiempo de despegue del avión.
+
+        Returns
+        -------
+        int
+            Nuevo tiempo de despegue del avión.
+        """
         self.departure = departure
 
 
@@ -135,36 +231,3 @@ class ArrayQueue:
     self._data[i] = e
     self._size += 1
 
-
-
-
-
-class PriorityQueue:
-  def __init__(self):
-      self._cola = []
-      self._indice = 0
-  
-  def __len__(self):
-    """Return the number of elements in the queue."""
-    return len(self._cola)
-    
-  def push(self, elemento, prioridad):
-      heapq.heappush(self._cola, (-prioridad, self._indice, elemento))
-      self._indice += 1
-    
-  def pop(self):
-      return heapq.heappop(self._cola)[-1]
-
-  def remove(self, elemento):
-      for i, (_, _, e) in enumerate(self._cola):
-          if e == elemento:
-              self._cola.pop(i)
-              heapq.heapify(self._cola)
-              return e
-      raise ValueError(f"{elemento} is not in the queue")
-  
-  def __getitem__(self, index):
-    """Return the element at the specified index."""
-    if index < 0 or index >= self._size:
-      raise IndexError('Index out of range')
-    return self._data[(self._front + index) % len(self._data)]
