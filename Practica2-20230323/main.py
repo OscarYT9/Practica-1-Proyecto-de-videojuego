@@ -1,3 +1,5 @@
+# Nombre del archivo: main.py
+# Autores: Óscar Vilela Rodríguez (oscar.vilela.rodriguez@udc.es), Guillermo García Engelmo (g.garcia2@udc.es)
 import sys
 from classes import *
 
@@ -154,6 +156,11 @@ def run(path):
             ax2.set(xlabel='', ylabel='Duración promedio')
             ax2.set_xticklabels(ax2.get_xticklabels(), rotation=90)
 
+            # Agregar valor promedio de cada clase
+            for i, row in df.groupby('clase')['duracion'].mean().reset_index().iterrows():
+                ax2.text(i, row['duracion'], f"{row['duracion']:.2f}", ha='center', va='bottom', size=8)
+            
+            plt.tight_layout()
             plt.show()
             plt.savefig('Gráficos1.png')
         if y == 1:
@@ -166,6 +173,12 @@ def run(path):
             sns.barplot(x='duracion', y='clase', data=df.groupby('clase')['duracion'].mean().reset_index(), ax=ax2)
             ax2.set(xlabel='Duración promedio', ylabel='')
 
+             # Agregar valor promedio de cada clase
+            for i, row in df.groupby('clase')['duracion'].mean().reset_index().iterrows():
+                ax2.text(row['duracion'], i, f"{row['duracion']:.2f}", ha='left', va='center', size=8)
+    
+
+            plt.tight_layout()
             plt.show()
             plt.savefig('Gráficos2.png')
         
@@ -177,7 +190,12 @@ def run(path):
 
             sns.barplot(y='clase', x='duracion', data=df.groupby('clase')['duracion'].mean().reset_index(), ax=ax2)
             ax2.set(xlabel='Duración promedio', ylabel='')
-
+            
+            # Agregar valor promedio de cada clase
+            for i, row in df.groupby('clase')['duracion'].mean().reset_index().iterrows():
+                ax2.text(row['duracion'], i, f"{row['duracion']:.2f}", ha='right', va='center', size=8)
+            
+            plt.tight_layout()
             plt.show()
             plt.savefig('Gráficos3.png')
 
