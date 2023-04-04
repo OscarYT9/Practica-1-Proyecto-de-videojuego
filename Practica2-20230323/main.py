@@ -1,6 +1,6 @@
 import sys
 from classes import *
-import pandas as pd
+
 
 Cola_despegues = ArrayQueue()
 
@@ -98,7 +98,7 @@ def run(path):
                     if tiempo - avion.time > 20:
                         if i > 0:
                             cola_prioridad.remove_element(avion)
-                            Lista_de_colas_prioridad[i-1].enqueue(avion)  # mover el avión a la cola de prioridad más alta
+                            Lista_de_colas_prioridad[i-1].enqueue(avion)  # mover el avión a la cola de prioridad superior
                             avion.time = tiempo
                             print("se ha cambiado el tiempo", avion.id)
 
@@ -187,30 +187,35 @@ def run(path):
         
 
         #Gráfico interactivo
+        # Definimos los colores para cada tipo de clase
         colores = {'domestico': 'cornflowerblue', 'privado': 'gold', 'regular': 'mediumseagreen', 'charter': 'tomato', 'transoceanico': 'plum'}
 
-        fig = make_subplots(rows=3, cols=1, shared_yaxes=True,
-                            subplot_titles=("Duración por Clase", "Duración Promedio por Clase", "Dispersión de Tiempo por Avión"))
+        # Creamos la figura con 3 subplots
+        fig = make_subplots(rows=3, cols=1, shared_yaxes=True, subplot_titles=("Duración por Clase", "Duración Promedio por Clase", "Dispersión de Tiempo por Avión"))
 
+        # Añadimos un box plot por cada tipo de clase en el primer subplot
         for tipo, group in df.groupby('clase'):
             fig.add_trace(go.Box(x=group['clase'], y=group['duracion'], name=tipo, marker_color=colores[tipo]), row=1, col=1)
 
+        # Añadimos un gráfico de barras con la duración promedio por clase en el segundo subplot
         fig.add_trace(go.Bar(x=duracion_media_por_clase['clase'], y=duracion_media_por_clase['duracion'], name="Duración Promedio", marker_color=[colores[tipo] for tipo in duracion_media_por_clase['clase']]), row=2, col=1)
 
+        # Añadimos un scatter plot con el tiempo total por avión en el tercer subplot
         tiempo_total_por_avion = df.groupby('id')['duracion'].sum().reset_index().sort_values(by='duracion')
-        fig.add_trace(go.Scatter(x=tiempo_total_por_avion['id'], y=tiempo_total_por_avion['duracion'], mode='markers', 
-                        marker=dict(color=[colores[tipo] for tipo in df['clase']], size=10, line_width=1), 
-                        text=tiempo_total_por_avion['duracion'], name='Tiempo Total de Vuelo'), row=3, col=1)
+        fig.add_trace(go.Scatter(x=tiempo_total_por_avion['id'], y=tiempo_total_por_avion['duracion'], mode='markers', marker=dict(color=[colores[tipo] for tipo in df['clase']], size=10, line_width=1), text=tiempo_total_por_avion['duracion'], name='Tiempo Total de Vuelo'), row=3, col=1)
 
+        # Actualizamos los títulos y etiquetas de los ejes de cada subplot
         fig.update_xaxes(title_text="Clase", row=1, col=1)
-        fig.update_yaxes(title_text="Duración", row=1, col=1)
+        fig.update_yaxes(title_text="Duración (min)", row=1, col=1)
         fig.update_xaxes(title_text="Clase", row=2, col=1)
-        fig.update_yaxes(title_text="Duración Promedio", row=2, col=1)
-        fig.update_xaxes(title_text="Avión", row=3, col=1)
-        fig.update_yaxes(title_text="Tiempo Total", row=3, col=1)
+        fig.update_yaxes(title_text="Duración Promedio (min)", row=2, col=1)
+        fig.update_xaxes(title_text="ID Avión", row=3, col=1)
+        fig.update_yaxes(title_text="Tiempo Total (min)", row=3, col=1)
 
+        # Actualizamos la configuración de la figura
         fig.update_layout(height=4000, showlegend=True, coloraxis_showscale=False)
 
+        # Actualizamos la configuración de la leyenda
         fig.update_layout(
             legend=dict(
                 orientation="h",
@@ -221,10 +226,15 @@ def run(path):
             )
         )
 
+        # Añadimos etiquetas al scatter plot del tercer subplot
         tiempo_total_por_avion['duracion_texto'] = tiempo_total_por_avion['duracion'].apply(lambda x: f"{x:.2g} min")
         fig.update_traces(text=tiempo_total_por_avion['duracion_texto'], row=3, col=1)
+        fig.add_trace(go.Scatter(x=tiempo_total_por_avion['id'], y=tiempo_total_por_avion['duracion'], mode='markers', marker=dict(color=[colores[tipo] for tipo in df['clase']], size=10, line_width=1), text=tiempo_total_por_avion['duracion'], name='Tiempo Total de Vuelo', fill='tozeroy'), row=3, col=1)
+        
 
+        # Mostramos la figura
         fig.show()
+
 
 
 
