@@ -261,6 +261,24 @@ def run(path):
 
 
 def parse_params(params):
+    """
+    Crea un objeto de tipo Avion con los parámetros especificados.
+
+    Parameters
+    ----------
+    params : list
+        Lista con los parámetros del avión (id, clase, tiempo entrada, tiempo de salida).
+
+    Returns
+    -------
+    Avion
+        Objeto de la clase Avion creado a partir de los parámetros especificados.
+
+    Raises
+    ------
+    ValueError
+        Si la clase especificada no es válida (debe ser 'domestico', 'privado', 'regular' , 'charter' o 'transoceanico').
+    """
     
     id, clase, time, departure = params[0], params[1], 0, None
     return Avion(id, clase, time, departure)
