@@ -129,106 +129,157 @@ class Avion:
 
 #_____________________________________________________________________________________________________________________________________________
 class Empty(Exception):
-  """Error attempting to access an element from an empty container."""
-  pass
+    """
+    Error que ocurre cuando se intenta acceder a un elemento de un contenedor vacío.
+    
+    """
+    pass
 
 class ArrayQueue:
-  """FIFO queue implementation using a Python list as underlying storage."""
-  DEFAULT_CAPACITY = 10          # moderate capacity for all new queues
+    """Implementación de una cola FIFO utilizando una lista de Python como almacenamiento subyacente."""
+    DEFAULT_CAPACITY = 10          # capacidad moderada para todas las nuevas colas
 
-  def __init__(self):
-    """Create an empty queue."""
-    self._data = [None] * ArrayQueue.DEFAULT_CAPACITY
-    self._size = 0
-    self._front = 0
+    def __init__(self):
+        """
+        Crea una cola vacía
+        
+        Parameters
+        ----------
+        data : int
+            longitud de la cola por defecto.
+        size : int
+            numero de elementos de la cola.
+        front : int
+            primera posición de la cola.
+            
 
-  def __len__(self):
-    """Return the number of elements in the queue."""
-    return self._size
+        Returns
+        -------
+        None
+            
+        """
+        self._data = [None] * ArrayQueue.DEFAULT_CAPACITY
+        self._size = 0
+        self._front = 0
 
-  def is_empty(self):
-    """Return True if the queue is empty."""
-    return self._size == 0
+    def __len__(self):
+        """
+        Devuelve la longitud de la cola.
 
-  def first(self):
-    """Return (but do not remove) the element at the front of the queue.
-    Raise Empty exception if the queue is empty.
-    """
-    if self.is_empty():
-      raise Empty('Queue is empty')
-    return self._data[self._front]
+        Returns
+        -------
+        int
+            longitud de la cola.
+        
+        """
+        return self._size
 
-  def dequeue(self):
-    """Remove and return the first element of the queue (i.e., FIFO).
+    def is_empty(self):
+        """
+            Devuelve si la cola esta vacia o no.
 
-    Raise Empty exception if the queue is empty.
-    """
-    if self.is_empty():
-      raise Empty('Queue is empty')
-    answer = self._data[self._front]
-    self._data[self._front] = None         # help garbage collection
-    self._front = (self._front + 1) % len(self._data)
-    self._size -= 1
-    return answer
+        Returns
+        -------
+        bool
+            True or False.
+        """
+        
+        return self._size == 0
 
-  def enqueue(self, e):
-    """Add an element to the back of queue."""
-    if self._size == len(self._data):
-      self._resize(2 * len(self._data))     # double the array size
-    avail = (self._front + self._size) % len(self._data)
-    self._data[avail] = e
-    self._size += 1
+    def first(self):
+        """
+        Devuelve el elemento de la primera posción de la cola primera posción de la cola.
 
-  def _resize(self, cap):                  # we assume cap >= len(self)
-    """Resize to a new list of capacity >= len(self)."""
-    old = self._data                       # keep track of existing list
-    self._data = [None] * cap              # allocate list with new capacity
-    walk = self._front
-    for k in range(self._size):            # only consider existing elements
-      self._data[k] = old[walk]            # intentionally shift indices
-      walk = (1 + walk) % len(old)         # use old size as modulus
-    self._front = 0                        # front has been realigned
-  
-  def __getitem__(self, index):
-    """Return the element at the specified index."""
-    if index < 0 or index >= self._size:
-      raise IndexError('Index out of range')
-    return self._data[(self._front + index) % len(self._data)]
+        Returns
+        -------
+        str
+            El elemento de la primera posción de la cola o lanza la excepción Empty si la cola está vacía.
+        """
+        if self.is_empty():
+            raise Empty('La cola está vacía')
+        return self._data[self._front]
+    
+    def _resize(self, cap):                  
+        """
+        
+        Redimensiona a una nueva lista de capacidad >= len(self)
+        
+        Returns
+        -------
+        None
+        """
+        
+        old = self._data                       
+        self._data = [None] * cap              
+        walk = self._front
+        for k in range(self._size):            
+            self._data[k] = old[walk]            
+            walk = (1 + walk) % len(old)         
+        self._front = 0 
 
-  def remove_element(self, e):
-      """Elimina la primera ocurrencia del elemento e de la cola."""
-      for i in range(self._size):
-        if self._data[(self._front + i) % len(self._data)] == e:
-          # Se encontró el elemento
-          for j in range(i, self._size - 1):
-            # Desplazar los elementos restantes hacia la izquierda
-            self._data[(self._front + j) % len(self._data)] = self._data[(self._front + j + 1) % len(self._data)]
-          self._data[(self._front + self._size - 1) % len(self._data)] = None
-          self._size -= 1
-          return
-      # El elemento no se encontró
-      raise ValueError('Elemento no encontrado')
+    def dequeue(self):
+        """
+        Elimina y devuelve el primer elemento de la cola.
 
-  def enqueue_front(self, e):
-      """Add an element to the front of queue."""
-      if self._size == len(self._data):
-          self._resize(2 * len(self._data))     # double the array size
-      self._front = (self._front - 1) % len(self._data)
-      self._data[self._front] = e
-      self._size += 1
+        Returns
+        -------
+        str
+            el primer elemento de la cola o lanza la excepción Empty si la cola está vacía.
+        """
+        if self.is_empty():
+            raise Empty('La cola está vacía')
+        answer = self._data[self._front]
+        self._data[self._front] = None         
+        self._front = (self._front + 1) % len(self._data)
+        self._size -= 1
+        return answer
 
-  def insert(self, index, e):
-    """Inserta un elemento en la posición index de la cola."""
-    if index < 0 or index > self._size:
-        raise IndexError('Index out of range')
+    def enqueue(self, e):
+        """
+        Agrega un elemento al final de la cola.
 
-    if self._size == len(self._data):
-        self._resize(2 * len(self._data))
+        Returns
+        -------
+        None
+        """
+        if self._size == len(self._data):
+            self._resize(2 * len(self._data))     
+        avail = (self._front + self._size) % len(self._data)
+        self._data[avail] = e
+        self._size += 1         
 
-    i = (self._front + index) % len(self._data)
-    for j in range(self._size, index, -1):
-        self._data[(self._front + j) % len(self._data)] = self._data[(self._front + j - 1) % len(self._data)]
+    def __getitem__(self, index):
+        """
+        Devuelve el elemento en el índice especificado.
 
-    self._data[i] = e
-    self._size += 1
+        Returns
+        -------
+            elemento del índice indicado
+        
+        """
+        if index < 0 or index >= self._size:
+            raise IndexError('Index out of range')
+        return self._data[(self._front + index) % len(self._data)]
+
+    def remove_element(self, e):
+        """
+        Elimina la primera ocurrencia del elemento e de la cola
+
+        Returns
+        -------
+        None
+        """
+        for i in range(self._size):
+            if self._data[(self._front + i) % len(self._data)] == e:
+                # Se encontró el elemento
+                for j in range(i, self._size - 1):
+                # Desplazar los elementos restantes hacia la izquierda
+                    self._data[(self._front + j) % len(self._data)] = self._data[(self._front + j + 1) % len(self._data)]
+                self._data[(self._front + self._size - 1) % len(self._data)] = None
+                self._size -= 1
+                return
+        # El elemento no se encontró
+        raise ValueError('Elemento no encontrado')
+    
+
 

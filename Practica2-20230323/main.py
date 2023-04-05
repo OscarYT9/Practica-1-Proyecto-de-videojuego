@@ -19,12 +19,12 @@ Lista_de_colas_prioridad = [cola_prioridad_1, cola_prioridad_2, cola_prioridad_3
 
 def run(path):
     """
-    Ejecuta la simulación de combate entre los personajes leídos desde el archivo especificado.
+    Ejecuta la simulación de despegues de aviones leídos desde el archivo especificado.
     
     Parameters
     ----------
     path : str
-        ruta del archivo que contiene los parámetros de los personajes
+        ruta del archivo que contiene los parámetros de los aviones.
     
     Returns
     -------    
@@ -32,24 +32,23 @@ def run(path):
     """
 
     with open(path) as f:
-        pjs = f.readlines()
-        for pj in pjs:
-            avion = parse_params(pj.split())
+        vuelos = f.readlines()
+        for vuelo in vuelos:
+            avion = parse_params(vuelo.split())
             Cola_despegues.enqueue(avion)
-    #TODO: Implement simulation here
-
-    print(Cola_despegues.__len__())
 
     tiempo = 0
     data = [] # lista vacía para guardar los datos de cada avión
+    #Ejecuta la simulación hasta que todos los aviones hayan despegado.
     while not Cola_despegues.is_empty() or any(len(cola) > 0 for cola in Lista_de_colas_prioridad):
             tiempo += 1
             print("Tiempo Actual:", tiempo)
             if not Cola_despegues.is_empty():
-                avion = Cola_despegues.dequeue() # para obtener el elemento del frente de la cola
+                avion = Cola_despegues.dequeue() 
                 avion.time = tiempo
                 
                 print(f"Entrando en pista vuelo... < {avion.id} > < {avion.clase} > < {avion.time} min >") #En términos de eficiencia computacional, utilizar una cadena formateada con f es ligeramente más costoso que simplemente concatenar cadenas con comas.
+                #
                 if avion.clase == "domestico":
                     Lista_de_colas_prioridad[0].enqueue(avion)
                 elif avion.clase == "privado":
@@ -63,7 +62,7 @@ def run(path):
     
             # Verificar si han transcurrido 5 unidades de tiempo
             if tiempo % 5 == 0:
-                # Ordenar el despegue del vuelo de máxima prioridad
+                # Comprueba el estado de las colas y indica despegar al avión con más prioridad en ese instante cada 5 unidades de tiempo
                     if not Lista_de_colas_prioridad[0].is_empty():
                         avion = Lista_de_colas_prioridad[0].dequeue() #Desencola el primer elemento
                         print(f"Despegando vuelo... < {avion.id} > < {avion.clase} > < {avion.time} min >")
@@ -102,23 +101,17 @@ def run(path):
                             cola_prioridad.remove_element(avion)
                             Lista_de_colas_prioridad[i-1].enqueue(avion)  # mover el avión a la cola de prioridad superior
                             avion.time = tiempo
-                            print("se ha cambiado el tiempo", avion.id)
-
 
 
     import pandas as pd
 
-    # dentro del ciclo while que simula la lógica del aeropuerto
-    # agregar los tiempos de entrada y salida de cada avión a la lista data
-    # la estructura del avión se representa con una tupla (id, clase, tiempo_entrada, tiempo_salida)
-    # por ejemplo: data.append((avion.id, avion.clase, avion.time, avion.departure))
 
-    # una vez que se hayan agregado todos los aviones, se transforma la lista en un DataFrame
+    # Transforma la lista con los datos de todos los aviones en un DataFrame
     df = pd.DataFrame(data, columns=['id', 'clase', 'time', 'departure'])
 
     df['duracion'] = df['departure'] - df['time']
     
-    #Creamos un nuevo dataframe que contiene los valores de la columna "clase" y los valores de las duraciones medias por grupo.
+    # Creamos un nuevo dataframe que contiene los valores de la columna "clase" y los valores de las duraciones medias por grupo.
     duracion_media_por_clase = df.groupby('clase')['duracion'].mean().reset_index()
 
     # Ordenar las duraciones promedio de menor a mayor
