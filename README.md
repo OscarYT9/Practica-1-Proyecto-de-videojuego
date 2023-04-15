@@ -1,5 +1,5 @@
 # **Practica-1-Proyecto-de-videojuego**
-# <p> <sub>`Tiempo restante`</sub> <img src="https://gen.sendtric.com/countdown/0b60je0yta" alt="Descripción de la imagen" align="center" width="300" /> <sub>`Click para abrir`</sub> <a  href="https://codesandbox.io/p/github/OscarYT9/Practica-1-Proyecto-de-videojuego/draft/1?workspaceId=a923da0c-be0a-4c5f-a6e5-15ed3514b8c6&file=%2FREADME.md&workspace=%257B%2522activeFileId%2522%253A%2522cle8er4sd0000g4jvesqp9pcq%2522%252C%2522openFiles%2522%253A%255B%2522%252FREADME.md%2522%255D%252C%2522sidebarPanel%2522%253A%2522EXPLORER%2522%252C%2522gitSidebarPanel%2522%253A%2522COMMIT%2522%252C%2522spaces%2522%253A%257B%2522cleauevoq001d336jzl1lezqf%2522%253A%257B%2522key%2522%253A%2522cleauevoq001d336jzl1lezqf%2522%252C%2522name%2522%253A%2522Default%2522%252C%2522devtools%2522%253A%255B%255D%257D%257D%252C%2522currentSpace%2522%253A%2522cleauevoq001d336jzl1lezqf%2522%252C%2522spacesOrder%2522%253A%255B%2522cleauevoq001d336jzl1lezqf%2522%255D%252C%2522hideCodeEditor%2522%253Afalse%257D"><img src="https://codesandbox.io/favicon.ico" alt="CodeSandbox" height="40" style="vertical-align:top; margin:4px"></a> </p>
+# <p> <sub>`Tiempo restante`</sub> <img src="https://gen.sendtric.com/countdown/v014ytpdbo" alt="Descripción de la imagen" align="center" width="300" /> <sub>`Click para abrir`</sub> <a  href="https://codesandbox.io/p/github/OscarYT9/Practica-1-Proyecto-de-videojuego/draft/1?workspaceId=a923da0c-be0a-4c5f-a6e5-15ed3514b8c6&file=%2FREADME.md&workspace=%257B%2522activeFileId%2522%253A%2522cle8er4sd0000g4jvesqp9pcq%2522%252C%2522openFiles%2522%253A%255B%2522%252FREADME.md%2522%255D%252C%2522sidebarPanel%2522%253A%2522EXPLORER%2522%252C%2522gitSidebarPanel%2522%253A%2522COMMIT%2522%252C%2522spaces%2522%253A%257B%2522cleauevoq001d336jzl1lezqf%2522%253A%257B%2522key%2522%253A%2522cleauevoq001d336jzl1lezqf%2522%252C%2522name%2522%253A%2522Default%2522%252C%2522devtools%2522%253A%255B%255D%257D%257D%252C%2522currentSpace%2522%253A%2522cleauevoq001d336jzl1lezqf%2522%252C%2522spacesOrder%2522%253A%255B%2522cleauevoq001d336jzl1lezqf%2522%255D%252C%2522hideCodeEditor%2522%253Afalse%257D"><img src="https://codesandbox.io/favicon.ico" alt="CodeSandbox" height="40" style="vertical-align:top; margin:4px"></a> </p>
 
 
 ## 1. Introducción
@@ -157,6 +157,52 @@ que viene determinada por la clase de vuelo. [Practica_2.pdf](https://github.com
 | Transoceánico | 5 (MIN) |
 
 </details>
+<details open>
+	<summary style="text-align:center;"><img src="https://user-images.githubusercontent.com/113378321/232179870-fb58e526-751a-48bd-886b-5dd723f06c39.gif" width="40px">Práctica 3</summary>
+	
+### 1.5 Listas posicionales ordenadas
+>En esta práctica, se simulará la gestión del servicio de préstamos de una biblioteca. De cada libro tenemos 
+la  siguiente  información:  Título  del  libro,  Autor,  Año  de  edición  y Número  de  préstamos  realizados.  En  la 
+actualidad, la biblioteca posee un listado ineficiente y no ordenado en el que puede haber múltiples copias 
+y/o ediciones de cada libro. [P3.pdf](https://github.com/OscarYT9/Practica-1-Proyecto-de-videojuego/files/11238155/P3.pdf)
+ 
+**Se pide implementar un sistema con menú que permita realizar las siguientes acciones:**
+<ol>
+  <li><strong>Leer de un fichero los datos sobre los libros y almacenarlos en una lista posicional ordenada:</strong><br>
+    <ul>
+      <li>Los libros deben ser ordenados por autor, título y año de edición.</li>
+    </ul>
+  </li><br>
+
+  <li><strong>Determinar la media de préstamos por libro:</strong><br>
+    <ul>
+      <li>Calcular el promedio de préstamos realizados por cada libro en la biblioteca.</li>
+    </ul>
+  </li><br>
+
+  <li><strong>Eliminar los libros con mismo título y autor:</strong><br>
+    <ul>
+      <li>Dejar solo la versión más reciente de los libros con mismo título y autor.</li>
+    </ul>
+  </li><br>
+
+  <li><strong>Visualizar en pantalla un listado tabulado de libros:</strong><br>
+    <ul>
+      <li>Se puede elegir entre todos los libros de la biblioteca, los escritos por un autor específico o los editados en un año determinado por el usuario.</li>
+      <li>Si hay varias copias y/o ediciones de un libro, se deben incluir todas en el listado.</li>
+    </ul>
+  </li><br>
+</ol>
+
+
+
+| Objetivos |
+| --- |
+| Las estructuras de datos deberán manipular objetos de una clase Libro, que incluirá las variables de instancia y métodos necesarios, respetando los principios de orientación a objetos (herencia, encapsulación y polimorfismo). |
+| Todo el procesamiento se realizará con el TAD Lista Posicional. La práctica debe funcionar (alternativamente) con ambas implementaciones (array_ordered_positional_list y linked_ordered_positional_list). |
+
+
+
 </details>
 
 ## **2. Programas utilizados**
@@ -268,6 +314,7 @@ En principio para este pequeño proyecto el Equipo debería trabajar sobre la mi
 [![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/223845009-11c90628-7d08-42fa-9365-55ebcbf01039.png)](https://www.youtube.com/watch?v=qnACJZm_BYw)
 [![IMAGE ALT TEXT HERE](https://cdna.artstation.com/p/assets/images/images/016/502/820/large/lee-j-p-.jpg?1552406319)](https://www.youtube.com/watch?v=fWTRBsNHzco)
 [![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/227637813-e43af441-6f7d-4a01-8e6e-9f489560237e.jpg)](https://www.youtube.com/watch?v=crgpxKsal18)
+[![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/113378321/232178549-4f55e27a-c4a0-4083-b3fb-3f40809eb7a5.jpg)](https://www.youtube.com/watch?v=BVbm31ybqlU)
 
 
 <a href="https://code.visualstudio.com/">
