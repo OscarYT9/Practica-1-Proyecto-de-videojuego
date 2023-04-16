@@ -3,9 +3,6 @@ from classes import *
 from array_ordered_positional_list  import *
 from linked_ordered_positional_list import *
 
-# Crear una lista vacía para almacenar los libros
-libros = ArrayOrderedPositionalList()
-
 
 
 def leer_libros(path):
@@ -31,7 +28,6 @@ def media_prestamos(libros):
     return media
 
 # Eliminar los libros con mismo título y autor, dejando la versión más reciente.
-libros_sin_duplicados = ArrayOrderedPositionalList()
 def eliminar_duplicados(libros):
     diccionario = {}
 
@@ -71,8 +67,36 @@ def imprimir_libros_por_anio(libros, anio_edicion):
         if libro.anio_edicion == anio_edicion:
             print(f"{libro.titulo}\t{libro.autor}\t{libro.anio_edicion}")
 
+# Función para imprimir el menú
+def imprimir_menu():
+    print("\n--------------------------------------------------------")
+    print("|                BIENVENIDO A LA BIBLIOTECA             |")
+    print("--------------------------------------------------------")
+    print("| Selecciona una opción:                               |")
+    print("|                                                      |")
+    print("| 1. Leer libros desde un archivo                       |")
+    print("| 2. Determinar la media de préstamos por libro          |")
+    print("| 3. Eliminar libros duplicados                         |")
+    print("| 4. Visualizar listado de libros                        |")
+    print("| 5. Salir                                             |")
+    print("| 6. Configuración                                  |")
+    print("|                                                      |")
+    print("|------------------------------------------------------|")
 
-
+# Función para imprimir el submenú
+def imprimir_submenu():
+    print("\n--------------------------------------------------------")
+    print("|                LISTADO DE LIBROS                      |")
+    print("--------------------------------------------------------")
+    print("| Selecciona una opción:                               |")
+    print("|                                                      |")
+    print("| 1. Listar todos los libros                            |")
+    print("| 2. Listar libros de un autor determinado               |")
+    print("| 3. Listar libros de un año determinado                 |")
+    print("| 4. Cancelar y volver al menú principal                |")
+    print("| 5. Salir                                             |")
+    print("|                                                      |")
+    print("|------------------------------------------------------|")
 
     
 def parse_params(params):
@@ -86,11 +110,18 @@ if __name__ == "__main__":
     print("\n-----------------------")
     print("| Biblioteca XYZ |")
     print("-----------------------\n")
-    print("\033[1m¡Recuerda que antes de nada debes cargar la base de datos de los libros con la opción número 1! (de normal se carga el archivo libros.txt)\n\033[0m")
+    print("\033[1m¡Recuerda que antes de nada debes cargar la base de datos de los libros con la opción número 1! (de normal se carga el archivo libros.txt)\033[0m")
+    print("\033[1m(De forma predeterminada se usa array_ordered_positional_list para almacenar los libros para cambiar su comportamiento ir a Configuración)\n\033[0m")
+    
+    # Crear una lista vacía para almacenar los libros
+    libros = ArrayOrderedPositionalList()
+    libros_sin_duplicados = ArrayOrderedPositionalList()
+    tipo_lista = "a"
     path = "libros.txt"
+
     print(leer_libros(path))
     print("\n")
-
+    
     while True:
         print("Selecciona una opción:\n")
         print("1. Leer libros desde un archivo")
@@ -120,6 +151,12 @@ if __name__ == "__main__":
             print(media_prestamos(libros))
 
         elif opcion == "3":
+            if tipo_lista == "a":
+                libros_sin_duplicados = ArrayOrderedPositionalList()
+
+            elif tipo_lista == "l":
+                libros_sin_duplicados = LinkedOrderedPositionalList()
+        
             # Eliminar los libros con mismo título y autor, dejando la versión más reciente.
             print(eliminar_duplicados(libros))
             print([repr(libro) for libro in libros_sin_duplicados])
@@ -129,7 +166,7 @@ if __name__ == "__main__":
             print("")
             while True:
                 print("\t1. Un listado tabulado de todos los libros de la biblioteca")
-                print("\t2. Un listado tabulado de todos los libros escritos por un autor")
+                print("\t2. Un listado tabulado de todos los libros escritos por un autor (Apellido, Nombre)")
                 print("\t3. Un listado tabulado de todos los libros editados en un año determinado")
                 print("\t4. Cancelar y volver al menú principal")
                 print("\t5. Salir\n")
@@ -184,8 +221,8 @@ if __name__ == "__main__":
                         nueva_lista = LinkedOrderedPositionalList()
                         for libro in temp:
                             nueva_lista.add(libro)
-                        break
                         libros = nueva_lista
+                        break
                 elif cambiar == "n":
                     break
                 else:
