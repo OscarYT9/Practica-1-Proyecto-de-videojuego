@@ -16,7 +16,7 @@ def leer_libros(path):
         # Iterar sobre las líneas del archivo y agregar cada libro a la lista
         for linea in lineas:
             # Dividir la línea en tres partes: título, autor y año de edición
-            libro = parse_params(linea.strip().split(';'))
+            libro = parse_params(linea.split('; '))
             # Agregar el libro a la lista, ordenando por autor, título y año de edición
             libros.add(libro)
     return libros
@@ -24,17 +24,15 @@ def leer_libros(path):
 
 # Determinar la media de préstamos por libro que realiza el servicio de la biblioteca.
 def media_prestamos(libros):
-
-    sum=0
+    suma_prestamos = 0
     for libro in libros:
-        libro.prestamos_realizados+= sum
-    media = sum/len(libros)
+        suma_prestamos += libro.prestamos_realizados
+    media = suma_prestamos / len(libros)
     return media
 
 # Eliminar los libros con mismo título y autor, dejando la versión más reciente.
-
+libros_sin_duplicados = ArrayOrderedPositionalList()
 def eliminar_duplicados(libros):
-    libros_sin_duplicados = ArrayOrderedPositionalList()
     diccionario = {}
 
     for libro in libros:
@@ -43,7 +41,7 @@ def eliminar_duplicados(libros):
             diccionario[clave] = libro
         else:
             libro_existente = diccionario[clave]
-            if libro.fecha_publicacion > libro_existente.fecha_publicacion:
+            if libro.anio_edicion > libro_existente.anio_edicion:
                 diccionario[clave] = libro
     
     for libro in diccionario.values():
@@ -61,15 +59,16 @@ def imprimir_libros_por_autor(libros, autor):
     print("Título\tAutor\tAño Edición")
     print("--------------------------------------------------")
     for libro in libros:
-        if libro.autor == autor:
-            print(f"{libro.titulo}\t{libro.autor}\t{libro.anio_edicion}")
+        if libro.autor == autor:                                            # Se puede usar if libro.autor.strip() == autor.strip(): para eliminar los espacios en blanco y saltos de línea del nombre del autor en el caso de hacer el split solo con [;]
+            print(f"{libro.titulo}\t{libro.autor}\t{libro.anio_edicion}")   # Como se puede ver se útiliza [; ] para separar los campos en la base datos por eso en la línea 19 debes debes hace el split con ; 
+                                                                            # libro = parse_params(linea.strip().split('; '))
 
-def imprimir_libros_por_anio(libros, anio):
-    print(f"Listado de libros editados en el año {anio}")
+def imprimir_libros_por_anio(libros, anio_edicion):
+    print(f"Listado de libros editados en el año {anio_edicion}")
     print("Título\tAutor\tAño Edición")
     print("--------------------------------------------------")
     for libro in libros:
-        if libro.anio == anio:
+        if libro.anio_edicion == anio_edicion:
             print(f"{libro.titulo}\t{libro.autor}\t{libro.anio_edicion}")
 
 
@@ -78,17 +77,20 @@ def imprimir_libros_por_anio(libros, anio):
     
 def parse_params(params):
     
-    titulo, nombre, anio_edicion, prestamos_realizados = params[0], params[1], int(params[2]), int(params[3])
-    return Libro(titulo, nombre, anio_edicion, prestamos_realizados)
+    titulo, autor, anio_edicion, prestamos_realizados = params[0], params[1], int(params[2]), int(params[3])
+    return Libro(titulo, autor, anio_edicion, prestamos_realizados)
+
 
 if __name__ == "__main__":
     # Menú principal del programa
     print("\n-----------------------")
     print("| Biblioteca XYZ |")
     print("-----------------------\n")
-    print("\033[1m¡Recuerda que antes de nada debes cargar la base de datos de los libros con la opción número 1! (siempre puedes cambiar la base datos cargada más adelante)\n\033[0m")
+    print("\033[1m¡Recuerda que antes de nada debes cargar la base de datos de los libros con la opción número 1! (de normal se carga el archivo libros.txt)\n\033[0m")
+    path = "libros.txt"
+    print(leer_libros(path))
+    print("\n")
 
-        
     while True:
         print("Selecciona una opción:\n")
         print("1. Leer libros desde un archivo")
@@ -103,7 +105,14 @@ if __name__ == "__main__":
             # Pedir al usuario que ingrese la ubicación del archivo
             path = input("Ingrese el nombre del archivo (recuerda que la ubicación de la base de datos debe estár en el mismo directorio que el programa principal): ")
             # Leer libros desde el archivo y almacenarlos en una lista
+            if tipo_lista == "a":
+                libros = ArrayOrderedPositionalList()
+
+            elif tipo_lista == "l":
+                libros = LinkedOrderedPositionalList()
+                
             print(leer_libros(path))
+            print([repr(libro) for libro in libros]) # print(list(libros))
             print("Libros leídos correctamente.")
             
         elif opcion == "2":
@@ -113,6 +122,8 @@ if __name__ == "__main__":
         elif opcion == "3":
             # Eliminar los libros con mismo título y autor, dejando la versión más reciente.
             print(eliminar_duplicados(libros))
+            print([repr(libro) for libro in libros_sin_duplicados])
+            libros = libros_sin_duplicados  # Cambia la lista de libros original por la que no tiene duplicados
 
         elif opcion == "4":
             print("")
@@ -122,7 +133,7 @@ if __name__ == "__main__":
                 print("\t3. Un listado tabulado de todos los libros editados en un año determinado")
                 print("\t4. Cancelar y volver al menú principal")
                 print("\t5. Salir\n")
-                x = input("¿Qué deseas visualizar por pantalla?")
+                x = input("¿Qué deseas visualizar por pantalla?: ")
                 if x == "1":
                     imprimir_libros(libros)
 
@@ -131,8 +142,8 @@ if __name__ == "__main__":
                     imprimir_libros_por_autor(libros, autor)
 
                 elif x == "3":
-                    anio = input("¿De qué año deseas visualizar los libros?: ")
-                    imprimir_libros_por_anio(libros, anio)
+                    anio_edicion = int(input("¿De qué año deseas visualizar los libros?: "))
+                    imprimir_libros_por_anio(libros, anio_edicion)
 
                 elif x == "4":
                     # Salir al menú principal
@@ -154,17 +165,20 @@ if __name__ == "__main__":
 
         elif opcion == "6":
             while True:
-                cambiar = input("\t¿Quieres cambiar el tipo de lista con en el que se almacenan los libros? (De forma predeterminada se ejecutará con array_ordered_positional_list) [y/n] ")
+                cambiar = input("\t¿Quieres cambiar el tipo de lista con en el que se almacenan los libros? (De forma predeterminada se ejecutará con array_ordered_positional_list) [y/n]: ")
                 if cambiar == "y":
-                    tipo_lista = input("\t¿Que tipo de lista quieres, array o linked? [a/l] ")
+                    tipo_lista = input("\t¿Que tipo de lista quieres, array o linked? [a/l]: ")
                     if tipo_lista == "a":
                         libros = ArrayOrderedPositionalList()
-                    if tipo_lista == "l":
+                        break
+                    elif tipo_lista == "l":
                         libros = LinkedOrderedPositionalList()
-                if cambiar == "n":
+                        break
+                elif cambiar == "n":
                     break
                 else:
                     print("\t\033[1;31mOpción inválida. Por favor, selecciona [y/n].\033[0m")
+
 
         else:
             # Opción inválida, mostrar mensaje de error
