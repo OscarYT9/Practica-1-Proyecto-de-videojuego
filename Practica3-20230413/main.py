@@ -169,11 +169,23 @@ if __name__ == "__main__":
                 if cambiar == "y":
                     tipo_lista = input("\t¿Que tipo de lista quieres, array o linked? [a/l]: ")
                     if tipo_lista == "a":
-                        libros = ArrayOrderedPositionalList()
+                        temp = []
+                        for libro in libros:
+                            temp.append(libro)
+                        nueva_lista = ArrayOrderedPositionalList()
+                        for libro in temp:
+                            nueva_lista.add(libro)
+                        libros = nueva_lista
                         break
                     elif tipo_lista == "l":
-                        libros = LinkedOrderedPositionalList()
+                        temp = []
+                        for libro in libros:
+                            temp.append(libro)
+                        nueva_lista = LinkedOrderedPositionalList()
+                        for libro in temp:
+                            nueva_lista.add(libro)
                         break
+                        libros = nueva_lista
                 elif cambiar == "n":
                     break
                 else:
