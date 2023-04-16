@@ -70,33 +70,35 @@ def imprimir_libros_por_anio(libros, anio_edicion):
 # Función para imprimir el menú
 def imprimir_menu():
     print("\n--------------------------------------------------------")
-    print("|                BIENVENIDO A LA BIBLIOTECA             |")
+    print("|                MENÚ PRINCIPAL                        |")
     print("--------------------------------------------------------")
     print("| Selecciona una opción:                               |")
     print("|                                                      |")
-    print("| 1. Leer libros desde un archivo                       |")
-    print("| 2. Determinar la media de préstamos por libro          |")
-    print("| 3. Eliminar libros duplicados                         |")
-    print("| 4. Visualizar listado de libros                        |")
+    print("| 1. Leer libros desde un archivo                      |")
+    print("| 2. Determinar la media de préstamos por libro        |")
+    print("| 3. Eliminar libros duplicados                        |")
+    print("| 4. Visualizar listado de libros                      |")
     print("| 5. Salir                                             |")
-    print("| 6. Configuración                                  |")
+    print("| 6. Configuración                                     |")
     print("|                                                      |")
-    print("|------------------------------------------------------|")
+    print("|------------------------------------------------------|\n")
 
 # Función para imprimir el submenú
 def imprimir_submenu():
-    print("\n--------------------------------------------------------")
-    print("|                LISTADO DE LIBROS                      |")
-    print("--------------------------------------------------------")
-    print("| Selecciona una opción:                               |")
-    print("|                                                      |")
-    print("| 1. Listar todos los libros                            |")
-    print("| 2. Listar libros de un autor determinado               |")
-    print("| 3. Listar libros de un año determinado                 |")
-    print("| 4. Cancelar y volver al menú principal                |")
-    print("| 5. Salir                                             |")
-    print("|                                                      |")
-    print("|------------------------------------------------------|")
+    print("\n\t---------------------------------------------------------------")
+    print("\t|                LISTADO DE LIBROS                            |")
+    print("\t---------------------------------------------------------------")
+    print("\t| Selecciona una opción:                                      |")
+    print("\t|                                                             |")
+    print("\t| 1. Listar todos los libros                                  |")
+    print("\t| 2. Listar libros de un autor determinado (Apellido, Nombre) |")
+    print("\t| 3. Listar libros de un año determinado                      |")
+    print("\t| 4. Cancelar y volver al menú principal                      |")
+    print("\t| 5. Salir                                                    |")
+    print("\t|                                                             |")
+    print("\t|-------------------------------------------------------------|\n")
+
+
 
     
 def parse_params(params):
@@ -108,7 +110,7 @@ def parse_params(params):
 if __name__ == "__main__":
     # Menú principal del programa
     print("\n-----------------------")
-    print("| Biblioteca XYZ |")
+    print("| Biblioteca XYZ      |")
     print("-----------------------\n")
     print("\033[1m¡Recuerda que antes de nada debes cargar la base de datos de los libros con la opción número 1! (de normal se carga el archivo libros.txt)\033[0m")
     print("\033[1m(De forma predeterminada se usa array_ordered_positional_list para almacenar los libros para cambiar su comportamiento ir a Configuración)\n\033[0m")
@@ -123,28 +125,27 @@ if __name__ == "__main__":
     print("\n")
     
     while True:
-        print("Selecciona una opción:\n")
-        print("1. Leer libros desde un archivo")
-        print("2. Determinar la media de préstamos por libro que realiza el servicio de la biblioteca.")
-        print("3. Eliminar los libros con mismo título y autor, dejando la versión más reciente.")
-        print("4. Visualizar en pantalla un listado tabulado de todos los libros de la biblioteca, o de los escritos por un autor o los editados en un año determinado por el usuario. Si hay varias copias y/o ediciones de un libro, se incluyen todas en el listado.")
-        print("5. Salir")
-        print("6. Configuración")
+        imprimir_menu()
         opcion = input("Opción seleccionada: ")
         
         if opcion == "1":
             # Pedir al usuario que ingrese la ubicación del archivo
-            path = input("Ingrese el nombre del archivo (recuerda que la ubicación de la base de datos debe estár en el mismo directorio que el programa principal): ")
-            # Leer libros desde el archivo y almacenarlos en una lista
-            if tipo_lista == "a":
-                libros = ArrayOrderedPositionalList()
+            while True:
+                try:
+                    path = input("Ingrese el nombre del archivo con su respectiva extensión (recuerda que la ubicación de la base de datos debe estár en el mismo directorio que el programa principal): ")
+                    # Leer libros desde el archivo y almacenarlos en una lista
+                    if tipo_lista == "a":
+                        libros = ArrayOrderedPositionalList()
 
-            elif tipo_lista == "l":
-                libros = LinkedOrderedPositionalList()
-                
-            print(leer_libros(path))
-            print([repr(libro) for libro in libros]) # print(list(libros))
-            print("Libros leídos correctamente.")
+                    elif tipo_lista == "l":
+                        libros = LinkedOrderedPositionalList()
+
+                    print(leer_libros(path))
+                    print([repr(libro) for libro in libros]) # print(list(libros))
+                    print("Libros leídos correctamente.")
+                    break # salir del bucle while si no hay excepciones
+                except FileNotFoundError:
+                    print("\033[1;31mArchivo no encontrado. Por favor, inténtelo de nuevo.\033[0m")
             
         elif opcion == "2":
             # Determinar la media de préstamos por libro que realiza el servicio de la biblioteca.
@@ -163,13 +164,8 @@ if __name__ == "__main__":
             libros = libros_sin_duplicados  # Cambia la lista de libros original por la que no tiene duplicados
 
         elif opcion == "4":
-            print("")
             while True:
-                print("\t1. Un listado tabulado de todos los libros de la biblioteca")
-                print("\t2. Un listado tabulado de todos los libros escritos por un autor (Apellido, Nombre)")
-                print("\t3. Un listado tabulado de todos los libros editados en un año determinado")
-                print("\t4. Cancelar y volver al menú principal")
-                print("\t5. Salir\n")
+                imprimir_submenu()
                 x = input("¿Qué deseas visualizar por pantalla?: ")
                 if x == "1":
                     imprimir_libros(libros)
@@ -206,23 +202,21 @@ if __name__ == "__main__":
                 if cambiar == "y":
                     tipo_lista = input("\t¿Que tipo de lista quieres, array o linked? [a/l]: ")
                     if tipo_lista == "a":
-                        temp = []
-                        for libro in libros:
-                            temp.append(libro)
+
                         nueva_lista = ArrayOrderedPositionalList()
-                        for libro in temp:
-                            nueva_lista.add(libro)
-                        libros = nueva_lista
-                        break
-                    elif tipo_lista == "l":
-                        temp = []
                         for libro in libros:
-                            temp.append(libro)
-                        nueva_lista = LinkedOrderedPositionalList()
-                        for libro in temp:
                             nueva_lista.add(libro)
                         libros = nueva_lista
                         break
+
+                    elif tipo_lista == "l":
+
+                        nueva_lista = LinkedOrderedPositionalList()
+                        for libro in libros:
+                            nueva_lista.add(libro)
+                        libros = nueva_lista
+                        break
+                    
                 elif cambiar == "n":
                     break
                 else:
@@ -235,3 +229,4 @@ if __name__ == "__main__":
             print("\033[1;31mOpción inválida. Por favor, selecciona una opción válida.\033[0m")
 
 
+# EL PROGRAMA TIENE UN ERROR, si le das a Configuración (cambias a linked)> Eliminar libros duplicados >Determinar media de préstamos por libro comprobarás que da 8.375 cuando debería dar 8.5
