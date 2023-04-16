@@ -166,46 +166,65 @@ if __name__ == "__main__":
         funcion_seleccionada = opciones[seleccion]
         funcion_seleccionada()
 
-
     from PyInquirer import prompt, style_from_dict, Token, Separator
 
-    # Crear el estilo del prompt
-    custom_style = style_from_dict({
+    # Define el estilo de la interfaz de usuario
+    style = style_from_dict({
         Token.Separator: '#6C6C6C',
         Token.QuestionMark: '#FF9D00 bold',
         Token.Selected: '#5F819D',
         Token.Pointer: '#FF9D00 bold',
-        Token.Instruction: '',  # default
+        Token.Instruction: '',  # sin color - por defecto
         Token.Answer: '#5F819D bold',
         Token.Question: '',
     })
-
-    # Crear la lista de opciones
-    opciones = [
+    # Preguntas para el menú
+    questions = [
         {
             'type': 'list',
             'name': 'opcion',
             'message': 'Selecciona una opción:',
             'choices': [
-                Separator(),
-                {'name': '1. Cargar base de datos de libros'},
-                {'name': '2. Determinar media de préstamos por libro'},
-                {'name': '3. Eliminar duplicados'},
-                {'name': '4. Visualizar libros'},
-                Separator(),
-                {'name': '5. Salir'},
-                Separator()
-            ],
-            'validate': lambda answer: 'Debes elegir una opción.' \
-                if len(answer) == 0 else True
+                Separator('--- Opciones del programa ---'),
+                {
+                    'name': '1. Cargar base de datos de libros',
+                    'value': cargar_base_de_datos
+                },
+                {
+                    'name': '2. Determinar media de préstamos por libro',
+                    'value': media_prestamos(libros)
+                },
+                {
+                    'name': '3. Eliminar duplicados',
+                    'value': eliminar_duplicados
+                },
+                {
+                    'name': '4. Visualizar libros',
+                    'value': opcion_cuatro
+                },
+                {
+                    'name': '5. Salir',
+                    'value': 'Salir'
+                },
+                Separator('-----------------------')
+            ]
         }
     ]
 
-    # Ejecutar el prompt
-    respuesta = prompt(opciones, style=custom_style)
-
-    # Imprimir la respuesta
-    print(respuesta['opcion'])
+    while True:
+        # Mostrar el menú y obtener la opción seleccionada
+        respuesta = prompt(questions)
+        print(respuesta)
+        seleccion = respuesta.get('opcion', None)
+        
+        if seleccion:
+            if seleccion == 'Salir':
+                print('Saliendo del programa...')
+                break
+            else:
+                seleccion()
+        else:
+            print('Selecciona una opción válida.')
 
 
     #--------------------------------------------------------------------------------------------------------------
