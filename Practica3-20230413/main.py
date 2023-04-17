@@ -161,7 +161,7 @@ if __name__ == "__main__":
         questions = [        {            'type': 'list',            'name': 'opcion',            'message': '¿Qué deseas visualizar por pantalla?',            'choices': [                '1. Todos los libros',                '2. Libros de un autor',                '3. Libros de un año de edición',                Separator(),                '4. Volver al menú principal'            ]
             }
         ]
-        answer = prompt(questions)
+        answer = prompt(questions, style=style)
         seleccion = answer['opcion']
         funcion_seleccionada = opciones[seleccion]
         funcion_seleccionada()
@@ -213,19 +213,25 @@ if __name__ == "__main__":
 
     while True:
         # Mostrar el menú y obtener la opción seleccionada
-        respuesta = prompt(questions)
-        print(respuesta)
-        seleccion = respuesta.get('opcion', None)
-        
-        if seleccion:
-            if seleccion == 'Salir':
-                print('Saliendo del programa...')
-                break
-            else:
-                seleccion()
-        else:
-            print('Selecciona una opción válida.')
+        respuesta = prompt(questions, style=style)
+        opcion_seleccionada = respuesta['opcion']
 
+        # Salir del programa si el usuario selecciona la opción "Salir"
+        if opcion_seleccionada == "Salir":
+            print("¡Hasta luego!")
+            break
+        elif opcion_seleccionada == cargar_base_de_datos:
+            cargar_base_de_datos()
+
+        elif opcion_seleccionada == media_prestamos(libros):
+            print(media_prestamos(libros))
+            
+        elif opcion_seleccionada == eliminar_duplicados:
+            eliminar_duplicados()
+
+        elif opcion_seleccionada == opcion_cuatro:
+            opcion_cuatro()
+        
 
     #--------------------------------------------------------------------------------------------------------------
 
