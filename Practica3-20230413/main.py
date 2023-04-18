@@ -32,8 +32,8 @@ def parse_params(params):
 
 # Función para imprimir el menú
 def imprimir_menu():
-    print("\n--------------------------------------------------------")
-    print("|                  MENÚ PRINCIPAL                      |")
+    print("\n")
+    print("                | - MENÚ PRINCIPAL - |                  ")
     print("--------------------------------------------------------")
     print("| Selecciona una opción:                               |")
     print("|                                                      |")
@@ -48,18 +48,18 @@ def imprimir_menu():
 
 # Función para imprimir el submenú
 def imprimir_submenu():
-    print("\n\t---------------------------------------------------------------")
-    print("\t|                    LISTADO DE LIBROS                        |")
-    print("\t---------------------------------------------------------------")
-    print("\t| Selecciona una opción:                                      |")
-    print("\t|                                                             |")
-    print("\t| 1. Listar todos los libros                                  |")
-    print("\t| 2. Listar libros de un autor determinado (Apellido, Nombre) |")
-    print("\t| 3. Listar libros de un año determinado                      |")
-    print("\t| 4. Cancelar y volver al menú principal                      |")
-    print("\t| 5. Salir                                                    |")
-    print("\t|                                                             |")
-    print("\t|-------------------------------------------------------------|\n")
+    print("\n")
+    print("\t              | - LISTADO DE LIBROS - |               ")
+    print("\t------------------------------------------------------")
+    print("\t| Selecciona una opción:                              |")
+    print("\t|                                                     |")
+    print("\t| 1. Listar todos los libros                          |")
+    print("\t| 2. Listar libros de un autor determinado            |")
+    print("\t| 3. Listar libros de un año determinado              |")
+    print("\t| 4. Cancelar y volver al menú principal              |")
+    print("\t| 5. Salir                                            |")
+    print("\t|                                                     |")
+    print("\t|-----------------------------------------------------|\n")
 
 #_______________________________________________________________________________________________________________
 # Funciónes que definen las opciones de los submenús
@@ -77,6 +77,7 @@ def opcion_cuatro():
     seleccion = answer['opcion']
     funcion_seleccionada = opciones[seleccion]
     funcion_seleccionada()
+    print("")
 #_______________________________________________________________________________________________________________
 def configuracion(libros, tipo_lista):
     questions = [
@@ -104,12 +105,24 @@ def configuracion(libros, tipo_lista):
 if __name__ == "__main__":
     
 
-    #--------------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------
 
     
-    print("-----------------------")
-    print("| Biblioteca XYZ |")
-    print("-----------------------")
+    print("      _____  _____   _____   ______  ______ _____  _____")
+    print("|       |   |_____] |_____/ |______ |_____/   |   |_____|")
+    print("|____ __|__ |_____] |    \_ |______ |    \_ __|__ |     |")
+    
+    print("|              .--.                   .---.             |")
+    print("|          .---|__|           .-.     |~~~|             |")
+    print("|       .--|===|--|_          |_|     |~~~|--.          |")
+    print("|       |  |===|  |'\     .---!~|  .--| P |--|          |")
+    print("|       |%%| I |  |.'\    |===| |--|%%| . |  |          |")
+    print("|       |%%| A |  |\.'\   | P | |__|  | 3 |  |          |")
+    print("|       |  | | |  | \  \  |===| |==|  | . |  |          |")
+    print("|       |  | | |__|  \.'\ | 2 |_|__|  |~~~|__|          |")
+    print("|       |  |===|--|   \.'\|===|~|--|%%|~~~|--|          |")
+    print("|       ^--^---'--^    `-'`---^-^--^--^---'--'          |") 
+    print("---------------------------------------------------------")
     print("| \033[1m¡Recuerda que puedes cambiar la base de datos de los libros con la opción número 1! (de normal se carga el archivo libros.txt)\033[0m")
     print("| \033[1m(De forma predeterminada se usa array_ordered_positional_list para almacenar los libros para cambiar su comportamiento ir a Configuración)\033[0m")
     print("|")
@@ -173,15 +186,18 @@ if __name__ == "__main__":
                 while True:
                     imprimir_submenu()
                     x = input("¿Qué deseas visualizar por pantalla?: ")
+                    print("")
                     if x == "1":
                         imprimir_libros(libros)
 
                     elif x == "2":
-                        autor = input("¿De qué autor deseas visualizar los libros?: ")
+                        autor = input("¿De qué autor deseas visualizar los libros? (Apellido, Nombre): ")
+                        print("")
                         imprimir_libros_por_autor(libros, autor)
 
                     elif x == "3":
                         anio_edicion = int(input("¿De qué año deseas visualizar los libros?: "))
+                        print("")
                         imprimir_libros_por_anio(libros, anio_edicion)
 
                     elif x == "4":

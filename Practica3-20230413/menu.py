@@ -57,27 +57,60 @@ def eliminar_duplicados(libros, tipo_lista):
 # Todo depende del caso, en mi caso he decido eliminar el que tenga menos prestamos, suponiendo que cuantos menos prestamos tenga más nuevo será el libro
 
 def imprimir_libros(libros):
-    print("Título\tAutor\tAño Edición")
-    print("--------------------------------------------------")
+    print(f"Listado todos los libros de la biblioteca\n")
+
+    # Obtener el tamaño máximo de cada columna
+    titulo_max = max([len(libro.titulo) for libro in libros])
+    autor_max = max([len(libro.autor) for libro in libros])
+    anio_max = max([len(str(libro.anio_edicion)) for libro in libros])
+    
+    # Imprimir la cabecera de la tabla
+    print(f"{'Título':<{titulo_max}} | {'Autor':<{autor_max}} | {'Año':<{anio_max}}")
+    print(f"{'-' * titulo_max}-|-{'-' * autor_max}-|-{'-' * anio_max}")
+    
+    # Imprimir cada libro
     for libro in libros:
-        print(f"{libro.titulo}\t{libro.autor}\t{libro.anio_edicion}")
+        print(f"{libro.titulo:<{titulo_max}} | {libro.autor:<{autor_max}} | {libro.anio_edicion:<{anio_max}}")
+
 
 def imprimir_libros_por_autor(libros, autor):
-    print(f"Listado de libros del autor {autor}")
-    print("Título\tAutor\tAño Edición")
-    print("--------------------------------------------------")
+    print(f"Listado de libros del autor {autor}\n")
+
+    # Obtener el tamaño máximo de cada columna
+    titulo_max = max([len(libro.titulo) for libro in libros])
+    autor_max = max([len(libro.autor) for libro in libros])
+    anio_max = max([len(str(libro.anio_edicion)) for libro in libros])
+
+    # Imprimir la cabecera de la tabla
+    print(f"{'Título':<{titulo_max}} | {'Autor':<{autor_max}} | {'Año':<{anio_max}}")
+    print(f"{'-' * titulo_max}-|-{'-' * autor_max}-|-{'-' * anio_max}")
+
+    # Imprimir cada libro
     for libro in libros:
-        if libro.autor == autor:                                            # Se puede usar if libro.autor.strip() == autor.strip(): para eliminar los espacios en blanco y saltos de línea del nombre del autor en el caso de hacer el split solo con [;]
-            print(f"{libro.titulo}\t{libro.autor}\t{libro.anio_edicion}")   # Como se puede ver se útiliza [; ] para separar los campos en la base datos por eso en la línea 19 debes debes hace el split con ; 
-                                                                            # libro = parse_params(linea.strip().split('; '))
+        if libro.autor == autor:
+            print(f"{libro.titulo:<{titulo_max}} | {libro.autor:<{autor_max}} | {libro.anio_edicion:<{anio_max}}")
+
+# Como se puede ver se útiliza [; ] para separar los campos en la base datos por eso en la línea 19 debes debes hace el split con ; 
+# libro = parse_params(linea.strip().split('; '))
+# Se puede usar if libro.autor.strip() == autor.strip(): para eliminar los espacios en blanco y saltos de línea del nombre del autor en el caso de hacer el split solo con [;]
 
 def imprimir_libros_por_anio(libros, anio_edicion):
-    print(f"Listado de libros editados en el año {anio_edicion}")
-    print("Título\tAutor\tAño Edición")
-    print("--------------------------------------------------")
+    print(f"Listado de libros editados en el año {anio_edicion}\n")
+
+    # Obtener el tamaño máximo de cada columna
+    titulo_max = max([len(libro.titulo) for libro in libros])
+    autor_max = max([len(libro.autor) for libro in libros])
+    anio_max = max([len(str(libro.anio_edicion)) for libro in libros])
+
+    # Imprimir la cabecera de la tabla
+    print(f"{'Título':<{titulo_max}} | {'Autor':<{autor_max}} | {'Año':<{anio_max}}")
+    print(f"{'-' * titulo_max}-|-{'-' * autor_max}-|-{'-' * anio_max}")
+    
+    # Imprimir cada libro
     for libro in libros:
         if libro.anio_edicion == anio_edicion:
-            print(f"{libro.titulo}\t{libro.autor}\t{libro.anio_edicion}")
+            print(f"{libro.titulo:<{titulo_max}} | {libro.autor:<{autor_max}} | {libro.anio_edicion:<{anio_max}}")
+
 
 
 def cambiar_tipo_lista(libros, tipo_lista):
