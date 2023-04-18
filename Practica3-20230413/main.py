@@ -2,10 +2,16 @@ import sys
 from classes import *
 from array_ordered_positional_list  import *
 from linked_ordered_positional_list import *
+from menu import *
 
 
+def leer_libros(path, tipo_lista):
 
-def leer_libros(path):
+    if tipo_lista == "a":
+        libros = ArrayOrderedPositionalList()
+
+    elif tipo_lista == "l":
+        libros = LinkedOrderedPositionalList()
 
     with open(path, 'r') as archivo:
         # Abrir el archivo de texto y leer cada línea
@@ -19,53 +25,10 @@ def leer_libros(path):
     return libros
 #TODO: Implement simulation here
 
-# Determinar la media de préstamos por libro que realiza el servicio de la biblioteca.
-def media_prestamos(libros):
-    suma_prestamos = 0
-    for libro in libros:
-        suma_prestamos += libro.prestamos_realizados
-    media = suma_prestamos / len(libros)
-    return media
-
-# Eliminar los libros con mismo título y autor, dejando la versión más reciente.
-def eliminar_duplicados(libros):
-    diccionario = {}
-
-    for libro in libros:
-        clave = (libro.titulo, libro.autor)
-        if clave not in diccionario:
-            diccionario[clave] = libro
-        else:
-            libro_existente = diccionario[clave]
-            if libro.anio_edicion > libro_existente.anio_edicion:
-                diccionario[clave] = libro
+def parse_params(params):
     
-    for libro in diccionario.values():
-        libros_sin_duplicados.add(libro)
-    return libros_sin_duplicados
-
-def imprimir_libros(libros):
-    print("Título\tAutor\tAño Edición")
-    print("--------------------------------------------------")
-    for libro in libros:
-        print(f"{libro.titulo}\t{libro.autor}\t{libro.anio_edicion}")
-
-def imprimir_libros_por_autor(libros, autor):
-    print(f"Listado de libros del autor {autor}")
-    print("Título\tAutor\tAño Edición")
-    print("--------------------------------------------------")
-    for libro in libros:
-        if libro.autor == autor:                                            # Se puede usar if libro.autor.strip() == autor.strip(): para eliminar los espacios en blanco y saltos de línea del nombre del autor en el caso de hacer el split solo con [;]
-            print(f"{libro.titulo}\t{libro.autor}\t{libro.anio_edicion}")   # Como se puede ver se útiliza [; ] para separar los campos en la base datos por eso en la línea 19 debes debes hace el split con ; 
-                                                                            # libro = parse_params(linea.strip().split('; '))
-
-def imprimir_libros_por_anio(libros, anio_edicion):
-    print(f"Listado de libros editados en el año {anio_edicion}")
-    print("Título\tAutor\tAño Edición")
-    print("--------------------------------------------------")
-    for libro in libros:
-        if libro.anio_edicion == anio_edicion:
-            print(f"{libro.titulo}\t{libro.autor}\t{libro.anio_edicion}")
+    titulo, autor, anio_edicion, prestamos_realizados = params[0], params[1], int(params[2]), int(params[3])
+    return Libro(titulo, autor, anio_edicion, prestamos_realizados)
 
 # Función para imprimir el menú
 def imprimir_menu():
@@ -98,8 +61,8 @@ def imprimir_submenu():
     print("\t|                                                             |")
     print("\t|-------------------------------------------------------------|\n")
 
-
-# Función que define las opciones del menú
+#_______________________________________________________________________________________________________________
+# Funciónes que definen las opciones de los submenús
 def opcion_cuatro():
     opciones = {
         '1. Todos los libros': lambda: imprimir_libros(libros),
@@ -114,13 +77,8 @@ def opcion_cuatro():
     seleccion = answer['opcion']
     funcion_seleccionada = opciones[seleccion]
     funcion_seleccionada()
-
-def configuracion():
-    global tipo_lista  # Necesitamos usar la variable global en esta función
-    opciones = {
-        '1. Cambiar tipo de lista de libros': lambda: cambiar_tipo_lista(),
-        '2. Volver al menú principal': lambda: None,
-    }
+#_______________________________________________________________________________________________________________
+def configuracion(libros, tipo_lista):
     questions = [
         {
             'type': 'list',
@@ -135,35 +93,13 @@ def configuracion():
     ]
     answer = prompt(questions, style=style)
     seleccion = answer['opcion']
-    funcion_seleccionada = opciones[seleccion]
-    funcion_seleccionada()
-
-def cambiar_tipo_lista():
-    global libros, tipo_lista  # Necesitamos usar las variables globales en esta función
-    while True:
-        tipo_lista = input("\t¿Que tipo de lista quieres, array o linked? [a/l]: ")
-        if tipo_lista == "a":
-            nueva_lista = ArrayOrderedPositionalList()
-            for libro in libros:
-                nueva_lista.add(libro)
-            libros = nueva_lista
-            return
-
-        elif tipo_lista == "l":
-            nueva_lista = LinkedOrderedPositionalList()
-            for libro in libros:
-                nueva_lista.add(libro)
-            libros = nueva_lista
-            return
-        else:
-            print("\t\033[1;31mOpción inválida. Por favor, selecciona [a/l].\033[0m")
-
-
-def parse_params(params):
-    
-    titulo, autor, anio_edicion, prestamos_realizados = params[0], params[1], int(params[2]), int(params[3])
-    return Libro(titulo, autor, anio_edicion, prestamos_realizados)
-
+    print(seleccion)
+    if seleccion == '1. Cambiar tipo de lista de libros':
+        libros, tipo_lista = cambiar_tipo_lista(libros, tipo_lista)
+        return libros, tipo_lista
+    else:
+        None
+#_______________________________________________________________________________________________________________
 
 if __name__ == "__main__":
     
@@ -171,21 +107,24 @@ if __name__ == "__main__":
     #--------------------------------------------------------------------------------------------------------------
 
     
-    print("\n-----------------------")
-    print("| Biblioteca XYZ      |")
-    print("-----------------------\n")
-    print("\033[1m¡Recuerda que puedes cambiar la base de datos de los libros con la opción número 1! (de normal se carga el archivo libros.txt)\033[0m")
-    print("\033[1m(De forma predeterminada se usa array_ordered_positional_list para almacenar los libros para cambiar su comportamiento ir a Configuración)\n\033[0m")
-    print("Ahora debes decidir el menú que deseas usar el 1 o el 2:")
-    print("El menú 1 está implementado con solo con python mientras que el 2 utiliza la libreria de PyInquirer:")
+    print("-----------------------")
+    print("| Biblioteca XYZ |")
+    print("-----------------------")
+    print("| \033[1m¡Recuerda que puedes cambiar la base de datos de los libros con la opción número 1! (de normal se carga el archivo libros.txt)\033[0m")
+    print("| \033[1m(De forma predeterminada se usa array_ordered_positional_list para almacenar los libros para cambiar su comportamiento ir a Configuración)\033[0m")
+    print("|")
+    print("| \x1b[1;30mHan sido implementados 2 menús, ahora debes decidir el Menú que deseas usar [1/2]\033[0m")
+    print("| \x1b[1;30mEl Menú 1 está implementado solo en Python mientras que el 2 utiliza la librería de PyInquirer por lo que deberá tenerla instalada:\033[0m")
+    print("| ")
+
     while True:
-        menu = input("Menú seleccionado: ")
+        menu = input("Menú seleccionado [1/2]: ")
         if menu=="1" or menu=="2":
             break
         else:
             # Opción inválida, mostrar mensaje de error
             print("")
-            print("\033[1;31mOpción inválida. Por favor, selecciona el menú 1 o 2.\033[0m")
+            print("\033[1;31mOpción inválida. Por favor, selecciona el Menú 1 o 2.\033[0m")
 
     # Crear una lista vacía para almacenar los libros
     libros = ArrayOrderedPositionalList()
@@ -193,7 +132,8 @@ if __name__ == "__main__":
     tipo_lista = "a"
     path = "libros.txt"
 
-    print(leer_libros(path))
+    libros= leer_libros(path, tipo_lista)
+    print(libros)
     print("\n")
     
 
@@ -204,38 +144,28 @@ if __name__ == "__main__":
             opcion = input("Opción seleccionada: ")
             
             if opcion == "1":
-                # Pedir al usuario que ingrese la ubicación del archivo
                 while True:
                     try:
                         path = input("Ingrese el nombre del archivo con su respectiva extensión (recuerda que la ubicación de la base de datos debe estár en el mismo directorio que el programa principal): ")
                         # Leer libros desde el archivo y almacenarlos en una lista
-                        if tipo_lista == "a":
-                            libros = ArrayOrderedPositionalList()
 
-                        elif tipo_lista == "l":
-                            libros = LinkedOrderedPositionalList()
-
-                        print(leer_libros(path))
+                        libros = leer_libros(path, tipo_lista)
+                        print(libros)
                         print([repr(libro) for libro in libros]) # print(list(libros))
                         print("Libros leídos correctamente.")
                         break # salir del bucle while si no hay excepciones
                     except FileNotFoundError:
                         print("\033[1;31mArchivo no encontrado. Por favor, inténtelo de nuevo.\033[0m")
+
                 
             elif opcion == "2":
                 # Determinar la media de préstamos por libro que realiza el servicio de la biblioteca.
                 print(media_prestamos(libros))
 
             elif opcion == "3":
-                if tipo_lista == "a":
-                    libros_sin_duplicados = ArrayOrderedPositionalList()
-
-                elif tipo_lista == "l":
-                    libros_sin_duplicados = LinkedOrderedPositionalList()
-            
                 # Eliminar los libros con mismo título y autor, dejando la versión más reciente.
-                print(eliminar_duplicados(libros))
-                libros = libros_sin_duplicados               # Cambia la lista de libros original por la que no tiene duplicados
+                libros = eliminar_duplicados(libros, tipo_lista)
+                print(libros)                                # Cambia la lista de libros original por la que no tiene duplicados
                 print([repr(libro) for libro in libros])     ### EL ERROR CREO QUE ES CULPA DE ESTA LISTA (SE AGREGAN MAS ELEMENTOS CUANTO MAS LO EJECUTES)
                 
 
@@ -273,31 +203,7 @@ if __name__ == "__main__":
                 break
 
             elif opcion == "6":
-                while True:
-                    cambiar = input("\t¿Quieres cambiar el tipo de lista con en el que se almacenan los libros? (De forma predeterminada se ejecutará con array_ordered_positional_list) [y/n]: ")
-                    if cambiar == "y":
-                        tipo_lista = input("\t¿Que tipo de lista quieres, array o linked? [a/l]: ")
-                        if tipo_lista == "a":
-
-                            nueva_lista = ArrayOrderedPositionalList()
-                            for libro in libros:
-                                nueva_lista.add(libro)
-                            libros = nueva_lista
-                            break
-
-                        elif tipo_lista == "l":
-
-                            nueva_lista = LinkedOrderedPositionalList()
-                            for libro in libros:
-                                nueva_lista.add(libro)
-                            libros = nueva_lista
-                            break
-                        
-                    elif cambiar == "n":
-                        break
-                    else:
-                        print("\t\033[1;31mOpción inválida. Por favor, selecciona [y/n].\033[0m")
-
+                libros, tipo_lista = cambiar_tipo_lista(libros, tipo_lista)
 
             else:
                 # Opción inválida, mostrar mensaje de error
@@ -356,34 +262,23 @@ if __name__ == "__main__":
                         try:
                             path = input("Ingrese el nombre del archivo con su respectiva extensión (recuerda que la ubicación de la base de datos debe estár en el mismo directorio que el programa principal): ")
                             # Leer libros desde el archivo y almacenarlos en una lista
-                            if tipo_lista == "a":
-                                libros = ArrayOrderedPositionalList()
 
-                            elif tipo_lista == "l":
-                                libros = LinkedOrderedPositionalList()
-
-                            print(leer_libros(path))
+                            libros = leer_libros(path, tipo_lista)
+                            print(libros)
                             print([repr(libro) for libro in libros]) # print(list(libros))
                             print("Libros leídos correctamente.")
                             break # salir del bucle while si no hay excepciones
                         except FileNotFoundError:
                             print("\033[1;31mArchivo no encontrado. Por favor, inténtelo de nuevo.\033[0m")
 
+
                 elif opcion_seleccionada == "2. Determinar media de préstamos por libro":
                     # Determinar la media de préstamos por libro que realiza el servicio de la biblioteca.
                     print(media_prestamos(libros))
                     
                 elif opcion_seleccionada == "3. Eliminar duplicados":
-
-                    if tipo_lista == "a":
-                        libros_sin_duplicados = ArrayOrderedPositionalList()
-
-                    elif tipo_lista == "l":
-                        libros_sin_duplicados = LinkedOrderedPositionalList()
-                
-                    # Eliminar los libros con mismo título y autor, dejando la versión más reciente.
-                    print(eliminar_duplicados(libros))
-                    libros = libros_sin_duplicados               # Cambia la lista de libros original por la que no tiene duplicados
+                    libros = eliminar_duplicados(libros, tipo_lista)
+                    print(libros)                                # Cambia la lista de libros original por la que no tiene duplicados
                     print([repr(libro) for libro in libros])     ### EL ERROR CREO QUE ES CULPA DE ESTA LISTA (SE AGREGAN MAS ELEMENTOS CUANTO MAS LO EJECUTES)
 
                 elif opcion_seleccionada == "4. Visualizar libros":
@@ -394,9 +289,12 @@ if __name__ == "__main__":
                     break
 
                 elif respuesta['opcion'] == '6. Configuración':
-                    configuracion()
+                    libros, tipo_lista = configuracion(libros, tipo_lista)
+
+            
             # El modulo da error si interactuas con las opciones o el separador con el raton. Detecta la opción que selecionas con el raton pero es incapaz de guardarla con la función prompt y te devuelve un diccionario vacio, yo soy incapaz de encontrar una forma de solucionarlo
             # https://github.com/CITGuru/PyInquirer/issues/57
+            
             except KeyError:
                 print("\033[1;31m¡Usa solo las flechas de dirección!\033[0m")
             except TypeError as e:
