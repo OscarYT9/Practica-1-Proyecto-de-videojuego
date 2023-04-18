@@ -70,7 +70,7 @@ def imprimir_libros_por_anio(libros, anio_edicion):
 # Función para imprimir el menú
 def imprimir_menu():
     print("\n--------------------------------------------------------")
-    print("|                MENÚ PRINCIPAL                        |")
+    print("|                  MENÚ PRINCIPAL                      |")
     print("--------------------------------------------------------")
     print("| Selecciona una opción:                               |")
     print("|                                                      |")
@@ -86,7 +86,7 @@ def imprimir_menu():
 # Función para imprimir el submenú
 def imprimir_submenu():
     print("\n\t---------------------------------------------------------------")
-    print("\t|                LISTADO DE LIBROS                            |")
+    print("\t|                    LISTADO DE LIBROS                        |")
     print("\t---------------------------------------------------------------")
     print("\t| Selecciona una opción:                                      |")
     print("\t|                                                             |")
@@ -178,7 +178,14 @@ if __name__ == "__main__":
     print("\033[1m(De forma predeterminada se usa array_ordered_positional_list para almacenar los libros para cambiar su comportamiento ir a Configuración)\n\033[0m")
     print("Ahora debes decidir el menú que deseas usar el 1 o el 2:")
     print("El menú 1 está implementado con solo con python mientras que el 2 utiliza la libreria de PyInquirer:")
-    menu = input("Menú seleccionado: ")
+    while True:
+        menu = input("Menú seleccionado: ")
+        if menu=="1" or menu=="2":
+            break
+        else:
+            # Opción inválida, mostrar mensaje de error
+            print("")
+            print("\033[1;31mOpción inválida. Por favor, selecciona el menú 1 o 2.\033[0m")
 
     # Crear una lista vacía para almacenar los libros
     libros = ArrayOrderedPositionalList()
@@ -302,6 +309,8 @@ if __name__ == "__main__":
 
     # Menú principal del programa 2
     elif menu == "2":
+        print("\033[1;31m¡IMPORTANTE!: Muevete con las flechas de dirección y selecciona una opción con ENTER\033[0m")
+        print("\033[1;31mde lo contrario el Menú podría dar errores (no afecta a los resultados obtenidos)\033[0m")
         from PyInquirer import prompt, style_from_dict, Token, Separator
 
         # Define el estilo de la interfaz de usuario
@@ -334,57 +343,69 @@ if __name__ == "__main__":
         ]
 
         while True:
-            # Mostrar el menú y obtener la opción seleccionada
-            respuesta = prompt(questions, style=style)
-            opcion_seleccionada = respuesta['opcion']
-            print(respuesta)
+            try:
+                # Mostrar el menú y obtener la opción seleccionada
+                respuesta = prompt(questions, style=style)
+                opcion_seleccionada = respuesta['opcion']
 
-            # Salir del programa si el usuario selecciona la opción "Salir"
+                # Salir del programa si el usuario selecciona la opción "Salir"
 
-            if opcion_seleccionada == "1. Cargar base de datos de libros":
-                # Pedir al usuario que ingrese la ubicación del archivo
-                while True:
-                    try:
-                        path = input("Ingrese el nombre del archivo con su respectiva extensión (recuerda que la ubicación de la base de datos debe estár en el mismo directorio que el programa principal): ")
-                        # Leer libros desde el archivo y almacenarlos en una lista
-                        if tipo_lista == "a":
-                            libros = ArrayOrderedPositionalList()
+                if opcion_seleccionada == "1. Cargar base de datos de libros":
+                    # Pedir al usuario que ingrese la ubicación del archivo
+                    while True:
+                        try:
+                            path = input("Ingrese el nombre del archivo con su respectiva extensión (recuerda que la ubicación de la base de datos debe estár en el mismo directorio que el programa principal): ")
+                            # Leer libros desde el archivo y almacenarlos en una lista
+                            if tipo_lista == "a":
+                                libros = ArrayOrderedPositionalList()
 
-                        elif tipo_lista == "l":
-                            libros = LinkedOrderedPositionalList()
+                            elif tipo_lista == "l":
+                                libros = LinkedOrderedPositionalList()
 
-                        print(leer_libros(path))
-                        print([repr(libro) for libro in libros]) # print(list(libros))
-                        print("Libros leídos correctamente.")
-                        break # salir del bucle while si no hay excepciones
-                    except FileNotFoundError:
-                        print("\033[1;31mArchivo no encontrado. Por favor, inténtelo de nuevo.\033[0m")
+                            print(leer_libros(path))
+                            print([repr(libro) for libro in libros]) # print(list(libros))
+                            print("Libros leídos correctamente.")
+                            break # salir del bucle while si no hay excepciones
+                        except FileNotFoundError:
+                            print("\033[1;31mArchivo no encontrado. Por favor, inténtelo de nuevo.\033[0m")
 
-            elif opcion_seleccionada == "2. Determinar media de préstamos por libro":
-                # Determinar la media de préstamos por libro que realiza el servicio de la biblioteca.
-                print(media_prestamos(libros))
+                elif opcion_seleccionada == "2. Determinar media de préstamos por libro":
+                    # Determinar la media de préstamos por libro que realiza el servicio de la biblioteca.
+                    print(media_prestamos(libros))
+                    
+                elif opcion_seleccionada == "3. Eliminar duplicados":
+
+                    if tipo_lista == "a":
+                        libros_sin_duplicados = ArrayOrderedPositionalList()
+
+                    elif tipo_lista == "l":
+                        libros_sin_duplicados = LinkedOrderedPositionalList()
                 
-            elif opcion_seleccionada == "3. Eliminar duplicados":
+                    # Eliminar los libros con mismo título y autor, dejando la versión más reciente.
+                    print(eliminar_duplicados(libros))
+                    libros = libros_sin_duplicados               # Cambia la lista de libros original por la que no tiene duplicados
+                    print([repr(libro) for libro in libros])     ### EL ERROR CREO QUE ES CULPA DE ESTA LISTA (SE AGREGAN MAS ELEMENTOS CUANTO MAS LO EJECUTES)
 
-                if tipo_lista == "a":
-                    libros_sin_duplicados = ArrayOrderedPositionalList()
+                elif opcion_seleccionada == "4. Visualizar libros":
+                    opcion_cuatro()
 
-                elif tipo_lista == "l":
-                    libros_sin_duplicados = LinkedOrderedPositionalList()
-            
-                # Eliminar los libros con mismo título y autor, dejando la versión más reciente.
-                print(eliminar_duplicados(libros))
-                libros = libros_sin_duplicados               # Cambia la lista de libros original por la que no tiene duplicados
-                print([repr(libro) for libro in libros])     ### EL ERROR CREO QUE ES CULPA DE ESTA LISTA (SE AGREGAN MAS ELEMENTOS CUANTO MAS LO EJECUTES)
+                elif opcion_seleccionada == "5. Salir":
+                    print("¡Hasta luego!")
+                    break
 
-            elif opcion_seleccionada == "4. Visualizar libros":
-                opcion_cuatro()
+                elif respuesta['opcion'] == '6. Configuración':
+                    configuracion()
+            # El modulo da error si interactuas con las opciones o el separador con el raton. Detecta la opción que selecionas con el raton pero es incapaz de guardarla con la función prompt y te devuelve un diccionario vacio, yo soy incapaz de encontrar una forma de solucionarlo
+            # https://github.com/CITGuru/PyInquirer/issues/57
+            except KeyError:
+                print("\033[1;31m¡Usa solo las flechas de dirección!\033[0m")
+            except TypeError as e:
+                error_msg = str(e)
+                if 'w keys)' in error_msg:
+                    error_msg = error_msg.split('w keys)')[0] + '!'
+                continue
+                print("\033[1;31m{}\033[0m".format(error_msg))
+                print("\033[1;31m¡Usa solo las flechas de dirección!\033[0m")
 
-            elif opcion_seleccionada == "5. Salir":
-                print("¡Hasta luego!")
-                break
 
-            elif respuesta['opcion'] == '6. Configuración':
-                configuracion()
-
-# EL PROGRAMA TIENE UN ERROR, si le das a Configuración (cambias a linked)> Eliminar libros duplicados >Determinar media de préstamos por libro comprobarás que da 8.375 cuando debería dar 8.5
+# EL PROGRAMA TIENE UN ERROR, si le das a Configuración (cambias a linked)> Eliminar libros duplicados >Determinar media de préstamos por libro comprobarás que da 8.375 cuando debería dar 8.5 (sola pasa en el primer menú)
