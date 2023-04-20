@@ -56,8 +56,9 @@ def imprimir_submenu():
     print("\t| 1. Listar todos los libros                          |")
     print("\t| 2. Listar libros de un autor determinado            |")
     print("\t| 3. Listar libros de un año determinado              |")
-    print("\t| 4. Cancelar y volver al menú principal              |")
-    print("\t| 5. Salir                                            |")
+    print("\t| 4. Listar libros por autor y año determinado        |")
+    print("\t| 5. Cancelar y volver al menú principal              |")
+    print("\t| 6. Salir                                            |")
     print("\t|                                                     |")
     print("\t|-----------------------------------------------------|\n")
 
@@ -108,20 +109,20 @@ if __name__ == "__main__":
 #--------------------------------------------------------------------------------------------------------------
 
     
-    print("      _____  _____   _____   ______  ______ _____  _____")
-    print("|       |   |_____] |_____/ |______ |_____/   |   |_____|")
-    print("|____ __|__ |_____] |    \_ |______ |    \_ __|__ |     |")
+    print("\033[31m      _____  _____   _____   ______  ______ _____  _____\033[0m")
+    print("\033[33m|       |   |_____] |_____/ |______ |_____/   |   |_____|\033[33m")
+    print("\033[31m|____ __|__ |_____] |    \_ |______ |    \_ __|__ |     |\033[0m")
     
-    print("|              .--.                   .---.             |")
-    print("|          .---|__|           .-.     |~~~|             |")
-    print("|       .--|===|--|_          |_|     |~~~|--.          |")
-    print("|       |  |===|  |'\     .---!~|  .--| P |--|          |")
-    print("|       |%%| I |  |.'\    |===| |--|%%| . |  |          |")
-    print("|       |%%| A |  |\.'\   | P | |__|  | 3 |  |          |")
-    print("|       |  | | |  | \  \  |===| |==|  | . |  |          |")
-    print("|       |  | | |__|  \.'\ | 2 |_|__|  |~~~|__|          |")
-    print("|       |  |===|--|   \.'\|===|~|--|%%|~~~|--|          |")
-    print("|       ^--^---'--^    `-'`---^-^--^--^---'--'          |") 
+    print("\033[31m|              .--.                   .---.             |\033[0m")
+    print("\033[31m|          .---|__|           .-.     |~~~|             |\033[0m")
+    print("\033[33m|       .--|===|--|_          |_|     |~~~|--.          |\033[0m")
+    print("\033[33m|       |  |===|  |'\     .---!~|  .--| P |--|          |\033[0m")
+    print("\033[33m|       |%%| I |  |.'\    |===| |--|%%| . |  |          |\033[0m")
+    print("\033[33m|       |%%| A |  |\.'\   | P | |__|  | 3 |  |          |\033[0m")
+    print("\033[33m|       |  | | |  | \  \  |===| |==|  | . |  |          |\033[0m")
+    print("\033[33m|       |  | | |__|  \.'\ | 2 |_|__|  |~~~|__|          |\033[0m")
+    print("\033[31m|       |  |===|--|   \.'\|===|~|--|%%|~~~|--|          |\033[0m")
+    print("\033[31m|       ^--^---'--^    `-'`---^-^--^--^---'--'          |\033[0m") 
     print("---------------------------------------------------------")
     print("| \033[1m¡Recuerda que puedes cambiar la base de datos de los libros con la opción número 1! (de normal se carga el archivo libros.txt)\033[0m")
     print("| \033[1m(De forma predeterminada se usa array_ordered_positional_list para almacenar los libros para cambiar su comportamiento ir a Configuración)\033[0m")
@@ -199,13 +200,20 @@ if __name__ == "__main__":
                         anio_edicion = int(input("¿De qué año deseas visualizar los libros?: "))
                         print("")
                         imprimir_libros_por_anio(libros, anio_edicion)
-
+                    
                     elif x == "4":
+                        autor = input("¿De qué autor deseas visualizar los libros? (Apellido, Nombre): ")
+                        anio_edicion = int(input("¿De qué año deseas visualizar los libros?: "))
+                        print("")
+                        
+                        
+
+                    elif x == "5":
                         # Salir al menú principal
                         print("")
                         break
                     
-                    elif x == "5":
+                    elif x == "6":
                         # Salir al menú principal
                         print("")
                         sys.exit()
@@ -220,6 +228,8 @@ if __name__ == "__main__":
 
             elif opcion == "6":
                 libros, tipo_lista = cambiar_tipo_lista(libros, tipo_lista)
+                print(libros)
+                print([repr(libro) for libro in libros])
 
             else:
                 # Opción inválida, mostrar mensaje de error
@@ -306,7 +316,6 @@ if __name__ == "__main__":
 
                 elif respuesta['opcion'] == '6. Configuración':
                     libros, tipo_lista = configuracion(libros, tipo_lista)
-
             
             # El modulo da error si interactuas con las opciones o el separador con el raton. Detecta la opción que selecionas con el raton pero es incapaz de guardarla con la función prompt y te devuelve un diccionario vacio, yo soy incapaz de encontrar una forma de solucionarlo
             # https://github.com/CITGuru/PyInquirer/issues/57

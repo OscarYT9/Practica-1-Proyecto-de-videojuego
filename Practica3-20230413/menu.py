@@ -18,6 +18,12 @@ def media_prestamos(libros):
 
 # Eliminar los libros con mismo título y autor, dejando la versión más reciente.
 def eliminar_duplicados(libros, tipo_lista):
+
+    if tipo_lista == "a":
+        libros_sin_duplicados = ArrayOrderedPositionalList()
+    elif tipo_lista == "l":
+        libros_sin_duplicados = LinkedOrderedPositionalList()
+
     diccionario = {}
 
     for libro in libros:
@@ -26,32 +32,17 @@ def eliminar_duplicados(libros, tipo_lista):
             diccionario[clave] = libro
         else:
             libro_existente = diccionario[clave]
-            if libro.anio_edicion > libro_existente.anio_edicion:
-                if libro_existente. prestamos_realizados <= libro. prestamos_realizados:
-                    del diccionario[clave]
+            if libro.anio_edicion == libro_existente.anio_edicion:
+                if libro.prestamos_realizados < libro_existente.prestamos_realizados:
                     diccionario[clave] = libro
-                else:
-                    pass
-            elif libro.anio_edicion == libro_existente.anio_edicion:
-                if libro. prestamos_realizados <= libro_existente. prestamos_realizados:
-                    pass
-                else:
-                    del diccionario[clave]
-                    diccionario[clave] = libro
-            else:
-                pass
-    
-    libros_sin_duplicados = None
-    if tipo_lista == "a":
-        libros_sin_duplicados = ArrayOrderedPositionalList()
-    elif tipo_lista == "l":
-        libros_sin_duplicados = LinkedOrderedPositionalList()
+            elif libro.anio_edicion > libro_existente.anio_edicion:
+                diccionario[clave] = libro
     
     for libro in diccionario.values():
         libros_sin_duplicados.add(libro)
-    
     return libros_sin_duplicados
 
+    
 # La definición de "Determinar la media de préstamos por libro que realiza el servicio de la biblioteca." está incompleta y surgen varias dudas.
 # Si un libro tiene el mismo título y autor, ¿cual se debe elminar?: ¿El que tenga menos prestamos? ¿El que aparezca primero en la lista?
 # Todo depende del caso, en mi caso he decido eliminar el que tenga menos prestamos, suponiendo que cuantos menos prestamos tenga más nuevo será el libro
@@ -111,6 +102,22 @@ def imprimir_libros_por_anio(libros, anio_edicion):
         if libro.anio_edicion == anio_edicion:
             print(f"{libro.titulo:<{titulo_max}} | {libro.autor:<{autor_max}} | {libro.anio_edicion:<{anio_max}}")
 
+def imprimir_libros_por_anio_autor(libro, autor, anio_edicion):
+    print("")
+    print(f"Listado de libros por autor y anio determinados")
+
+    # Obtener el tamaño máximo de cada columna
+    titulo_max = max([len(libro.titulo) for libro in libros])
+    autor_max = max([len(libro.autor) for libro in libros])
+    anio_max = max([len(str(libro.anio_edicion)) for libro in libros])
+
+    # Imprimir la cabecera de la tabla
+    print(f"{'Título':<{titulo_max}} | {'Autor':<{autor_max}} | {'Año':<{anio_max}}")
+    print(f"{'-' * titulo_max}-|-{'-' * autor_max}-|-{'-' * anio_max}")
+
+    for libro in libros:
+        if libro.autor == autor and libro.anio_edicion == anio:
+            print(f"{libro.titulo:<{titulo_max}} | {libro.autor:<{autor_max}} | {libro.anio_edicion:<{anio_max}}")
 
 
 def cambiar_tipo_lista(libros, tipo_lista):
