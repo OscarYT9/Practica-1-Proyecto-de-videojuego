@@ -6,6 +6,22 @@ from menu import *
 
 
 def leer_libros(path, tipo_lista):
+    """
+    Lee los libros desde un archivo de texto y los agrega a una lista ordenada.
+
+    Parameters
+    ----------
+    path : str
+        La ruta al archivo de texto que contiene la información de los libros.
+    tipo_lista : str
+        El tipo de lista ordenada que se utilizará para almacenar los libros. Debe ser "a" para
+        ArrayOrderedPositionalList o "l" para LinkedOrderedPositionalList.
+
+    Returns
+    -------
+    lista_ordenada : ArrayOrderedPositionalList o LinkedOrderedPositionalList
+        La lista ordenada que contiene los libros leídos del archivo de texto.
+    """
 
     if tipo_lista == "a":
         libros = ArrayOrderedPositionalList()
@@ -13,7 +29,7 @@ def leer_libros(path, tipo_lista):
     elif tipo_lista == "l":
         libros = LinkedOrderedPositionalList()
 
-    with open(path, 'r') as archivo:
+    with open(path) as archivo:
         # Abrir el archivo de texto y leer cada línea
         lineas = archivo.readlines()
         # Iterar sobre las líneas del archivo y agregar cada libro a la lista
@@ -26,7 +42,24 @@ def leer_libros(path, tipo_lista):
 #TODO: Implement simulation here
 
 def parse_params(params):
-    
+    """
+    Convierte una lista de parámetros en un objeto de tipo Libro.
+
+    Parameters
+    ----------
+    params : list
+        Una lista con cuatro elementos que representan los parámetros de un libro. Los elementos son:
+        - título (str)
+        - autor (str)
+        - año de edición (int)
+        - número de préstamos realizados (int)
+
+    Returns
+    -------
+    Libro
+        Un objeto de tipo Libro con los parámetros especificados en la lista.
+
+    """
     titulo, autor, anio_edicion, prestamos_realizados = params[0], params[1], int(params[2]), int(params[3])
     return Libro(titulo, autor, anio_edicion, prestamos_realizados)
 
@@ -65,6 +98,20 @@ def imprimir_submenu():
 #_______________________________________________________________________________________________________________
 # Funciónes que definen las opciones de los submenús
 def opcion_cuatro():
+    """
+    Ofrece opciones para visualizar los libros y ejecuta la opción seleccionada por el usuario.
+
+    Parameters
+    ----------
+    libros : ArrayOrderedPositionalList o LinkedOrderedPositionalList
+        Lista de libros ordenada.
+    tipo_lista : str
+        Tipo de lista utilizada para ordenar los libros.
+
+    Returns
+    -------
+    None
+    """
     opciones = {
         '1. Todos los libros': lambda: imprimir_libros(libros),
         '2. Libros de un autor': lambda: imprimir_libros_por_autor(libros, input("¿De qué autor deseas visualizar los libros?: ")),
@@ -81,6 +128,23 @@ def opcion_cuatro():
     print("")
 #_______________________________________________________________________________________________________________
 def configuracion(libros, tipo_lista):
+    """
+    Ofrece opciones de configuración y ejecuta la opción seleccionada por el usuario.
+
+    Parameters
+    ----------
+    libros : ArrayOrderedPositionalList o LinkedOrderedPositionalList
+        Lista de libros ordenada.
+    tipo_lista : str
+        Tipo de lista utilizada para ordenar los libros.
+
+    Returns
+    -------
+    libros : ArrayOrderedPositionalList o LinkedOrderedPositionalList
+        Lista de libros ordenada.
+    tipo_lista : str
+        Tipo de lista utilizada para ordenar los libros.
+    """
     questions = [
         {
             'type': 'list',
@@ -178,7 +242,7 @@ if __name__ == "__main__":
 
             elif opcion == "3":
                 # Eliminar los libros con mismo título y autor, dejando la versión más reciente.
-                libros = eliminar_duplicados(libros, tipo_lista)
+                libros = eliminar_duplicados(libros)
                 print(libros)                                # Cambia la lista de libros original por la que no tiene duplicados
                 print([repr(libro) for libro in libros])     ### EL ERROR CREO QUE ES CULPA DE ESTA LISTA (SE AGREGAN MAS ELEMENTOS CUANTO MAS LO EJECUTES)
                 
