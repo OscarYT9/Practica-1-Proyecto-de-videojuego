@@ -1,3 +1,5 @@
+# Nombre del archivo: funciones.py
+# Autores: Óscar Vilela Rodríguez (oscar.vilela.rodriguez@udc.es), Guillermo García Engelmo (g.garcia2@udc.es)
 from classes import *
 from array_ordered_positional_list  import *
 from linked_ordered_positional_list import *

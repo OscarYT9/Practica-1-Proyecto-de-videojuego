@@ -1,3 +1,5 @@
+# Nombre del archivo: classes.py
+# Autores: Óscar Vilela Rodríguez (oscar.vilela.rodriguez@udc.es), Guillermo García Engelmo (g.garcia2@udc.es)
 class Libro:
     """
     Clase que representa un libro.
@@ -162,16 +164,4 @@ class Libro:
         if isinstance(other, Libro):
             return (self.autor.lower(), self.titulo.lower(), self.anio_edicion) > (other.autor.lower(), other.titulo.lower(), other.anio_edicion)
         
-        return NotImplemented
-
-    def __le__(self, other):
-        if isinstance(other, Libro):
-                return (self.autor.lower(), self.titulo.lower(), self.anio_edicion) <= (other.autor.lower(), other.titulo.lower(), other.anio_edicion)
-            
-        return NotImplemented
-
-    def __lt__(self, other):
-        if isinstance(other, Libro):
-                return (self.autor.lower(), self.titulo.lower(), self.anio_edicion) < (other.autor.lower(), other.titulo.lower(), other.anio_edicion)
-            
         return NotImplemented

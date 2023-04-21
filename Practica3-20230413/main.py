@@ -1,3 +1,5 @@
+# Nombre del archivo: main.py
+# Autores: Óscar Vilela Rodríguez (oscar.vilela.rodriguez@udc.es), Guillermo García Engelmo (g.garcia2@udc.es)
 import sys
 from classes import *
 from array_ordered_positional_list  import *
