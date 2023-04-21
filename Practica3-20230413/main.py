@@ -64,6 +64,78 @@ def parse_params(params):
     return Libro(titulo, autor, anio_edicion, prestamos_realizados)
 
 #_______________________________________________________________________________________________________________
+def opcion_cuatro():
+    """
+    Ofrece opciones para visualizar los libros y ejecuta la opción seleccionada por el usuario.
+
+    Parameters
+    ----------
+    libros : ArrayOrderedPositionalList o LinkedOrderedPositionalList
+        Lista de libros ordenada.
+    tipo_lista : str
+        Tipo de lista utilizada para ordenar los libros.
+
+    Returns
+    -------
+    None
+    """
+    opciones = {
+        '1. Todos los libros': lambda: imprimir_libros(libros),
+        '2. Libros de un autor': lambda: imprimir_libros_por_autor(libros, input("¿De qué autor deseas visualizar los libros? (Apellido, Nombre): ")),
+        '3. Libros de un año de edición': lambda: imprimir_libros_por_anio(libros, int(input("¿De qué año deseas visualizar los libros?: ")) ),
+        '4. Listar libros por autor y año': lambda: imprimir_libros_por_anio_autor(libros, input("¿De qué autor deseas visualizar los libros? (Apellido, Nombre): "), int(input("¿De qué año deseas visualizar los libros?: "))),
+        '5. Volver al menú principal': lambda: None,
+    }
+    questions = [        {            'type': 'list',            'name': 'opcion',            'message': '¿Qué deseas visualizar por pantalla?',            'choices': [                '1. Todos los libros',                '2. Libros de un autor',                '3. Libros de un año de edición',       '4. Listar libros por autor y año',               Separator(),                '5. Volver al menú principal'            ]
+        }
+    ]
+    answer = prompt(questions, style=style)
+    seleccion = answer['opcion']
+    funcion_seleccionada = opciones[seleccion]
+    funcion_seleccionada()
+    print("")
+    
+#_______________________________________________________________________________________________________________
+def configuracion(libros, tipo_lista):
+    """
+    Ofrece opciones de configuración y ejecuta la opción seleccionada por el usuario.
+
+    Parameters
+    ----------
+    libros : ArrayOrderedPositionalList o LinkedOrderedPositionalList
+        Lista de libros ordenada.
+    tipo_lista : str
+        Tipo de lista utilizada para ordenar los libros.
+
+    Returns
+    -------
+    libros : ArrayOrderedPositionalList o LinkedOrderedPositionalList
+        Lista de libros ordenada.
+    tipo_lista : str
+        Tipo de lista utilizada para ordenar los libros.
+    """
+    questions = [
+        {
+            'type': 'list',
+            'name': 'opcion',
+            'message': 'Selecciona una opción:',
+            'choices': [
+                '1. Cambiar tipo de lista de libros',
+                Separator(),
+                '2. Volver al menú principal'
+            ]
+        }
+    ]
+    answer = prompt(questions, style=style)
+    seleccion = answer['opcion']
+    print(seleccion)
+    if seleccion == '1. Cambiar tipo de lista de libros':
+        libros, tipo_lista = cambiar_tipo_lista(libros, tipo_lista)
+        return libros, tipo_lista
+    else:
+        None
+
+#_______________________________________________________________________________________________________________
 
 if __name__ == "__main__":
     
@@ -259,7 +331,7 @@ if __name__ == "__main__":
                 elif opcion_seleccionada == "3. Eliminar duplicados":
                     libros = eliminar_duplicados(libros, tipo_lista)
                     print("Libros duplicados elminados correctamente.")
-                    
+
                 elif opcion_seleccionada == "4. Visualizar libros":
                     opcion_cuatro()
 
