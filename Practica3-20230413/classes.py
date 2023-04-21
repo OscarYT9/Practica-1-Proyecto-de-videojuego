@@ -111,6 +111,17 @@ class Libro:
         """
         return f"Libro('{self.titulo}', '{self.autor}', {self.anio_edicion}, {self.prestamos_realizados})"        
 
+    def __eq__(self, other):
+        """
+        Compara dos libros y devuelve True si tienen el mismo título, autor y año de edición.
+        De lo contrario, devuelve False.
+        """
+        if isinstance(other, Libro):
+            return (self.titulo == other.titulo and 
+                    self.autor == other.autor and 
+                    self.anio_edicion == other.anio_edicion)
+        return False
+
     def __ge__(self, other):
         """
         Compara dos objetos Libro por su autor, título y año de edición.
@@ -153,3 +164,14 @@ class Libro:
         
         return NotImplemented
 
+    def __le__(self, other):
+        if isinstance(other, Libro):
+                return (self.autor.lower(), self.titulo.lower(), self.anio_edicion) <= (other.autor.lower(), other.titulo.lower(), other.anio_edicion)
+            
+        return NotImplemented
+
+    def __lt__(self, other):
+        if isinstance(other, Libro):
+                return (self.autor.lower(), self.titulo.lower(), self.anio_edicion) < (other.autor.lower(), other.titulo.lower(), other.anio_edicion)
+            
+        return NotImplemented

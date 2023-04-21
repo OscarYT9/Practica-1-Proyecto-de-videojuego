@@ -2,7 +2,7 @@ import sys
 from classes import *
 from array_ordered_positional_list  import *
 from linked_ordered_positional_list import *
-from menu import *
+from funciones import *
 
 
 def leer_libros(path, tipo_lista):
@@ -63,108 +63,6 @@ def parse_params(params):
     titulo, autor, anio_edicion, prestamos_realizados = params[0], params[1], int(params[2]), int(params[3])
     return Libro(titulo, autor, anio_edicion, prestamos_realizados)
 
-# Función para imprimir el menú
-def imprimir_menu():
-    print("\n")
-    print("                | - MENÚ PRINCIPAL - |                  ")
-    print("--------------------------------------------------------")
-    print("| Selecciona una opción:                               |")
-    print("|                                                      |")
-    print("| 1. Leer libros desde un archivo                      |")
-    print("| 2. Determinar la media de préstamos por libro        |")
-    print("| 3. Eliminar libros duplicados                        |")
-    print("| 4. Visualizar listado de libros                      |")
-    print("| 5. Salir                                             |")
-    print("| 6. Configuración                                     |")
-    print("|                                                      |")
-    print("|------------------------------------------------------|\n")
-
-# Función para imprimir el submenú
-def imprimir_submenu():
-    print("\n")
-    print("\t              | - LISTADO DE LIBROS - |               ")
-    print("\t------------------------------------------------------")
-    print("\t| Selecciona una opción:                              |")
-    print("\t|                                                     |")
-    print("\t| 1. Listar todos los libros                          |")
-    print("\t| 2. Listar libros de un autor determinado            |")
-    print("\t| 3. Listar libros de un año determinado              |")
-    print("\t| 4. Listar libros por autor y año determinado        |")
-    print("\t| 5. Cancelar y volver al menú principal              |")
-    print("\t| 6. Salir                                            |")
-    print("\t|                                                     |")
-    print("\t|-----------------------------------------------------|\n")
-
-#_______________________________________________________________________________________________________________
-# Funciónes que definen las opciones de los submenús
-def opcion_cuatro():
-    """
-    Ofrece opciones para visualizar los libros y ejecuta la opción seleccionada por el usuario.
-
-    Parameters
-    ----------
-    libros : ArrayOrderedPositionalList o LinkedOrderedPositionalList
-        Lista de libros ordenada.
-    tipo_lista : str
-        Tipo de lista utilizada para ordenar los libros.
-
-    Returns
-    -------
-    None
-    """
-    opciones = {
-        '1. Todos los libros': lambda: imprimir_libros(libros),
-        '2. Libros de un autor': lambda: imprimir_libros_por_autor(libros, input("¿De qué autor deseas visualizar los libros?: ")),
-        '3. Libros de un año de edición': lambda: imprimir_libros_por_anio(libros, int(input("¿De qué año deseas visualizar los libros?: ")) ),
-        '4. Volver al menú principal': lambda: None,
-    }
-    questions = [        {            'type': 'list',            'name': 'opcion',            'message': '¿Qué deseas visualizar por pantalla?',            'choices': [                '1. Todos los libros',                '2. Libros de un autor',                '3. Libros de un año de edición',                Separator(),                '4. Volver al menú principal'            ]
-        }
-    ]
-    answer = prompt(questions, style=style)
-    seleccion = answer['opcion']
-    funcion_seleccionada = opciones[seleccion]
-    funcion_seleccionada()
-    print("")
-#_______________________________________________________________________________________________________________
-def configuracion(libros, tipo_lista):
-    """
-    Ofrece opciones de configuración y ejecuta la opción seleccionada por el usuario.
-
-    Parameters
-    ----------
-    libros : ArrayOrderedPositionalList o LinkedOrderedPositionalList
-        Lista de libros ordenada.
-    tipo_lista : str
-        Tipo de lista utilizada para ordenar los libros.
-
-    Returns
-    -------
-    libros : ArrayOrderedPositionalList o LinkedOrderedPositionalList
-        Lista de libros ordenada.
-    tipo_lista : str
-        Tipo de lista utilizada para ordenar los libros.
-    """
-    questions = [
-        {
-            'type': 'list',
-            'name': 'opcion',
-            'message': 'Selecciona una opción:',
-            'choices': [
-                '1. Cambiar tipo de lista de libros',
-                Separator(),
-                '2. Volver al menú principal'
-            ]
-        }
-    ]
-    answer = prompt(questions, style=style)
-    seleccion = answer['opcion']
-    print(seleccion)
-    if seleccion == '1. Cambiar tipo de lista de libros':
-        libros, tipo_lista = cambiar_tipo_lista(libros, tipo_lista)
-        return libros, tipo_lista
-    else:
-        None
 #_______________________________________________________________________________________________________________
 
 if __name__ == "__main__":
@@ -204,7 +102,7 @@ if __name__ == "__main__":
             print("")
             print("\033[1;31mOpción inválida. Por favor, selecciona el Menú 1 o 2.\033[0m")
 
-    # Crear una lista vacía para almacenar los libros
+    # Crear una lista vacía para almacenar los libros y definir el tipo de lista
     libros = ArrayOrderedPositionalList()
     libros_sin_duplicados = ArrayOrderedPositionalList()
     tipo_lista = "a"
@@ -228,8 +126,6 @@ if __name__ == "__main__":
                         # Leer libros desde el archivo y almacenarlos en una lista
 
                         libros = leer_libros(path, tipo_lista)
-                        print(libros)
-                        print([repr(libro) for libro in libros]) # print(list(libros))
                         print("Libros leídos correctamente.")
                         break # salir del bucle while si no hay excepciones
                     except FileNotFoundError:
@@ -238,13 +134,12 @@ if __name__ == "__main__":
                 
             elif opcion == "2":
                 # Determinar la media de préstamos por libro que realiza el servicio de la biblioteca.
-                print(media_prestamos(libros))
+                print("Media: ",media_prestamos(libros))
 
             elif opcion == "3":
                 # Eliminar los libros con mismo título y autor, dejando la versión más reciente.
-                libros = eliminar_duplicados(libros)
-                print(libros)                                # Cambia la lista de libros original por la que no tiene duplicados
-                print([repr(libro) for libro in libros])     ### EL ERROR CREO QUE ES CULPA DE ESTA LISTA (SE AGREGAN MAS ELEMENTOS CUANTO MAS LO EJECUTES)
+                libros = eliminar_duplicados(libros, tipo_lista)
+                print("Libros duplicados elminados correctamente.")
                 
 
             elif opcion == "4":
@@ -268,9 +163,8 @@ if __name__ == "__main__":
                     elif x == "4":
                         autor = input("¿De qué autor deseas visualizar los libros? (Apellido, Nombre): ")
                         anio_edicion = int(input("¿De qué año deseas visualizar los libros?: "))
-                        print("")
-                        
-                        
+                        imprimir_libros_por_anio_autor(libros, autor, anio_edicion)
+                        print("")                             
 
                     elif x == "5":
                         # Salir al menú principal
@@ -292,8 +186,6 @@ if __name__ == "__main__":
 
             elif opcion == "6":
                 libros, tipo_lista = cambiar_tipo_lista(libros, tipo_lista)
-                print(libros)
-                print([repr(libro) for libro in libros])
 
             else:
                 # Opción inválida, mostrar mensaje de error
@@ -354,8 +246,6 @@ if __name__ == "__main__":
                             # Leer libros desde el archivo y almacenarlos en una lista
 
                             libros = leer_libros(path, tipo_lista)
-                            print(libros)
-                            print([repr(libro) for libro in libros]) # print(list(libros))
                             print("Libros leídos correctamente.")
                             break # salir del bucle while si no hay excepciones
                         except FileNotFoundError:
@@ -364,13 +254,12 @@ if __name__ == "__main__":
 
                 elif opcion_seleccionada == "2. Determinar media de préstamos por libro":
                     # Determinar la media de préstamos por libro que realiza el servicio de la biblioteca.
-                    print(media_prestamos(libros))
+                    print("Media: ",media_prestamos(libros))
                     
                 elif opcion_seleccionada == "3. Eliminar duplicados":
                     libros = eliminar_duplicados(libros, tipo_lista)
-                    print(libros)                                # Cambia la lista de libros original por la que no tiene duplicados
-                    print([repr(libro) for libro in libros])     ### EL ERROR CREO QUE ES CULPA DE ESTA LISTA (SE AGREGAN MAS ELEMENTOS CUANTO MAS LO EJECUTES)
-
+                    print("Libros duplicados elminados correctamente.")
+                    
                 elif opcion_seleccionada == "4. Visualizar libros":
                     opcion_cuatro()
 
@@ -381,7 +270,7 @@ if __name__ == "__main__":
                 elif respuesta['opcion'] == '6. Configuración':
                     libros, tipo_lista = configuracion(libros, tipo_lista)
             
-            # El modulo da error si interactuas con las opciones o el separador con el raton. Detecta la opción que selecionas con el raton pero es incapaz de guardarla con la función prompt y te devuelve un diccionario vacio, yo soy incapaz de encontrar una forma de solucionarlo
+            # El modulo da error si interactuas con las opciones o el separador con el raton (devuelve un diccionario vacio).
             # https://github.com/CITGuru/PyInquirer/issues/57
             
             except KeyError:
@@ -391,8 +280,3 @@ if __name__ == "__main__":
                 if 'w keys)' in error_msg:
                     error_msg = error_msg.split('w keys)')[0] + '!'
                 continue
-                print("\033[1;31m{}\033[0m".format(error_msg))
-                print("\033[1;31m¡Usa solo las flechas de dirección!\033[0m")
-
-
-# EL PROGRAMA TIENE UN ERROR, si le das a Configuración (cambias a linked)> Eliminar libros duplicados >Determinar media de préstamos por libro comprobarás que da 8.375 cuando debería dar 8.5 (sola pasa en el primer menú)
