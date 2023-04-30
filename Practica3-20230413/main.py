@@ -213,7 +213,7 @@ if __name__ == "__main__":
             elif opcion == "3":
                 # Eliminar los libros con mismo título y autor, dejando la versión más reciente.
                 libros = eliminar_duplicados(libros, tipo_lista)
-                print("Libros duplicados elminados correctamente.")
+                print("Libros duplicados eliminados correctamente.")
                 
 
             elif opcion == "4":
@@ -332,7 +332,7 @@ if __name__ == "__main__":
                     
                 elif opcion_seleccionada == "3. Eliminar duplicados":
                     libros = eliminar_duplicados(libros, tipo_lista)
-                    print("Libros duplicados elminados correctamente.")
+                    print("Libros duplicados eliminados correctamente.")
 
                 elif opcion_seleccionada == "4. Visualizar libros":
                     opcion_cuatro()
