@@ -11,7 +11,7 @@ def sumar_actividades(avl_tree_1, avl_tree_2):
 
         if actividad not in avl_tree_3:
             if actividad in avl_tree_2:
-                if avl_tree_1[actividad].get_total_price() < avl_tree_2[actividad].get_total_price():
+                if (avl_tree_1[actividad].get_total_price() / avl_tree_1[actividad].get_participation() / avl_tree_1[actividad].get_duration()) < (avl_tree_2[actividad].get_total_price() / avl_tree_2[actividad].get_participation() / avl_tree_2[actividad].get_duration()):
                     avl_tree_3[actividad] = avl_tree_1[actividad]
                 else:
                     avl_tree_3[actividad] = avl_tree_2[actividad]
@@ -20,7 +20,7 @@ def sumar_actividades(avl_tree_1, avl_tree_2):
 
         else:
             if actividad in avl_tree_2:
-                if avl_tree_1[actividad].get_total_price() < avl_tree_2[actividad].get_total_price():
+                if (avl_tree_1[actividad].get_total_price() / avl_tree_1[actividad].get_participation() / avl_tree_1[actividad].get_duration()) < (avl_tree_2[actividad].get_total_price() / avl_tree_2[actividad].get_participation() / avl_tree_2[actividad].get_duration()):
                     avl_tree_3[actividad] = avl_tree_1[actividad]
                 else:
                     avl_tree_3[actividad] = avl_tree_2[actividad]
@@ -37,7 +37,7 @@ def oferta_minima_comun(avl_tree_1, avl_tree_2):
     avl_tree_3 = AVL()
     for actividad in avl_tree_1:
         if actividad in avl_tree_2:
-            if avl_tree_1[actividad].get_total_price() < avl_tree_2[actividad].get_total_price():
+            if (avl_tree_1[actividad].get_total_price() / avl_tree_1[actividad].get_participation() / avl_tree_1[actividad].get_duration()) < (avl_tree_2[actividad].get_total_price() / avl_tree_2[actividad].get_participation() / avl_tree_2[actividad].get_duration()):
                 avl_tree_3[actividad] = avl_tree_1[actividad]
             else:
                 avl_tree_3[actividad] = avl_tree_2[actividad]
