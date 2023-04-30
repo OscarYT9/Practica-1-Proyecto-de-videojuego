@@ -23,11 +23,12 @@ class Actividad:
     def set_participation(self, participation):
         self.participation = participation
     
-    def get_total_price(self,total_price):
-        return total_price
+    def get_total_price(self):
+        return self.total_price
     
     def set_total_price(self, total_price):
         self.total_price = total_price
         
-
+    def __str__(self):
+        return f" {self.name} ({self.duration} min, {self.participation} participantes, ${self.total_price})"
 

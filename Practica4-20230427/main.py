@@ -1,8 +1,24 @@
-from ABBs_posicionales.avl_tree import *
+import sys
+sys.path.append('/project/home/oscaryt9/workspace/Practica4-20230427/ABBs_posicionales')
+from ABBs_posicionales import *
+
+def preorder_indent_BST(T, p, d):
+    """Print preorder representation of a binary subtree of T rooted at p at depth d.
+        To print aTree completely call preorder_indent_BST(aTree, aTree.root(), 0)"""
+    if p is not None:
+        # use depth for indentation
+        print(2*d*' ' + "(" + str(p.key()) + "," +  str(p.value()) + ")") 
+        preorder_indent_BST(T, T.left(p), d+1) # left child depth is d+1
+        preorder_indent_BST(T, T.right(p), d+1) # right child depth is d+1
+
+
+
 from classes import *
 from funciones import *
 avl_tree_1 = AVL()
+print("Árbol vacío"); preorder_indent_BST(avl_tree_1,avl_tree_1.root(),0)
 avl_tree_2 = AVL()
+print("Árbol vacío"); preorder_indent_BST(avl_tree_2,avl_tree_2.root(),0)
 
 
 def leer_actividades(path, arbol):
@@ -44,17 +60,27 @@ if __name__ == "__main__":
 
     # Leer las actividades del archivo A y almacenarlas en el árbol 1
     leer_actividades("actividadesA.txt", avl_tree_1)
-
+    preorder_indent_BST(avl_tree_1,avl_tree_1.root(),0)
+    print("")
     # Leer las actividades del archivo B y almacenarlas en el árbol 2
     leer_actividades("actividadesB.txt", avl_tree_2)
-        
-    print(avl_tree_1)
-    print(avl_tree_2)
+    preorder_indent_BST(avl_tree_2,avl_tree_2.root(),0)
+
     #for actividad in avl_tree_1:
         #print(actividad)
     #for actividad in avl_tree_2:
         #print(actividad)
-    sumar_actividades(avl_tree_1,avl_tree_2)
-    oferta_comun(avl_tree_1,avl_tree_2)
-    print(avl_tree_3)
-    print(avl_tree_4)
+    print("")
+    avl_tree_3 = sumar_actividades(avl_tree_1,avl_tree_2)
+    preorder_indent_BST(avl_tree_3,avl_tree_3.root(),0)
+
+    for actividad in avl_tree_3:
+        print(actividad, avl_tree_3[actividad].total_price)
+
+    print("")
+
+    avl_tree_4 = oferta_minima_comun(avl_tree_1,avl_tree_2)
+    preorder_indent_BST(avl_tree_4, avl_tree_4.root(),0)
+
+    for actividad in avl_tree_4:
+        print(actividad, avl_tree_4[actividad].total_price)
