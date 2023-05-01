@@ -30,5 +30,5 @@ class Actividad:
         self.total_price = total_price
         
     def __str__(self):
-        return f" {self.name} ({self.duration} min, {self.participation} participantes, ${self.total_price})"
+        return f"({self.duration} min, {self.participation} participantes, ${self.total_price})"
 

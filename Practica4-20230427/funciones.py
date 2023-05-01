@@ -64,7 +64,7 @@ def _print_tree(T, node, height, indent):
             print('\033[1;34m└── \033[0m', end='')  # Color azul para el nivel actual
         else:
             print('\033[1;34m└── \033[0m', end='')  # Color azul para el nivel actual
-        print('\033[1;3{0}m{1}:{2}\033[0m'.format(height % 6 + 1, node.key(), node.value()))
+        print('\033[1;3{0}m{1}\033[0m'.format(height % 6 + 1, node.key()),' \033[2;50;1m\033[0.1m{0}\033[0m'.format(node.value()))
 
         # Imprimir los subárboles izquierdo y derecho con una indentación adicional y un nivel de color diferente
         _print_tree(T, T.left(node), height - 1, indent + 1)
@@ -95,5 +95,5 @@ def _print_tree2(T, node, height, indent, child):
             print('         ' * indent, end='')
             print("\033[34m   ┌────\033[0m",'\033[1;3{0}m{1}\033[0m'.format(height % 6 + 1, node.key()), end='')
         
-        print(':{0}'.format(node.value()))
+        print(' \033[2;50;1m\033[0.1m{0}\033[0m'.format(node.value()))
         _print_tree2(T, T.left(node), height - 1, indent + 1, True)
