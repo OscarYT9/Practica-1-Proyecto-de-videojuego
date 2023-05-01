@@ -12,7 +12,6 @@ def preorder_indent_BST(T, p, d):
         preorder_indent_BST(T, T.right(p), d+1) # right child depth is d+1
 
 
-
 from classes import *
 from funciones import *
 avl_tree_1 = AVL()
@@ -84,3 +83,36 @@ if __name__ == "__main__":
 
     for actividad in avl_tree_4:
         print(actividad, avl_tree_4[actividad].total_price)
+
+    from treelib import Node, Tree
+
+    def preorder_tree_BST(T, p, tree, parent=None):
+        """Add preorder representation of a binary subtree of T rooted at p to tree"""
+        if p is not None:
+            if parent is None:
+                node_id = str(p.key()) + ", " + str(p.value())
+                tree.create_node(tag=node_id, identifier=node_id)
+            else:
+                node_id = str(p.key()) + ", " + str(p.value())
+                tree.create_node(tag=node_id, identifier=node_id, parent=parent)
+            preorder_tree_BST(T, T.left(p), tree, parent=node_id)
+            preorder_tree_BST(T, T.right(p), tree, parent=node_id)
+
+    # Construir un objeto Tree de treelib y añadir el nodo raíz
+    avl_tree_interactive = Tree()
+    avl_tree_interactive.create_node(tag="root", identifier="root")
+
+    # Añadir los nodos del árbol de búsqueda binaria AVL
+    preorder_tree_BST(avl_tree_1, avl_tree_1.root(), avl_tree_interactive, parent="root")
+
+    # Mostrar el árbol de búsqueda binaria AVL de forma interactiva
+    avl_tree_interactive.show()
+
+    import plotly.graph_objects as go
+
+    fig = go.Figure(go.Treemap(
+        labels = ["root", "karaoke", "combate con churros de gomaespuma", "cine", "gimnasia", "fotografía", "senderismo", "pintura", "yoga", "teatro"],
+        parents = ["", "root", "karaoke", "combate con churros de gomaespuma", "combate con churros de gomaespuma", "karaoke", "root", "senderismo", "senderismo", "yoga"],
+    ))
+
+    fig.show()
