@@ -84,29 +84,57 @@ if __name__ == "__main__":
     for actividad in avl_tree_4:
         print(actividad, avl_tree_4[actividad].total_price)
 
+
+    def print_tree(T):
+        # Obtener la altura del árbol
+        height = T.height()
+
+        # Imprimir el árbol en orden preorden con indentación
+        _print_tree(T, T.root(), height, 0)
+
+
+    def _print_tree(T, node, height, indent):
+        if node is None:
+            return
+        else:
+            # Imprimir el nodo con su respectiva indentación
+            print('      ' * indent, end='')
+            if T.left(node) is not None or T.right(node) is not None:
+                print('\033[1;34m└── \033[0m', end='')  # Color azul para el nivel actual
+            else:
+                print('\033[1;34m└── \033[0m', end='')  # Color azul para el nivel actual
+            print('\033[1;3{0}m{1}:{2}\033[0m'.format(height % 6 + 1, node.key(), node.value()))
+
+            # Imprimir los subárboles izquierdo y derecho con una indentación adicional y un nivel de color diferente
+            _print_tree(T, T.left(node), height - 1, indent + 1)
+            _print_tree(T, T.right(node), height - 1, indent + 1)
+
+
+    print_tree(avl_tree_2)
+
+    print("___________________________________________________________________________________________________________________________________________________")
     from treelib import Node, Tree
 
     def preorder_tree_BST(T, p, tree, parent=None):
         """Add preorder representation of a binary subtree of T rooted at p to tree"""
         if p is not None:
-            if parent is None:
-                node_id = str(p.key()) + ", " + str(p.value())
-                tree.create_node(tag=node_id, identifier=node_id)
-            else:
-                node_id = str(p.key()) + ", " + str(p.value())
+            node_id = str(p.key()) + ", " + str(p.value())
+            if parent is not None:
                 tree.create_node(tag=node_id, identifier=node_id, parent=parent)
+            else:
+                tree.create_node(tag=node_id, identifier=node_id)
             preorder_tree_BST(T, T.left(p), tree, parent=node_id)
             preorder_tree_BST(T, T.right(p), tree, parent=node_id)
 
     # Construir un objeto Tree de treelib y añadir el nodo raíz
     avl_tree_interactive = Tree()
-    avl_tree_interactive.create_node(tag="root", identifier="root")
 
     # Añadir los nodos del árbol de búsqueda binaria AVL
-    preorder_tree_BST(avl_tree_1, avl_tree_1.root(), avl_tree_interactive, parent="root")
+    preorder_tree_BST(avl_tree_1, avl_tree_1.root(), avl_tree_interactive)
 
     # Mostrar el árbol de búsqueda binaria AVL de forma interactiva
     avl_tree_interactive.show()
+
 
     import plotly.graph_objects as go
 
