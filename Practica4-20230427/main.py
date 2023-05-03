@@ -14,7 +14,6 @@ def preorder_indent_BST(T, p, d):
         preorder_indent_BST(T, T.right(p), d+1) # right child depth is d+1
 
 
-
 # Creamos los arboles de las empresas A y B
 avl_tree_1 = AVL()
 # Generamos el arbol vacio A
