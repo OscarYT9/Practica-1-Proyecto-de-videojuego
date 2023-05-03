@@ -45,12 +45,13 @@ preorder_indent_BST(avl_tree_2,avl_tree_2.root(),0)
 #_____________________________________________________________________________________________________________________________________
 
 if __name__ == "__main__":
-    
+    # Preguntamos al usuario si quiere añadir sus propios archivos
     check = input("Desea añadir sus propios archivos? (si no lo hace se cargarán los archivos predeterminados)\n [y/n]: ")
     while check != "y" and check != "n":
         check = input("\033[1;31m Valor incorrecto. Por favor, elija [y/n]: \033[0m")
     print("")
 
+    # Leemos las actividades A , B y las volcamos en los arboles correspondientes
     while True:
         try:
             if check =="n":
@@ -58,13 +59,13 @@ if __name__ == "__main__":
                 read_activities("actividadesB.txt", avl_tree_2)
                 break
             else:
-                actividadesA = input("Nombre del archivo de las actividades A (archivoA.txt): ")
+                activitiesA = input("Nombre del archivo de las actividades A (archivoA.txt): ")
                 # Leer las actividades del archivo A y almacenarlas en el árbol 1
-                read_activities(actividadesA, avl_tree_1)
+                read_activities(activitiesA, avl_tree_1)
 
-                actividadesB = input("Nomrbre del archivo de las actividades B (archivoB.txt): ")
+                activitiesB = input("Nomrbre del archivo de las actividades B (archivoB.txt): ")
                 # Leer las actividades del archivo B y almacenarlas en el árbol 2
-                read_activities(actividadesB, avl_tree_2)
+                read_activities(activitiesB, avl_tree_2)
                 print("")
                 break
         except FileNotFoundError:
