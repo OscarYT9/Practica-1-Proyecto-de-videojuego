@@ -17,44 +17,47 @@ def preorder_indent_BST(T, p, d):
 
 # Creamos los arboles de las empresas A y B
 avl_tree_1 = AVL()
+# Generamos el arbol vacio A
 preorder_indent_BST(avl_tree_1,avl_tree_1.root(),0)
 avl_tree_2 = AVL()
+# Generamos el arbol vacio B
 preorder_indent_BST(avl_tree_2,avl_tree_2.root(),0)
 
 
-def leer_actividades(path, arbol):
+def read_activities(path, tree):
 
-    with open(path) as archivo:
+    with open(path) as archive:
         # Abrir el archivo de texto y leer cada línea
-        lineas = archivo.readlines()
-        # Iterar sobre las líneas del archivo y agregar cada libro a la lista
-        for linea in range(1, len(lineas)):
+        lines = archive.readlines()
+        # Iterar sobre las líneas del archivo y agregar cada actividad al arbol
+        for line in range(1, len(lines)):
             # Dividir la línea en tres partes: título, autor y año de edición
-            actividad = parse_params(lineas[linea].strip().split(';'))
+            activity = parse_params(lines[line].strip().split(';'))
             # Agregar el libro a la lista, ordenando por autor, título y año de edición
-            arbol[actividad.get_name()] = actividad
+            tree[activity.get_name()] = activity
 
 #TODO: Implement simulation here
 
 def parse_params(params):
     
     name, duration, participation, total_price = params[0], int(params[1]), int(params[2]), float(params[3])
-    return Actividad(name, duration, participation, total_price)
+    cost = total_price/participation/duration
+    return Activity(name, duration, participation, total_price, cost)
 
 
 if __name__ == "__main__":
 
     # Leer las actividades del archivo A y almacenarlas en el árbol 1
-    leer_actividades("actividadesA.txt", avl_tree_1)
+    read_activities("actividadesA.txt", avl_tree_1)
 
     # Leer las actividades del archivo B y almacenarlas en el árbol 2
-    leer_actividades("actividadesB.txt", avl_tree_2)
+    read_activities("actividadesB.txt", avl_tree_2)
 
     # Función sumar actividades
-    avl_tree_3 = sumar_actividades(avl_tree_1,avl_tree_2)
+    avl_tree_3 = add_activities(avl_tree_1,avl_tree_2)
 
     # Función oferta minima comun
-    avl_tree_4 = oferta_minima_comun(avl_tree_1,avl_tree_2)
+    avl_tree_4 = offer_minim_common(avl_tree_1,avl_tree_2)
 
     x = input("Elige la forma de imprimir el arbol AVL:\n 1. Como lista desplegable \n 2. Como arbol binario \n [1/2]: ")
     print("")
@@ -88,7 +91,11 @@ if __name__ == "__main__":
 
 
     print("___________________________________________________________________________________________________________________________________________________")
-        #__getitem__ (pej.print(tree[1]))
+
+
+    print() 
+     
+    #__getitem__ (pej.print(tree[1]))
     #__setitem__(pej.tree[1]="A")
     #__delitem__(del tree[1])
     #__iter__(for in in s)

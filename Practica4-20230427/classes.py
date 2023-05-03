@@ -1,9 +1,10 @@
-class Actividad:
-    def __init__(self, name, duration, participation, total_price):
+class Activity:
+    def __init__(self, name, duration, participation, total_price, cost):
         self.name =name
         self.duration = duration
         self.participation = participation
         self.total_price = total_price
+        self.cost = cost
 
     def get_name(self):
         return self.name
@@ -28,6 +29,12 @@ class Actividad:
     
     def set_total_price(self, total_price):
         self.total_price = total_price
+    
+    def get_cost(self):
+        return self.cost
+    
+    def set_cost(self, cost):
+        self.cost = cost
         
     def __str__(self):
         return f"({self.duration} min, {self.participation} participantes, ${self.total_price})"
