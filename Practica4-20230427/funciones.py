@@ -4,9 +4,10 @@ from ABBs_posicionales.avl_tree import *
 from classes import *
 
 
-#Función eliminar duplicados y dejar la actividad con menor coste
-#Función sumar actividades
-#Recorre el arbol(A) y el arbol(B) y devuelve las actividades que al menos esten en una de las empresas, llama a la funcion eliminar duplicados y almacena las actividades resultantes en un arbol C
+# Función eliminar duplicados y dejar la actividad con menor coste
+# Función sumar actividades
+# Recorre el arbol(A) y el arbol(B) y devuelve las actividades que al menos esten en una de las empresas, llama a la funcion offer_minim_common y almacena las actividades resultantes en un arbol C
+# Es decir, las empresas comunes y no comunes
 def add_activities(avl_tree_1, avl_tree_2):
     avl_tree_3 = offer_minim_common(avl_tree_1, avl_tree_2)
 
@@ -20,8 +21,9 @@ def add_activities(avl_tree_1, avl_tree_2):
 
     return avl_tree_3
 
-#Función oferta mínima común
-#Recorre el arbol(A) y el arbol(B) y devuelve las actividades que esten en ambas empresas y llama a la funcion eliminar duplicados y almacena las actividades resultantes en un arbol D
+# Función oferta mínima común
+# Recorre el arbol(A) y el arbol(B) y devuelve las actividades que esten en ambas empresas y llama a la funcion eliminar duplicados y almacena las actividades resultantes en un arbol D
+# Es decir, las empresas comunes
 def offer_minim_common(avl_tree_1, avl_tree_2):
     avl_tree_3 = AVL()
     for activity in avl_tree_1:
@@ -73,15 +75,20 @@ def _print_tree2(T, node, height, indent, child):
         return
     else:
         # Imprimir los subárboles derecho e izquierdo con una indentación adicional
+        # Imprime el nodo hijo derecho con valor de child False (se usa en el bucle para identificar el nodo)
         _print_tree2(T, T.right(node), height - 1, indent + 1, False)
         
         # Cambiar el símbolo según si el nodo es un hijo izquierdo o derecho
         if child:
             print('         ' * indent, end='')
             print("\033[34m   └────\033[0m",'\033[1;3{0}m{1}\033[0m'.format(height % 6 + 1, node.key()), end='')
+        elif indent == 0:
+            print('\033[34m   ──────\033[0m', end='')
+            print('\033[1;3{0}m{1}\033[0m'.format(height % 6 + 1, node.key()), end='')
         else:
             print('         ' * indent, end='')
             print("\033[34m   ┌────\033[0m",'\033[1;3{0}m{1}\033[0m'.format(height % 6 + 1, node.key()), end='')
         
         print(' \033[2;50;1m\033[0.1m{0}\033[0m'.format(node.value()))
+        # Imprime el nodo hijo izquierdo con valor de child True (se usa en el bucle para identificar el nodo)
         _print_tree2(T, T.left(node), height - 1, indent + 1, True)
