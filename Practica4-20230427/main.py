@@ -1,12 +1,30 @@
 import sys
 sys.path.append('/project/home/oscaryt9/workspace/Practica4-20230427/ABBs_posicionales')
-from ABBs_posicionales import *
+from ABBs_posicionales.avl_tree import *
 from classes import *
 from funciones import *
 
 def preorder_indent_BST(T, p, d):
-    """Print preorder representation of a binary subtree of T rooted at p at depth d.
-        To print aTree completely call preorder_indent_BST(aTree, aTree.root(), 0)"""
+    """
+    Imprime la representación de preorden de un subárbol binario de T
+    que está enraizado en p y tiene profundidad d.
+
+    Para imprimir un árbol completo, llame a la función con
+    preorder_indent_BST(aTree, aTree.root(), 0)
+
+    Parameters
+    ----------
+    T : BinarySearchTree
+        El árbol binario en el que se encuentra el subárbol.
+    p : Position
+        La posición del nodo raíz del subárbol.
+    d : int
+        La profundidad del subárbol.
+
+    Returns
+    -------
+    None
+    """
     if p is not None:
         # use depth for indentation
         print(2*d*' ' + "(" + str(p.key()) + "," +  str(p.value()) + ")") 
@@ -14,6 +32,20 @@ def preorder_indent_BST(T, p, d):
         preorder_indent_BST(T, T.right(p), d+1) # right child depth is d+1
 
 def read_activities(path, tree):
+    """
+    Lee el archivo de texto en la ruta especificada y agrega cada actividad al árbol binario.
+
+    Parameters
+    ----------
+    path : str
+        La ruta del archivo de texto que contiene las actividades.
+    tree : BinarySearchTree
+        El árbol binario en el que se agregarán las actividades.
+
+    Returns
+    -------
+    None
+    """
 
     with open(path) as archive:
         # Abrir el archivo de texto y leer cada línea
@@ -28,10 +60,25 @@ def read_activities(path, tree):
 #TODO: Implement simulation here
 
 def parse_params(params):
+    """
+    Parsea los parámetros de una actividad y calcula el costo por participante.
+
+    Parameters
+    ----------
+    params : List[str]
+        Una lista que contiene los parámetros de una actividad en el siguiente orden:
+        [nombre, duración, participantes, precio_total].
+
+    Returns
+    -------
+    Activity
+        Una instancia de la clase Activity que representa la actividad parseada,
+        incluyendo el costo por participante.
+    """
     
-    name, duration, participation, total_price = params[0], int(params[1]), int(params[2]), float(params[3])
-    cost = total_price/participation/duration
-    return Activity(name, duration, participation, total_price, cost)
+    name, duration, participation, total_price_activity = params[0], int(params[1]), int(params[2]), float(params[3])
+    cost_per_participate = total_price_activity/participation/duration
+    return Activity(name, duration, participation, total_price_activity, cost_per_participate)
 
 
 # Creamos los arboles de las empresas A y B
@@ -72,10 +119,9 @@ if __name__ == "__main__":
             print("\033[1;31mArchivo no encontrado. Por favor, inténtelo de nuevo.\033[0m")
 
     # Función sumar actividades
-    avl_tree_3 = add_activities(avl_tree_1,avl_tree_2)
+    avl_tree_3, avl_tree_4 = operations(avl_tree_1,avl_tree_2)
 
     # Función oferta minima comun
-    avl_tree_4 = offer_minim_common(avl_tree_1,avl_tree_2)
 
     # Imprimir todos los arboles de Actividades
     print_out = input("Elige la forma de imprimir los arboles AVL:\n 1. Como lista desplegable \n 2. Como arbol binario \n [1/2]: ")

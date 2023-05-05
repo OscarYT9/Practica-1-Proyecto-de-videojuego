@@ -4,11 +4,81 @@ from ABBs_posicionales.avl_tree import *
 from classes import *
 
 
+def operations(avl_tree_1, avl_tree_2):
+    """
+    Combina dos árboles AVL de actividades en dos nuevos árboles AVL:
+    uno que contiene todas las actividades de ambos árboles sin repetición
+    y otro que contiene las actividades que tienen la menor cantidad de cupos
+    entre ambos árboles.
+
+    Parameters
+    ----------
+    avl_tree_1 : AVLTree
+        El primer árbol AVL de actividades.
+    avl_tree_2 : AVLTree
+        El segundo árbol AVL de actividades.
+
+    Returns
+    -------
+    Tuple[AVLTree, AVLTree]
+        Una tupla que contiene dos árboles AVL:
+        el primero es un árbol que contiene todas las actividades de ambos árboles sin repetición,
+        y el segundo es un árbol que contiene las actividades que tienen la menor cantidad de cupos
+        entre ambos árboles.
+    """
+    marker_A = avl_tree_1.first()
+    marker_B = avl_tree_2.first()
+    add_activities = AVL()
+    offer_minim_common = AVL()
+
+    while marker_A != None and marker_B != None:
+        if marker_A.key()  == marker_B.key():
+            if marker_A.value() < marker_B.value():
+                offer_minim_common[marker_A.key()] = marker_A.value()
+                add_activities[marker_A.key()] = marker_A.value()
+            else:
+                offer_minim_common[marker_B.key()] = marker_B.value()
+                add_activities[marker_B.key()] = marker_B.value()
+            marker_A = avl_tree_1.after(marker_A)
+            marker_B = avl_tree_2.after(marker_B)
+        elif marker_A.key()  != marker_B.key():
+            if marker_A.value() < marker_B.value():
+                add_activities[marker_A.key()] = marker_A.value()
+                marker_A = avl_tree_1.after(marker_A)
+            else:
+                add_activities[marker_B.key()] = marker_B.value()
+                marker_B = avl_tree_2.after(marker_B)
+        else:
+            if marker_A != None and marker_B != None:
+                add_activities[marker_B.key()] = marker_B.value()
+                marker_B = avl_tree_2.after(marker_B)
+        
+    return add_activities, offer_minim_common
+                
+
+
+
+
 # Función eliminar duplicados y dejar la actividad con menor coste
 # Función sumar actividades
 # Recorre el arbol(A) y el arbol(B) y devuelve las actividades que al menos esten en una de las empresas, llama a la funcion offer_minim_common y almacena las actividades resultantes en un arbol C
 # Es decir, las empresas comunes y no comunes
 def add_activities(avl_tree_1, avl_tree_2):
+    """
+    Combina los dos árboles AVL dados en uno nuevo, agregando las actividades únicas de ambos árboles.
+
+    Parameters
+    ----------
+    avl_tree_1 : AVLTree
+        El primer árbol AVL que se quiere combinar.
+    avl_tree_2 : AVLTree
+        El segundo árbol AVL que se quiere combinar.
+
+    Returns
+    -------
+    AVLTree
+        Un nuevo árbol AVL que contiene todas las actividades de avl_tree_1 y avl_tree_2, eliminando las duplicadas.
+    """
     avl_tree_3 = offer_minim_common(avl_tree_1, avl_tree_2)
 
     for activity in avl_tree_1:
@@ -25,10 +95,27 @@ def add_activities(avl_tree_1, avl_tree_2):
 # Recorre el arbol(A) y el arbol(B) y devuelve las actividades que esten en ambas empresas y llama a la funcion eliminar duplicados y almacena las actividades resultantes en un arbol D
 # Es decir, las empresas comunes
 def offer_minim_common(avl_tree_1, avl_tree_2):
+    """
+    Crea un nuevo árbol AVL que contiene las actividades en común entre avl_tree_1 y avl_tree_2,
+    y sus valores son los objetos Activity que tienen los costos por participante más bajos.
+
+    Parameters
+    ----------
+    avl_tree_1 : AVL
+        El primer árbol AVL que contiene actividades.
+    avl_tree_2 : AVL
+        El segundo árbol AVL que contiene actividades.
+
+    Returns
+    -------
+    AVL
+        Un nuevo árbol AVL que contiene las actividades en común entre avl_tree_1 y avl_tree_2,
+        y sus valores son los objetos Activity que tienen los costos por participante más bajos.
+    """
     avl_tree_3 = AVL()
     for activity in avl_tree_1:
         if activity in avl_tree_2:
-            if (avl_tree_1[activity].get_cost()) < (avl_tree_2[activity].get_cost()):
+            if (avl_tree_1[activity].get_cost_per_participate()) < (avl_tree_2[activity].get_cost_per_participate()):
                 avl_tree_3[activity] = avl_tree_1[activity]
             else:
                 avl_tree_3[activity] = avl_tree_2[activity]
@@ -37,6 +124,18 @@ def offer_minim_common(avl_tree_1, avl_tree_2):
 
 # Funciones para imprimir los arboles
 def print_tree(T):
+    """
+    Imprime un árbol binario en preorden con indentación.
+
+    Parameters
+    ----------
+    T : BinaryTree
+        El árbol binario a imprimir.
+
+    Returns
+    -------
+    None
+    """
     # Obtener la altura del árbol
     height = T.height()
 
@@ -45,6 +144,23 @@ def print_tree(T):
 
 
 def _print_tree(T, node, height, indent):
+    """
+    Imprime un subárbol binario en preorden con indentación.
+    Parameters
+    ----------
+    T : BinaryTree
+        El árbol binario que contiene el subárbol a imprimir.
+    node : BinaryTreeNode
+        La raíz del subárbol a imprimir.
+    height : int
+        La altura del subárbol a imprimir.
+    indent : int
+        La indentación actual del nodo.
+
+    Returns
+    -------
+    None
+    """
     if node is None:
         return
     else:
@@ -63,6 +179,18 @@ def _print_tree(T, node, height, indent):
 
 
 def print_tree2(T):
+    """
+    Imprime un árbol binario con indentación y las ramas del árbol conectadas con líneas.
+
+    Parameters
+    ----------
+    T : BinaryTree
+        El árbol binario a imprimir.
+
+    Returns
+    -------
+    None
+    """
     # Obtener la altura del árbol
     height = T.height()
 
@@ -71,6 +199,25 @@ def print_tree2(T):
 
 
 def _print_tree2(T, node, height, indent, child):
+    """
+    Imprime un subárbol derecho e izquierdo con indentación adicional.
+    Parameters
+    ----------
+    T : BinaryTree
+        El árbol binario a imprimir.
+    node : Position
+        La posición del nodo actual.
+    height : int
+        La altura del nodo actual.
+    indent : int
+        La indentación actual.
+    child : bool
+        Booleano que indica si el nodo es hijo izquierdo (True) o derecho (False).
+
+    Returns
+    -------
+    None
+    """
     if node is None:
         return
     else:
