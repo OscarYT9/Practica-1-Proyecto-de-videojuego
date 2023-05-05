@@ -57,28 +57,14 @@ def operations(avl_tree_1, avl_tree_2):
             add_activities[marker_B.key()] = marker_B.value()
             marker_B = avl_tree_2.after(marker_B) # Pasamos al siguiente NodoB (marcador)
 
-    # Agregar las actividades restantes de avl_tree_1, si las hay
-    while marker_A is not None:
-        add_activities[marker_A.key()] = marker_A.value() # Metemos la actividadB comun en add_activities
-        marker_A = avl_tree_1.after(marker_A) # Pasamos al siguiente NodoA (marcador)
-
-    # Agregar las actividades restantes de avl_tree_2, si las hay
-    while marker_B is not None:
-        add_activities[marker_B.key()] = marker_B.value() # Metemos la actividadB comun en add_activities
-        marker_B = avl_tree_2.after(marker_B) # Pasamos al siguiente NodoB (marcador)
-        
     return add_activities, offer_minim_common # Al final del todo devolvemos la tupla con los arboles
-
-                
-
-
 
 
 # Función eliminar duplicados y dejar la actividad con menor coste
 # Función sumar actividades
 # Recorre el arbol(A) y el arbol(B) y devuelve las actividades que al menos esten en una de las empresas, llama a la funcion offer_minim_common y almacena las actividades resultantes en un arbol C
 # Es decir, las empresas comunes y no comunes
-def add_activities(avl_tree_1, avl_tree_2):
+#def add_activities(avl_tree_1, avl_tree_2):
     """
     Combina los dos árboles AVL dados en uno nuevo, agregando las actividades únicas de ambos árboles.
 
@@ -109,7 +95,7 @@ def add_activities(avl_tree_1, avl_tree_2):
 # Función oferta mínima común
 # Recorre el arbol(A) y el arbol(B) y devuelve las actividades que esten en ambas empresas y llama a la funcion eliminar duplicados y almacena las actividades resultantes en un arbol D
 # Es decir, las empresas comunes
-def offer_minim_common(avl_tree_1, avl_tree_2):
+#def offer_minim_common(avl_tree_1, avl_tree_2):
     """
     Crea un nuevo árbol AVL que contiene las actividades en común entre avl_tree_1 y avl_tree_2,
     y sus valores son los objetos Activity que tienen los costos por participante más bajos.

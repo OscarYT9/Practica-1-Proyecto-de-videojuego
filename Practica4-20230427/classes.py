@@ -209,19 +209,19 @@ class Activity:
 
     def __ge__(self, other):
         """
-        Compara dos objetos Libro por su autor, título y año de edición.
+        Compara dos objetos Actividad por su coste por participante.
 
         Parameters
         ----------
-        other : Libro
-            El otro objeto Libro con el que se va a comparar.
+        other : Actividad
+            El otro objeto Actividad con el que se va a comparar.
 
         Returns
         -------
         bool or NotImplemented
-            True si el objeto actual es mayor o igual que el otro objeto Libro en términos de autor, título y año de edición;
+            True si el objeto actual es mayor o igual que el otro objeto Actividad en términos de coste por participante;
             False en caso contrario;
-            NotImplemented si el objeto no es del tipo Libro.
+            NotImplemented si el objeto no es del tipo Actividad.
         """
         if isinstance(other, Activity):
             return (self.cost_per_participate >= other.cost_per_participate)
@@ -230,19 +230,19 @@ class Activity:
     
     def __gt__(self, other):
         """
-        Compara dos objetos Libro por su autor, título y año de edición.
+        Compara los costes por participante de cada actividad.
 
         Parameters
         ----------
-        other : Libro
-            El otro objeto Libro con el que se va a comparar.
+        other : Actividad
+            El otro objeto Actividad con el que se va a comparar.
 
         Returns
         -------
         bool or NotImplemented
-            True si el objeto actual es mayor que el otro objeto Libro en términos de autor, título y año de edición;
+            True si el objeto actual es mayor que el otro objeto Actividad en términos de coste por participante;
             False en caso contrario;
-            NotImplemented si el objeto no es del tipo Libro.
+            NotImplemented si el objeto no es del tipo Actividad.
         """
         if isinstance(other, Activity):
             return (self.cost_per_participate > other.cost_per_participate)

@@ -1,35 +1,17 @@
+import os
 import sys
-sys.path.append('/project/home/oscaryt9/workspace/Practica4-20230427/ABBs_posicionales')
+
+# Obtener la ruta del archivo actual
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Agregar el directorio que contiene los módulos al sys.path
+module_dir = os.path.join(current_dir, "ABBs_posicionales")
+sys.path.append(module_dir)
+
 from ABBs_posicionales.avl_tree import *
 from classes import *
 from funciones import *
 
-def preorder_indent_BST(T, p, d):
-    """
-    Imprime la representación de preorden de un subárbol binario de T
-    que está enraizado en p y tiene profundidad d.
-
-    Para imprimir un árbol completo, llame a la función con
-    preorder_indent_BST(aTree, aTree.root(), 0)
-
-    Parameters
-    ----------
-    T : BinarySearchTree
-        El árbol binario en el que se encuentra el subárbol.
-    p : Position
-        La posición del nodo raíz del subárbol.
-    d : int
-        La profundidad del subárbol.
-
-    Returns
-    -------
-    None
-    """
-    if p is not None:
-        # use depth for indentation
-        print(2*d*' ' + "(" + str(p.key()) + "," +  str(p.value()) + ")") 
-        preorder_indent_BST(T, T.left(p), d+1) # left child depth is d+1
-        preorder_indent_BST(T, T.right(p), d+1) # right child depth is d+1
 
 def read_activities(path, tree):
     """
@@ -83,11 +65,7 @@ def parse_params(params):
 
 # Creamos los arboles de las empresas A y B
 avl_tree_1 = AVL()
-# Generamos el arbol vacio A
-preorder_indent_BST(avl_tree_1,avl_tree_1.root(),0)
 avl_tree_2 = AVL()
-# Generamos el arbol vacio B
-preorder_indent_BST(avl_tree_2,avl_tree_2.root(),0)
 
 #_____________________________________________________________________________________________________________________________________
 
@@ -124,12 +102,26 @@ if __name__ == "__main__":
     # Función oferta minima comun
 
     # Imprimir todos los arboles de Actividades
-    print_out = input("Elige la forma de imprimir los arboles AVL:\n 1. Como lista desplegable \n 2. Como arbol binario \n [1/2]: ")
-    while print_out !="1" and print_out !="2":
-        print_out = input("\033[1;31m Valor incorrecto. Por favor, elija [1/2]: \033[0m")
+    print_out = input("Elige la forma de imprimir los arboles AVL:\n 1. Con la función preorder_indent_BST \n 2. Como lista desplegable \n 3. Como arbol binario \n [1/2/3]: ")
+    while print_out !="1" and print_out !="2" and print_out !="3":
+        print_out = input("\033[1;31m Valor incorrecto. Por favor, elija [1/2/3]: \033[0m")
     print("")
 
     if print_out == "1":
+        print("___________________________________________________________________________________________________________________________________________________")
+        print("Actividades empresa A")
+        preorder_indent_BST(avl_tree_1,avl_tree_1.root(),0)
+        print("___________________________________________________________________________________________________________________________________________________")
+        print("Actividades empresa B")
+        preorder_indent_BST(avl_tree_2,avl_tree_2.root(),0)
+        print("___________________________________________________________________________________________________________________________________________________")
+        print("Suma de Actividades A+B (manteniendo la de menor coste)")
+        preorder_indent_BST(avl_tree_3,avl_tree_3.root(),0)
+        print("___________________________________________________________________________________________________________________________________________________")
+        print("Actividades comunes (manteniendo la de menor coste)")
+        preorder_indent_BST(avl_tree_4,avl_tree_4.root(),0)
+
+    if print_out == "2":
         print("___________________________________________________________________________________________________________________________________________________")
         print("Actividades empresa A")
         print_tree(avl_tree_1)
@@ -143,7 +135,7 @@ if __name__ == "__main__":
         print("Actividades comunes (manteniendo la de menor coste)")
         print_tree(avl_tree_4)
 
-    if print_out == "2":
+    if print_out == "3":
         print("___________________________________________________________________________________________________________________________________________________")
         print("Actividades empresa A")
         print_tree2(avl_tree_1)
@@ -160,16 +152,4 @@ if __name__ == "__main__":
 
     print("___________________________________________________________________________________________________________________________________________________")
      
-    #__getitem__ (pej.print(tree[1]))
-    #__setitem__(pej.tree[1]="A")
-    #__delitem__(del tree[1])
-    #__iter__(for in in s)
-    #__len__(len(s))
-
-    #Position
-    #p.key(): la clave del elemento en la posicion P
-    #p. value(): .....
-
-    #coste/participante/hora
-    # 100 2 3
-    # 100*3/2 =16,66 euros
+    
