@@ -3,7 +3,10 @@ sys.path.append('/project/home/oscaryt9/workspace/Practica4-20230427/ABBs_posici
 from ABBs_posicionales.avl_tree import *
 from classes import *
 
-
+# Se pueden crear dos funciones pero es más eficiente crear un sola función y aprovechar el resultado del arbol offer_minim_common.
+# Cuando estamos haciendo el primer if (if marker_A.key() == marker_B.key():) cogemos las actividades comunes (offer_minim_common)
+# Mientras tanto si en vez de ser comunes encontramos alguna actividad no común la agregamos al add_activities y así nos ahorramos tener que recorrer dos veces los arboles
+# Al final nos quedan dos arboles, offer_minim_common (actividades comunes) y add_activities (actividades comunes y no comunes).
 def operations(avl_tree_1, avl_tree_2):
     """
     Combina dos árboles AVL de actividades en dos nuevos árboles AVL:
@@ -26,42 +29,45 @@ def operations(avl_tree_1, avl_tree_2):
         y el segundo es un árbol que contiene las actividades que tienen la menor cantidad de cupos
         entre ambos árboles.
     """
-    if avl_tree_1.is_empty():
-        return avl_tree_2.copy(), AVL()
-    if avl_tree_2.is_empty():
-        return avl_tree_1.copy(), AVL()
-
-    marker_A = avl_tree_1.first()
-    marker_B = avl_tree_2.first()
     add_activities = AVL()
     offer_minim_common = AVL()
+    marker_A = avl_tree_1.first()
+    marker_B = avl_tree_2.first()
 
     while marker_A is not None and marker_B is not None:
+        # Comprobamos si las claves de los nodos son iguales
         if marker_A.key() == marker_B.key():
+            # Comprobamos cual de los dos tiene un coste menor (Comprobamos si un el objeto de un NodoA es menor que el de un NodoB), El marker_A.value() devuelve el valor asociado a la posición actual del marcador, en este caso un objeto Actividad 
             if marker_A.value() < marker_B.value():
-                offer_minim_common[marker_A.key()] = marker_A.value()
-                add_activities[marker_A.key()] = marker_A.value()
+                offer_minim_common[marker_A.key()] = marker_A.value()   # Metemos la actividadA comun en offer_minim_common
+                add_activities[marker_A.key()] = marker_A.value()       # Aprobechamos y también agregamos la actividadA comun a add_activities
             else:
-                offer_minim_common[marker_B.key()] = marker_B.value()
-                add_activities[marker_B.key()] = marker_B.value()
-            marker_A = avl_tree_1.after(marker_A) if marker_A is not None else None
-            marker_B = avl_tree_2.after(marker_B) if marker_B is not None else None
+                offer_minim_common[marker_B.key()] = marker_B.value()   # Metemos la actividadA comun en offer_minim_common
+                add_activities[marker_B.key()] = marker_B.value()       # Aprobechamos y también agregamos la actividadB comun a add_activities
+
+            marker_A = avl_tree_1.after(marker_A) # Pasamos al siguiente NodoA (marcador)
+            marker_B = avl_tree_2.after(marker_B) # Pasamos al siguiente NodoB (marcador)
+
+        # Si no son iguales es que las actividades no son comunes
         elif marker_A.key() < marker_B.key():
-            add_activities[marker_A.key()] = marker_A.value()
-            marker_A = avl_tree_1.after(marker_A) if marker_A is not None else None
+            add_activities[marker_A.key()] = marker_A.value() 
+            marker_A = avl_tree_1.after(marker_A) # Pasamos al siguiente NodoA (marcador)
+
         else:
             add_activities[marker_B.key()] = marker_B.value()
-            marker_B = avl_tree_2.after(marker_B) if marker_B is not None else None
+            marker_B = avl_tree_2.after(marker_B) # Pasamos al siguiente NodoB (marcador)
 
+    # Agregar las actividades restantes de avl_tree_1, si las hay
     while marker_A is not None:
-        add_activities[marker_A.key()] = marker_A.value()
-        marker_A = avl_tree_1.after(marker_A) if marker_A is not None else None
+        add_activities[marker_A.key()] = marker_A.value() # Metemos la actividadB comun en add_activities
+        marker_A = avl_tree_1.after(marker_A) # Pasamos al siguiente NodoA (marcador)
 
+    # Agregar las actividades restantes de avl_tree_2, si las hay
     while marker_B is not None:
-        add_activities[marker_B.key()] = marker_B.value()
-        marker_B = avl_tree_2.after(marker_B) if marker_B is not None else None
-
-    return add_activities, offer_minim_common
+        add_activities[marker_B.key()] = marker_B.value() # Metemos la actividadB comun en add_activities
+        marker_B = avl_tree_2.after(marker_B) # Pasamos al siguiente NodoB (marcador)
+        
+    return add_activities, offer_minim_common # Al final del todo devolvemos la tupla con los arboles
 
                 
 
