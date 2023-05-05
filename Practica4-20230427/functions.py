@@ -1,3 +1,5 @@
+# Nombre del archivo: functions.py
+# Autores: Óscar Vilela Rodríguez (oscar.vilela.rodriguez@udc.es), Guillermo García Engelmo (g.garcia2@udc.es)
 from ABBs_posicionales.avl_tree import *
 from classes import *
 

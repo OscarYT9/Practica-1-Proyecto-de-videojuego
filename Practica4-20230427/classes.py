@@ -1,3 +1,5 @@
+# Nombre del archivo: classes.py
+# Autores: Óscar Vilela Rodríguez (oscar.vilela.rodriguez@udc.es), Guillermo García Engelmo (g.garcia2@udc.es)
 class Activity:
     """
     Clase que representa una actividad.
@@ -196,7 +198,7 @@ class Activity:
         self.cost = cost_per_participate
         
     def __str__(self):
-        return f"({self.duration} min, {self.participation} participantes, ${self.total_price_activity})"
+        return f"({self.duration} min, {self.participation} participantes, ${self.total_price_activity}, ${round(self.cost_per_participate,3)})"
     
     def __eq__(self, other):
         """

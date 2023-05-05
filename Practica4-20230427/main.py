@@ -1,3 +1,5 @@
+# Nombre del archivo: main.py
+# Autores: Óscar Vilela Rodríguez (oscar.vilela.rodriguez@udc.es), Guillermo García Engelmo (g.garcia2@udc.es)
 import os
 import sys
 
@@ -10,7 +12,7 @@ sys.path.append(module_dir)
 
 from ABBs_posicionales.avl_tree import *
 from classes import *
-from funciones import *
+from functions import *
 #_____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 
@@ -40,7 +42,6 @@ def read_activities(path, tree):
             # Agregar el libro a la lista, ordenando por autor, título y año de edición
             tree[activity.get_name()] = activity
 
-#TODO: Implement simulation here
 
 def parse_params(params):
     """
