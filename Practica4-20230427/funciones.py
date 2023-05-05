@@ -26,34 +26,43 @@ def operations(avl_tree_1, avl_tree_2):
         y el segundo es un árbol que contiene las actividades que tienen la menor cantidad de cupos
         entre ambos árboles.
     """
+    if avl_tree_1.is_empty():
+        return avl_tree_2.copy(), AVL()
+    if avl_tree_2.is_empty():
+        return avl_tree_1.copy(), AVL()
+
     marker_A = avl_tree_1.first()
     marker_B = avl_tree_2.first()
     add_activities = AVL()
     offer_minim_common = AVL()
 
-    while marker_A != None and marker_B != None:
-        if marker_A.key()  == marker_B.key():
+    while marker_A is not None and marker_B is not None:
+        if marker_A.key() == marker_B.key():
             if marker_A.value() < marker_B.value():
                 offer_minim_common[marker_A.key()] = marker_A.value()
                 add_activities[marker_A.key()] = marker_A.value()
             else:
                 offer_minim_common[marker_B.key()] = marker_B.value()
                 add_activities[marker_B.key()] = marker_B.value()
-            marker_A = avl_tree_1.after(marker_A)
-            marker_B = avl_tree_2.after(marker_B)
-        elif marker_A.key()  != marker_B.key():
-            if marker_A.value() < marker_B.value():
-                add_activities[marker_A.key()] = marker_A.value()
-                marker_A = avl_tree_1.after(marker_A)
-            else:
-                add_activities[marker_B.key()] = marker_B.value()
-                marker_B = avl_tree_2.after(marker_B)
+            marker_A = avl_tree_1.after(marker_A) if marker_A is not None else None
+            marker_B = avl_tree_2.after(marker_B) if marker_B is not None else None
+        elif marker_A.key() < marker_B.key():
+            add_activities[marker_A.key()] = marker_A.value()
+            marker_A = avl_tree_1.after(marker_A) if marker_A is not None else None
         else:
-            if marker_A != None and marker_B != None:
-                add_activities[marker_B.key()] = marker_B.value()
-                marker_B = avl_tree_2.after(marker_B)
-        
+            add_activities[marker_B.key()] = marker_B.value()
+            marker_B = avl_tree_2.after(marker_B) if marker_B is not None else None
+
+    while marker_A is not None:
+        add_activities[marker_A.key()] = marker_A.value()
+        marker_A = avl_tree_1.after(marker_A) if marker_A is not None else None
+
+    while marker_B is not None:
+        add_activities[marker_B.key()] = marker_B.value()
+        marker_B = avl_tree_2.after(marker_B) if marker_B is not None else None
+
     return add_activities, offer_minim_common
+
                 
 
 
