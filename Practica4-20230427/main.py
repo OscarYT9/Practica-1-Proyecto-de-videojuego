@@ -11,6 +11,7 @@ sys.path.append(module_dir)
 from ABBs_posicionales.avl_tree import *
 from classes import *
 from funciones import *
+#_____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 
 def read_activities(path, tree):
@@ -67,7 +68,7 @@ def parse_params(params):
 avl_tree_1 = AVL()
 avl_tree_2 = AVL()
 
-#_____________________________________________________________________________________________________________________________________
+#_____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 if __name__ == "__main__":
     # Preguntamos al usuario si quiere añadir sus propios archivos
@@ -96,10 +97,9 @@ if __name__ == "__main__":
         except FileNotFoundError:
             print("\033[1;31mArchivo no encontrado. Por favor, inténtelo de nuevo.\033[0m")
 
-    # Función sumar actividades
+    # Función sumar actividades y oferta mínima comun
     avl_tree_3, avl_tree_4 = operations(avl_tree_1,avl_tree_2)
 
-    # Función oferta minima comun
 
     # Imprimir todos los arboles de Actividades
     print_out = input("Elige la forma de imprimir los arboles AVL:\n 1. Con la función preorder_indent_BST \n 2. Como lista desplegable \n 3. Como arbol binario \n [1/2/3]: ")

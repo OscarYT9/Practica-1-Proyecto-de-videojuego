@@ -200,52 +200,160 @@ class Activity:
     
     def __eq__(self, other):
         """
-        Compara los costes y devuelve True si tienen el mismo coste.
-        De lo contrario, devuelve False.
-        """
-        if isinstance(other, Activity):
-            return (self.cost_per_participate == other.cost_per_participate)
-        return False
-
-    def __ge__(self, other):
-        """
-        Compara dos objetos Actividad por su coste por participante.
+        Compara el costo por participante de esta actividad con otra actividad
+        y devuelve True si tienen el mismo costo. De lo contrario, devuelve False.
 
         Parameters
         ----------
-        other : Actividad
-            El otro objeto Actividad con el que se va a comparar.
+        other : Activity
+            La otra actividad con la que se comparará el costo.
 
         Returns
         -------
-        bool or NotImplemented
-            True si el objeto actual es mayor o igual que el otro objeto Actividad en términos de coste por participante;
-            False en caso contrario;
-            NotImplemented si el objeto no es del tipo Actividad.
+        bool
+            True si ambos tienen el mismo costo por participante, False de lo contrario.
+
+        Raises
+        ------
+        ValueError
+            Si el objeto comparado no es una actividad.
         """
         if isinstance(other, Activity):
-            return (self.cost_per_participate >= other.cost_per_participate)
-        
-        return NotImplemented
+            return self.cost_per_participate == other.cost_per_participate
+        else:
+            raise ValueError('Segundo objeto no es una actividad')
+    
+    def __ne__(self, other):
+        """
+        Compara el costo por participante de esta actividad con otra actividad
+        y devuelve True si tienen diferentes costos. De lo contrario, devuelve False.
+
+        Parameters
+        ----------
+        other : Activity
+            La otra actividad con la que se comparará el costo.
+
+        Returns
+        -------
+        bool
+            True si ambos tienen diferentes costos por participante, False de lo contrario.
+
+        Raises
+        ------
+        ValueError
+            Si el objeto comparado no es una actividad.
+        """
+
+        if isinstance(other, Activity):
+            return self.cost_per_participate != other.cost_per_participate
+        else:
+            raise ValueError('Segundo objeto no es una actividad')
+
     
     def __gt__(self, other):
         """
-        Compara los costes por participante de cada actividad.
+        Compara el costo por participante de esta actividad con otra actividad
+        y devuelve True si el costo de esta actividad es mayor que el costo de la otra actividad.
+        De lo contrario, devuelve False.
 
         Parameters
         ----------
-        other : Actividad
-            El otro objeto Actividad con el que se va a comparar.
+        other : Activity
+            La otra actividad con la que se comparará el costo.
 
         Returns
         -------
-        bool or NotImplemented
-            True si el objeto actual es mayor que el otro objeto Actividad en términos de coste por participante;
-            False en caso contrario;
-            NotImplemented si el objeto no es del tipo Actividad.
+        bool
+            True si el costo de esta actividad es mayor que el costo de la otra actividad, False de lo contrario.
+
+        Raises
+        ------
+        ValueError
+            Si el objeto comparado no es una actividad.
+        """
+        
+        if isinstance(other, Activity):
+            return self.cost_per_participate > other.cost_per_participate
+        else:
+            raise ValueError('Segundo objeto no es una actividad')
+
+
+    def __lt__(self, other):
+        """
+        Compara el costo por participante de esta actividad con otra actividad
+        y devuelve True si el costo de esta actividad es menor que el costo de la otra actividad.
+        De lo contrario, devuelve False.
+
+        Parameters
+        ----------
+        other : Activity
+            La otra actividad con la que se comparará el costo.
+
+        Returns
+        -------
+        bool
+            True si el costo de esta actividad es menor que el costo de la otra actividad, False de lo contrario.
+
+        Raises
+        ------
+        ValueError
+            Si el objeto comparado no es una actividad.
+        """
+        
+        if isinstance(other, Activity):
+            return self.cost_per_participate < other.cost_per_participate
+        else:
+            raise ValueError('Segundo objeto no es una actividad')
+
+    def __le__(self, other):
+        """
+        Compara el costo por participante de esta actividad con otra actividad
+        y devuelve True si el costo de esta actividad es menor o igual al costo de la otra actividad.
+        De lo contrario, devuelve False.
+
+        Parameters
+        ----------
+        other : Activity
+            La otra actividad con la que se comparará el costo.
+
+        Returns
+        -------
+        bool
+            True si el costo de esta actividad es menor o igual al costo de la otra actividad, False de lo contrario.
+
+        Raises
+        ------
+        ValueError
+            Si el objeto comparado no es una actividad.
         """
         if isinstance(other, Activity):
-            return (self.cost_per_participate > other.cost_per_participate)
-        
-        return NotImplemented
+            return self.cost_per_participate <= other.cost_per_participate
+        else:
+            raise ValueError('Segundo objeto no es una actividad')
+
+def __ge__(self, other):
+        """
+        Compara el costo por participante de esta actividad con otra actividad
+        y devuelve True si el costo de esta actividad es mayor o igual al costo de la otra actividad.
+        De lo contrario, devuelve False.
+
+        Parameters
+        ----------
+        other : Activity
+            La otra actividad con la que se comparará el costo.
+
+        Returns
+        -------
+        bool
+            True si el costo de esta actividad es mayor o igual al costo de la otra actividad, False de lo contrario.
+
+        Raises
+        ------
+        ValueError
+            Si el objeto comparado no es una actividad.
+        """
+        if isinstance(other, Activity):
+            return self.cost_per_participate >= other.cost_per_participate
+        else:
+            raise ValueError('Segundo objeto no es una actividad')
 
