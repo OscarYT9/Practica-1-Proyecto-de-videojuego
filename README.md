@@ -201,8 +201,39 @@ y/o ediciones de cada libro. [P3.pdf](https://github.com/OscarYT9/Practica-1-Pro
 | Las estructuras de datos deberán manipular objetos de una clase Libro, que incluirá las variables de instancia y métodos necesarios, respetando los principios de orientación a objetos (herencia, encapsulación y polimorfismo). |
 | Todo el procesamiento se realizará con el TAD Lista Posicional. La práctica debe funcionar (alternativamente) con ambas implementaciones (array_ordered_positional_list y linked_ordered_positional_list). |
 
+*Queda por implementar correctamente una función*
+
+</details>
+<details open>
+	<summary style="text-align:center;"><img src="https://github.com/OscarYT9/Practica-1-Proyecto-de-videojuego/assets/113378321/a91e9b85-6be2-4923-8076-a735947e0cb2" width="40px">Práctica 4</summary>
+
+### 1.6 Árboles AVL
+>Dos empresas de “Actividades de Ocio” A y B han decidido fusionarse, dando lugar 
+a la empresa C. Para generar su nuevo catálogo, precisan conocer la “suma de 
+actividades” (las ofertadas en al menos una de las empresas) y a la “oferta mínima 
+común” (las ofertadas en ambas empresas). [P4.pdf](https://github.com/OscarYT9/Practica-1-Proyecto-de-videojuego/files/12639759/P4.pdf)
 
 
+- Fusión de Empresas (Empresa C)
+  - Suma de Actividades
+    - Actividades de la Empresa A
+    - Actividades de la Empresa B
+  - Oferta Mínima Común
+    - Actividades Comunes a A y B
+  - Datos de las Actividades
+    - Actividad 1
+      - Nombre: [Nombre de la Actividad 1]
+      - Duración: [Duración en minutos]
+      - Número de Participantes: [Número de Participantes]
+      - Precio Total: [Precio Total]
+    - Actividad 2
+      - Nombre: [Nombre de la Actividad 2]
+      - Duración: [Duración en minutos]
+      - Número de Participantes: [Número de Participantes]
+      - Precio Total: [Precio Total]
+    - ...
+
+</details>
 </details>
 
 ## **2. Programas utilizados**
